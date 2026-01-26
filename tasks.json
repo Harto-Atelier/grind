@@ -1,0 +1,27 @@
+{
+  "lastUpdated": "2026-01-26T15:50:00Z",
+  "inbox": [
+    {
+      "id": "task-002",
+      "task": "Enviar gastos de envío a Paul",
+      "from": "Sergio",
+      "date": "2026-01-26",
+      "priority": "medium",
+      "status": "pending",
+      "notes": "Via email - NUEVO"
+    },
+    {
+      "id": "task-001", 
+      "task": "Agendar cita con el ayuntamiento",
+      "from": "Sergio",
+      "date": "2026-01-26",
+      "priority": "medium",
+      "status": "pending",
+      "notes": "Via email"
+    }
+  ],
+  "urgent": [],
+  "thisWeek": [],
+  "backlog": [],
+  "completed": []
+}

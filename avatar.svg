@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Nuria Avatar - Geometric AI Assistant -->
+  <defs>
+    <linearGradient id="nuriaglow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0066FF;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="#0a0a0a" stroke="url(#nuriaglow)" stroke-width="2"/>
+  
+  <!-- Geometric face - grid pattern -->
+  <g fill="url(#nuriaglow)">
+    <!-- Left eye - square -->
+    <rect x="28" y="35" width="12" height="12" rx="2"/>
+    <!-- Right eye - square -->
+    <rect x="60" y="35" width="12" height="12" rx="2"/>
+    
+    <!-- Nose - small diamond -->
+    <polygon points="50,48 54,55 50,62 46,55"/>
+    
+    <!-- Mouth - horizontal line with nodes -->
+    <rect x="32" y="70" width="36" height="3" rx="1"/>
+    <circle cx="32" cy="71.5" r="3"/>
+    <circle cx="50" cy="71.5" r="3"/>
+    <circle cx="68" cy="71.5" r="3"/>
+  </g>
+  
+  <!-- Circuit lines -->
+  <g stroke="url(#nuriaglow)" stroke-width="1" fill="none" opacity="0.5">
+    <line x1="20" y1="50" x2="28" y2="50"/>
+    <line x1="72" y1="50" x2="80" y2="50"/>
+    <line x1="50" y1="18" x2="50" y2="28"/>
+    <line x1="50" y1="80" x2="50" y2="90"/>
+  </g>
+</svg>
