@@ -1,24 +1,24 @@
 {
-  "lastUpdate": "2026-01-27T13:50:00+01:00",
+  "lastUpdate": "2026-01-27T15:30:00+01:00",
   "tasks": [
     {
-      "id": "followers-api-download",
-      "name": "Descargando 68k followers (API oficial)",
-      "status": "running",
-      "progress": 1,
+      "id": "followers-complete",
+      "name": "CRM @harto_fr Completo",
+      "status": "complete",
+      "progress": 100,
       "steps": [
-        {"name": "Conectando a Twitter API v2", "status": "complete", "detail": "✅ Créditos activos"},
-        {"name": "Descargando followers", "status": "running", "detail": "0 / ~68,000"},
-        {"name": "Categorizando contactos", "status": "pending"},
-        {"name": "Generando prospectos", "status": "pending"},
-        {"name": "Actualizando CRM", "status": "pending"}
+        {"name": "Descargar followers (Apify)", "status": "complete", "detail": "✅ 66,427 followers"},
+        {"name": "Categorizar contactos", "status": "complete", "detail": "✅ 8 categorías"},
+        {"name": "Identificar prospectos", "status": "complete", "detail": "✅ 9,236 alto valor"},
+        {"name": "Generar reporte", "status": "complete", "detail": "✅ FINAL_REPORT.md"}
       ],
-      "startedAt": "2026-01-27T13:50:00+01:00"
+      "completedAt": "2026-01-27T15:30:00+01:00"
     }
   ],
   "logs": [
-    {"time": "13:50", "msg": "🚀 Descarga iniciada con API oficial"},
-    {"time": "13:49", "msg": "✅ Test exitoso - 100 followers descargados"},
-    {"time": "13:48", "msg": "💳 Créditos añadidos ($25)"}
+    {"time": "15:30", "msg": "✅ CRM completo: 66,427 followers analizados"},
+    {"time": "15:15", "msg": "📊 Apify completó descarga"},
+    {"time": "15:08", "msg": "🚀 Scraper Apify iniciado"},
+    {"time": "15:00", "msg": "💳 Plan Starter activado"}
   ]
 }
