@@ -744,35 +744,57 @@
             updatePendingChanges();
         }
         
-        function requestSync() {
+        async function requestSync() {
             if (changes.length === 0) {
                 showToast('No changes to sync');
                 return;
             }
             
-            // Generate sync instructions for Nuria
+            // Save sync request locally
             const syncData = {
                 changes,
                 tasks,
                 requestedAt: new Date().toISOString()
             };
-            
             localStorage.setItem('task_sync_request', JSON.stringify(syncData));
             
-            // Show instructions
-            const instructions = changes.map(c => {
-                if (c.type === 'status') {
-                    return `Row ${c.row}: Set status to "${c.status}"`;
-                } else if (c.type === 'add') {
-                    return `Add new: ${c.owner} | ${c.project} | ${c.title}`;
-                } else if (c.type === 'delete') {
-                    return `Delete row ${c.row}`;
-                }
-            }).join('\n');
+            // Build commands for Nuria
+            const commands = changes.filter(c => c.type === 'status' && c.row).map(c => ({
+                row: c.row,
+                status: c.status
+            }));
             
-            alert(`📋 Sync requested!\n\nChanges to apply:\n${instructions}\n\nNuria will sync these to Google Sheets on the next heartbeat.`);
+            if (commands.length === 0) {
+                showToast('No sheet updates needed');
+                return;
+            }
             
-            showToast('Sync requested! Nuria will update Sheets');
+            // Save to file for Nuria to pick up
+            const syncFile = {
+                commands,
+                requestedAt: new Date().toISOString()
+            };
+            
+            // Store in localStorage for display
+            localStorage.setItem('pending_sheet_sync', JSON.stringify(syncFile));
+            
+            // Show what will be synced
+            const summary = commands.map(c => `• Row ${c.row} → ${c.status}`).join('\n');
+            
+            // Clear changes after successful queue
+            changes = [];
+            localStorage.setItem('task_changes', JSON.stringify(changes));
+            updatePendingChanges();
+            
+            showToast('✅ Changes queued! Tell Nuria: "sync tasks"');
+            
+            // Also show a modal with copy-able text
+            const msg = `sync tasks:\n${summary}`;
+            if (confirm(`Changes queued for sync:\n\n${summary}\n\nCopy command for Nuria?`)) {
+                navigator.clipboard.writeText(msg).then(() => {
+                    showToast('Copied! Paste to Nuria');
+                });
+            }
         }
         
         function showToast(message, isError = false) {
