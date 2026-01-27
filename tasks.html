@@ -261,10 +261,20 @@
             border-color: var(--cyan-border);
         }
         .task-card.done {
-            opacity: 0.5;
+            opacity: 0.6;
+            background: rgba(0, 255, 136, 0.05);
+            border-left: 3px solid var(--green);
         }
         .task-card.done .task-title {
             text-decoration: line-through;
+            color: var(--green);
+        }
+        .task-card.just-changed {
+            animation: highlightChange 0.5s ease;
+        }
+        @keyframes highlightChange {
+            0% { background: rgba(255, 107, 0, 0.3); transform: scale(1.01); }
+            100% { background: transparent; transform: scale(1); }
         }
         
         .task-main {
@@ -729,22 +739,35 @@
         function toggleDone(id) {
             const task = tasks.find(t => t.id === id);
             if (task) {
+                const oldStatus = task.status;
                 task.status = task.status === 'Done' ? 'Pending' : 'Done';
                 recordChange(task, 'status');
                 saveTasks();
                 applyFilters();
                 updateStats();
+                highlightTask(id);
+                showToast(`✓ "${task.title}" → ${task.status}`);
             }
         }
         
         function setTaskStatus(id, status) {
             const task = tasks.find(t => t.id === id);
-            if (task) {
+            if (task && task.status !== status) {
                 task.status = status;
                 recordChange(task, 'status');
                 saveTasks();
                 applyFilters();
                 updateStats();
+                highlightTask(id);
+                showToast(`✓ "${task.title}" → ${status}`);
+            }
+        }
+        
+        function highlightTask(id) {
+            const card = document.querySelector(`.task-card[data-id="${id}"]`);
+            if (card) {
+                card.classList.add('just-changed');
+                setTimeout(() => card.classList.remove('just-changed'), 500);
             }
         }
         
