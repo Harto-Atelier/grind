@@ -1,31 +1,32 @@
 {
-  "lastUpdate": "2026-01-27T13:15:00+01:00",
+  "lastUpdate": "2026-01-27T13:20:00+01:00",
   "tasks": [
     {
+      "id": "followers-download",
+      "name": "Descargando 68k followers @harto_fr",
+      "status": "running",
+      "progress": 5,
+      "steps": [
+        {"name": "Conectando a Twitter API", "status": "running", "detail": "..."},
+        {"name": "Descargando en batches", "status": "pending", "detail": "Con delays para evitar rate limit"},
+        {"name": "Guardando progreso", "status": "pending"},
+        {"name": "Categorizando contactos", "status": "pending"},
+        {"name": "Generando prospectos", "status": "pending"},
+        {"name": "Actualizando CRM", "status": "pending"}
+      ],
+      "startedAt": "2026-01-27T13:20:00+01:00"
+    },
+    {
       "id": "crm-analysis",
-      "name": "CRM Analysis @harto_fr",
+      "name": "CRM Analysis (following)",
       "status": "complete",
       "progress": 100,
-      "steps": [
-        {"name": "Extrayendo followers", "status": "complete", "detail": "✅"},
-        {"name": "Extrayendo following", "status": "complete", "detail": "769 contactos"},
-        {"name": "Analizando perfiles", "status": "complete", "detail": "✅"},
-        {"name": "Categorizando contactos", "status": "complete", "detail": "9 categorías"},
-        {"name": "Identificando clientes", "status": "complete", "detail": "60 prospectos"},
-        {"name": "Buscando hot topics", "status": "complete", "detail": "✅"},
-        {"name": "Generando reporte", "status": "complete", "detail": "✅ REPORT.md"}
-      ],
-      "startedAt": "2026-01-27T12:53:00+01:00",
       "completedAt": "2026-01-27T13:15:00+01:00"
     }
   ],
   "logs": [
-    {"time": "13:15", "msg": "✅ CRM COMPLETADO - 769 contactos analizados"},
-    {"time": "13:14", "msg": "📄 Reporte generado: REPORT.md"},
-    {"time": "13:12", "msg": "🔥 Hot topics: trading bots, ordinals automation"},
-    {"time": "13:10", "msg": "👥 60 prospectos identificados (arte + SaaS)"},
-    {"time": "13:05", "msg": "🏷️ Contactos categorizados en 9 grupos"},
-    {"time": "12:55", "msg": "✅ Following descargados (769)"},
-    {"time": "12:53", "msg": "🚀 Sub-agente iniciado"}
+    {"time": "13:20", "msg": "🚀 Iniciando descarga de 68k followers"},
+    {"time": "13:20", "msg": "⏳ Descargando en batches con delays..."},
+    {"time": "13:15", "msg": "✅ CRM following completado (769)"}
   ]
 }
