@@ -60,6 +60,61 @@
         }
         .nav-links a:hover, .nav-links a.active { color: var(--cyan); }
         
+        /* NURIA Widget */
+        .nuria-nav {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nuria-face-mini {
+            position: relative;
+            animation: nuriaBounce 3s ease-in-out infinite;
+        }
+        @keyframes nuriaBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-2px); }
+        }
+        .nuria-eyes-mini {
+            display: flex;
+            gap: 8px;
+        }
+        .nuria-eye-mini {
+            width: 20px;
+            height: 20px;
+            background: var(--orange);
+            border-radius: 4px;
+            position: relative;
+            box-shadow: 0 0 15px rgba(255,107,0,0.4);
+            animation: nuriaGlow 2s ease-in-out infinite;
+            transition: height 0.1s, transform 0.1s;
+        }
+        @keyframes nuriaGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(255,107,0,0.4); }
+            50% { box-shadow: 0 0 25px rgba(255,107,0,0.6); }
+        }
+        .nuria-eye-mini::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 6px;
+            height: 6px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 2px;
+        }
+        .nuria-eye-mini.blink {
+            height: 4px;
+            border-radius: 4px;
+            transform: translateY(8px);
+        }
+        .nuria-eye-mini.blink::before { display: none; }
+        .nuria-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--cyan);
+            letter-spacing: 2px;
+        }
+        
         /* Layout */
         .main-layout {
             display: grid;
@@ -560,6 +615,15 @@
             <a href="outreach.html">Outreach</a>
             <a href="analytics.html">Analytics</a>
         </div>
+        <div class="nuria-nav">
+            <div class="nuria-face-mini">
+                <div class="nuria-eyes-mini">
+                    <div class="nuria-eye-mini" id="nuriaEyeL"></div>
+                    <div class="nuria-eye-mini" id="nuriaEyeR"></div>
+                </div>
+            </div>
+            <div class="nuria-label">NURIA</div>
+        </div>
     </nav>
     
     <div class="main-layout">
@@ -1045,6 +1109,28 @@
         
         // Init
         loadContacts();
+        
+        // NURIA blink animation
+        const nuriaEyeL = document.getElementById('nuriaEyeL');
+        const nuriaEyeR = document.getElementById('nuriaEyeR');
+        
+        function nuriaBlink() {
+            nuriaEyeL.classList.add('blink');
+            nuriaEyeR.classList.add('blink');
+            setTimeout(() => {
+                nuriaEyeL.classList.remove('blink');
+                nuriaEyeR.classList.remove('blink');
+            }, 150);
+        }
+        
+        function scheduleNuriaBlink() {
+            const delay = 2000 + Math.random() * 3000;
+            setTimeout(() => {
+                nuriaBlink();
+                scheduleNuriaBlink();
+            }, delay);
+        }
+        scheduleNuriaBlink();
     </script>
 </body>
 </html>
