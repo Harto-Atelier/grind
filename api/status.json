@@ -1,0 +1,28 @@
+{
+  "lastUpdate": "2026-01-27T12:55:00+01:00",
+  "tasks": [
+    {
+      "id": "crm-analysis",
+      "name": "CRM Analysis @harto_fr",
+      "status": "running",
+      "progress": 10,
+      "steps": [
+        {"name": "Extrayendo followers", "status": "running", "detail": "Descargando lista..."},
+        {"name": "Extrayendo following", "status": "running", "detail": "Descargando lista..."},
+        {"name": "Analizando perfiles", "status": "pending"},
+        {"name": "Categorizando contactos", "status": "pending"},
+        {"name": "Identificando clientes potenciales", "status": "pending"},
+        {"name": "Buscando hot topics", "status": "pending"},
+        {"name": "Generando reporte", "status": "pending"}
+      ],
+      "startedAt": "2026-01-27T12:53:00+01:00"
+    }
+  ],
+  "logs": [
+    {"time": "12:53:00", "msg": "🚀 Sub-agente iniciado: harto-crm-analysis"},
+    {"time": "12:53:15", "msg": "📊 Obteniendo user ID de @harto_fr..."},
+    {"time": "12:53:20", "msg": "✅ User ID: 2466586573"},
+    {"time": "12:53:25", "msg": "⏳ Descargando followers (esto puede tardar)..."},
+    {"time": "12:53:30", "msg": "⏳ Descargando following..."}
+  ]
+}

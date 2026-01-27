@@ -597,6 +597,150 @@
         }
         
         .focus-btn.secondary { background: var(--card); color: var(--text); }
+        
+        /* ============ NURIA AGENT ============ */
+        .agent-status-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--muted);
+        }
+        
+        .status-dot.active {
+            background: var(--green);
+            box-shadow: 0 0 10px var(--green);
+            animation: pulse 2s infinite;
+        }
+        
+        .agent-task {
+            padding: 12px 0;
+        }
+        
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .task-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .task-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .task-badge.running {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--blue);
+        }
+        
+        .task-badge.complete {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--green);
+        }
+        
+        .task-progress-bar {
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+        
+        .task-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--yellow) 100%);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        .task-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+        
+        .step-item.running {
+            color: var(--blue);
+        }
+        
+        .step-item.complete {
+            color: var(--green);
+        }
+        
+        .step-icon {
+            width: 16px;
+            text-align: center;
+        }
+        
+        .agent-logs {
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: 'SF Mono', 'Monaco', monospace;
+            font-size: 11px;
+            background: var(--bg);
+            border-radius: 8px;
+            padding: 12px;
+        }
+        
+        .log-entry {
+            display: flex;
+            gap: 10px;
+            padding: 4px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+        
+        .log-time {
+            color: var(--muted);
+            min-width: 50px;
+        }
+        
+        .log-msg {
+            color: var(--text);
+        }
+        
+        .twitter-status {
+            padding: 10px 0;
+        }
+        
+        .twitter-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+        
+        .twitter-label {
+            color: var(--muted);
+        }
+        
+        .twitter-value.connected {
+            color: var(--green);
+        }
         .focus-btn.success { background: var(--green); color: var(--bg); }
         
         .focus-xp-reward {
@@ -1585,6 +1729,55 @@
         </div>
     </div>
 
+        <!-- ============ NURIA AGENT ============ -->
+        <div class="section" id="sec-nuria">
+            <div class="card">
+                <div class="card-title">🟧 Nuria — Estado del Agente</div>
+                <div id="agentStatus" class="agent-status">
+                    <div class="agent-status-row">
+                        <span class="status-dot active"></span>
+                        <span>Conectado</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">⚙️ Tareas en Progreso</div>
+                <div id="agentTasks" class="agent-tasks">
+                    <div class="agent-task">
+                        <div class="task-header">
+                            <span class="task-name">Cargando...</span>
+                            <span class="task-badge running">⏳</span>
+                        </div>
+                        <div class="task-progress-bar">
+                            <div class="task-progress" style="width: 0%"></div>
+                        </div>
+                        <div class="task-steps" id="taskSteps"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">📋 Logs en Tiempo Real</div>
+                <div id="agentLogs" class="agent-logs">
+                    <div class="log-entry">
+                        <span class="log-time">--:--</span>
+                        <span class="log-msg">Esperando actividad...</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">🐦 Twitter @Nuriacollects</div>
+                <div class="twitter-status">
+                    <div class="twitter-stat">
+                        <span class="twitter-label">Estado:</span>
+                        <span class="twitter-value connected">✅ Conectado</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     <!-- Morning Ritual Modal -->
     <div class="modal-overlay" id="morningModal">
         <div class="modal">
@@ -1664,6 +1857,10 @@
         <button class="nav-item" onclick="showSection('stats', this)">
             <span class="icon">📊</span>
             <span>Stats</span>
+        </button>
+        <button class="nav-item" onclick="showSection('nuria', this)">
+            <span class="icon">🟧</span>
+            <span>Nuria</span>
         </button>
         <button class="nav-item" onclick="showSection('more', this)">
             <span class="icon">⋯</span>
@@ -1981,6 +2178,60 @@
         }
         
         init();
+        
+        // ========== NURIA AGENT STATUS ==========
+        async function fetchAgentStatus() {
+            try {
+                const response = await fetch('api/status.json?' + Date.now());
+                if (!response.ok) return;
+                const data = await response.json();
+                updateAgentUI(data);
+            } catch(e) {
+                console.log('Agent status not available');
+            }
+        }
+        
+        function updateAgentUI(data) {
+            // Update tasks
+            const tasksEl = document.getElementById('agentTasks');
+            if (data.tasks && data.tasks.length > 0) {
+                tasksEl.innerHTML = data.tasks.map(task => `
+                    <div class="agent-task">
+                        <div class="task-header">
+                            <span class="task-name">${task.name}</span>
+                            <span class="task-badge ${task.status}">${task.status === 'running' ? '⏳ En progreso' : '✅ Completado'}</span>
+                        </div>
+                        <div class="task-progress-bar">
+                            <div class="task-progress" style="width: ${task.progress}%"></div>
+                        </div>
+                        <div class="task-steps">
+                            ${task.steps.map(step => `
+                                <div class="step-item ${step.status}">
+                                    <span class="step-icon">${step.status === 'complete' ? '✅' : step.status === 'running' ? '🔄' : '⏳'}</span>
+                                    <span>${step.name}</span>
+                                    ${step.detail ? `<span style="color: var(--muted); margin-left: auto;">${step.detail}</span>` : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            // Update logs
+            const logsEl = document.getElementById('agentLogs');
+            if (data.logs && data.logs.length > 0) {
+                logsEl.innerHTML = data.logs.slice().reverse().map(log => `
+                    <div class="log-entry">
+                        <span class="log-time">${log.time}</span>
+                        <span class="log-msg">${log.msg}</span>
+                    </div>
+                `).join('');
+            }
+        }
+        
+        // Fetch agent status every 10 seconds
+        fetchAgentStatus();
+        setInterval(fetchAgentStatus, 10000);
     </script>
 </body>
 </html>
