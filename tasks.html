@@ -28,6 +28,92 @@
             font-family: 'Inter', sans-serif;
             background: var(--bg);
             color: var(--text);
+        }
+        
+        /* Password Gate */
+        .password-gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .password-gate.hidden {
+            display: none;
+        }
+        .password-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        .password-box h2 {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--cyan);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+        .password-box p {
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-bottom: 25px;
+        }
+        .password-input {
+            width: 100%;
+            padding: 14px 18px;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            text-align: center;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            transition: border-color 0.2s;
+        }
+        .password-input:focus {
+            outline: none;
+            border-color: var(--cyan);
+        }
+        .password-input.error {
+            border-color: var(--red);
+            animation: shake 0.3s ease;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .password-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--cyan);
+            border: none;
+            color: #000;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .password-btn:hover {
+            background: #6b75c4;
+        }
+        
+        .main-content {
+            display: none;
+        }
+        .main-content.unlocked {
+            display: block;
             min-height: 100vh;
         }
         
@@ -468,6 +554,18 @@
     </style>
 </head>
 <body>
+    <!-- Password Gate -->
+    <div class="password-gate" id="passwordGate">
+        <div class="password-box">
+            <h2>🔒 TASKS // HARTO</h2>
+            <p>Enter password to access</p>
+            <input type="password" class="password-input" id="passwordInput" placeholder="••••••••" autocomplete="off">
+            <button class="password-btn" onclick="checkPassword()">ENTER</button>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
     <nav class="nav">
         <div class="nav-brand">TASKS // HARTO</div>
         <div class="nav-links">
@@ -905,8 +1003,57 @@
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
         
-        // Init
-        loadTasks();
+        // Init - only load if authenticated
+        if (isAuthenticated()) {
+            unlockPage();
+        }
+    </script>
+    </div><!-- End main-content -->
+    
+    <script>
+        // Password Protection
+        const PASS_HASH = '8a9f2b3c'; // Simple hash of h@rto2030
+        
+        function simpleHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash).toString(16).substring(0, 8);
+        }
+        
+        function isAuthenticated() {
+            const stored = localStorage.getItem('harto_tasks_auth');
+            return stored === PASS_HASH;
+        }
+        
+        function checkPassword() {
+            const input = document.getElementById('passwordInput');
+            const inputHash = simpleHash(input.value);
+            
+            // Check against actual password
+            if (input.value === 'h@rto2030') {
+                localStorage.setItem('harto_tasks_auth', PASS_HASH);
+                unlockPage();
+            } else {
+                input.classList.add('error');
+                setTimeout(() => input.classList.remove('error'), 300);
+                input.value = '';
+            }
+        }
+        
+        function unlockPage() {
+            document.getElementById('passwordGate').classList.add('hidden');
+            document.getElementById('mainContent').classList.add('unlocked');
+            loadTasks();
+        }
+        
+        // Enter key to submit
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') checkPassword();
+        });
     </script>
 </body>
 </html>
