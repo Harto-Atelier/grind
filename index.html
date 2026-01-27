@@ -1390,7 +1390,7 @@
                     <div class="mit-check"></div>
                     <div class="mit-content">
                         <div class="mit-title">Reunión restructuración</div>
-                        <div class="mit-meta">Mañana 10:30 • Teams</div>
+                        <div class="mit-meta">Hoy 10:30 • Teams</div>
                     </div>
                     <div class="mit-xp">+50 XP</div>
                 </div>
@@ -1504,7 +1504,7 @@
                     <div class="task-check"></div>
                     <div class="task-content">
                         <div class="task-title">Reunión restructuración</div>
-                        <div class="task-meta">Mañana 10:30 • Teams • +25 XP</div>
+                        <div class="task-meta">Hoy 10:30 • Teams • +25 XP</div>
                     </div>
                     <div class="task-priority priority-1"></div>
                 </div>
@@ -2179,10 +2179,52 @@
         
         init();
         
+        // ========== DYNAMIC DATA LOADING ==========
+        async function fetchTasks() {
+            try {
+                const response = await fetch('api/tasks.json?' + Date.now(), {cache: 'no-store'});
+                if (!response.ok) return;
+                const data = await response.json();
+                updateTasksUI(data);
+            } catch(e) {
+                console.log('Tasks data not available');
+            }
+        }
+        
+        function updateTasksUI(data) {
+            // Update MITs
+            const mits = data.mits || [];
+            const mitContainer = document.querySelector('.mit-section');
+            if (mitContainer && mits.length > 0) {
+                const mitItems = mitContainer.querySelectorAll('.mit-item');
+                mits.forEach((mit, i) => {
+                    if (mitItems[i]) {
+                        const title = mitItems[i].querySelector('.mit-title');
+                        const meta = mitItems[i].querySelector('.mit-meta');
+                        if (title) title.textContent = mit.title;
+                        if (meta) meta.textContent = mit.meta;
+                    }
+                });
+            }
+            
+            // Update Events
+            const events = data.events || [];
+            const eventContainer = document.querySelector('.event-item');
+            if (eventContainer && events.length > 0) {
+                const event = events[0];
+                const time = eventContainer.querySelector('.event-time');
+                const title = eventContainer.querySelector('.event-title');
+                const meta = eventContainer.querySelector('.event-meta');
+                if (time) time.textContent = event.time;
+                if (title) title.textContent = event.title;
+                if (meta) meta.textContent = event.meta;
+            }
+        }
+        
         // ========== NURIA AGENT STATUS ==========
         async function fetchAgentStatus() {
             try {
-                const response = await fetch('api/status.json?' + Date.now());
+                const response = await fetch('api/status.json?' + Date.now(), {cache: 'no-store'});
                 if (!response.ok) return;
                 const data = await response.json();
                 updateAgentUI(data);
@@ -2229,9 +2271,11 @@
             }
         }
         
-        // Fetch agent status every 10 seconds
+        // Fetch data on load and periodically
         fetchAgentStatus();
+        fetchTasks();
         setInterval(fetchAgentStatus, 10000);
+        setInterval(fetchTasks, 30000);
     </script>
 </body>
 </html>

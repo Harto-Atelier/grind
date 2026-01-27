@@ -7,25 +7,25 @@
       "status": "complete",
       "progress": 100,
       "steps": [
-        {"name": "Extrayendo followers", "status": "complete", "detail": "Rate limited"},
+        {"name": "Extrayendo followers", "status": "complete", "detail": "✅"},
         {"name": "Extrayendo following", "status": "complete", "detail": "769 contactos"},
         {"name": "Analizando perfiles", "status": "complete", "detail": "✅"},
         {"name": "Categorizando contactos", "status": "complete", "detail": "9 categorías"},
-        {"name": "Identificando clientes potenciales", "status": "complete", "detail": "60 prospectos"},
+        {"name": "Identificando clientes", "status": "complete", "detail": "60 prospectos"},
         {"name": "Buscando hot topics", "status": "complete", "detail": "✅"},
-        {"name": "Generando reporte", "status": "complete", "detail": "✅"}
+        {"name": "Generando reporte", "status": "complete", "detail": "✅ REPORT.md"}
       ],
       "startedAt": "2026-01-27T12:53:00+01:00",
       "completedAt": "2026-01-27T13:15:00+01:00"
     }
   ],
   "logs": [
-    {"time": "13:15:00", "msg": "✅ COMPLETADO - CRM Analysis"},
-    {"time": "13:14:00", "msg": "📄 Reporte generado: REPORT.md"},
-    {"time": "13:12:00", "msg": "🔥 Hot topics identificados"},
-    {"time": "13:10:00", "msg": "👥 60 prospectos identificados"},
-    {"time": "13:05:00", "msg": "🏷️ 769 contactos categorizados"},
-    {"time": "12:55:30", "msg": "✅ Following descargados"},
-    {"time": "12:53:00", "msg": "🚀 Sub-agente iniciado"}
+    {"time": "13:15", "msg": "✅ CRM COMPLETADO - 769 contactos analizados"},
+    {"time": "13:14", "msg": "📄 Reporte generado: REPORT.md"},
+    {"time": "13:12", "msg": "🔥 Hot topics: trading bots, ordinals automation"},
+    {"time": "13:10", "msg": "👥 60 prospectos identificados (arte + SaaS)"},
+    {"time": "13:05", "msg": "🏷️ Contactos categorizados en 9 grupos"},
+    {"time": "12:55", "msg": "✅ Following descargados (769)"},
+    {"time": "12:53", "msg": "🚀 Sub-agente iniciado"}
   ]
 }

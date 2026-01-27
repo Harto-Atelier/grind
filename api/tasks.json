@@ -1,0 +1,79 @@
+{
+  "lastUpdate": "2026-01-27T13:05:00+01:00",
+  "mits": [
+    {
+      "id": 1,
+      "title": "Reunión restructuración",
+      "meta": "Hoy 10:30 • Teams",
+      "xp": 50,
+      "done": false,
+      "date": "2026-01-27",
+      "priority": "urgent"
+    },
+    {
+      "id": 2,
+      "title": "Enviar movimientos Binance",
+      "meta": "Sergio • Finance",
+      "xp": 50,
+      "done": false,
+      "date": "2026-01-27",
+      "priority": "urgent"
+    },
+    {
+      "id": 3,
+      "title": "Responder Juliette",
+      "meta": "Contrato Manso",
+      "xp": 50,
+      "done": false,
+      "date": "2026-01-27",
+      "priority": "urgent"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 4,
+      "title": "Zoo con los niños",
+      "meta": "Sábado 31 • 10:00",
+      "xp": 15,
+      "done": false,
+      "date": "2026-01-31",
+      "priority": "normal"
+    },
+    {
+      "id": 5,
+      "title": "Revisar Nifty Gateway",
+      "meta": "Cierre plataforma",
+      "xp": 15,
+      "done": false,
+      "priority": "normal"
+    },
+    {
+      "id": 6,
+      "title": "Deploy Vercel rarity fix",
+      "meta": "harto-strategy",
+      "xp": 10,
+      "done": false,
+      "priority": "low"
+    }
+  ],
+  "events": [
+    {
+      "time": "10:30",
+      "title": "Reunión Núria Nadal",
+      "meta": "Teams • Restructuración",
+      "date": "2026-01-27"
+    },
+    {
+      "time": "11:30",
+      "title": "Mint",
+      "meta": "",
+      "date": "2026-01-27"
+    },
+    {
+      "time": "13:00",
+      "title": "Dinia en el piso",
+      "meta": "Hasta 15:00",
+      "date": "2026-01-27"
+    }
+  ]
+}
