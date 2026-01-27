@@ -1,24 +1,6 @@
 {
-  "lastUpdate": "2026-01-27T15:30:00+01:00",
-  "tasks": [
-    {
-      "id": "followers-complete",
-      "name": "CRM @harto_fr Completo",
-      "status": "complete",
-      "progress": 100,
-      "steps": [
-        {"name": "Descargar followers (Apify)", "status": "complete", "detail": "✅ 66,427 followers"},
-        {"name": "Categorizar contactos", "status": "complete", "detail": "✅ 8 categorías"},
-        {"name": "Identificar prospectos", "status": "complete", "detail": "✅ 9,236 alto valor"},
-        {"name": "Generar reporte", "status": "complete", "detail": "✅ FINAL_REPORT.md"}
-      ],
-      "completedAt": "2026-01-27T15:30:00+01:00"
-    }
-  ],
-  "logs": [
-    {"time": "15:30", "msg": "✅ CRM completo: 66,427 followers analizados"},
-    {"time": "15:15", "msg": "📊 Apify completó descarga"},
-    {"time": "15:08", "msg": "🚀 Scraper Apify iniciado"},
-    {"time": "15:00", "msg": "💳 Plan Starter activado"}
-  ]
+  "lastUpdate": "2026-01-27T20:34:22.961Z",
+  "calendar": 8,
+  "emails": 10,
+  "unread": 6
 }

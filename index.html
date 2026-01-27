@@ -413,6 +413,108 @@
         }
         .crm-btn:hover { background: #5d67b0; }
         
+        /* Agenda Section */
+        .agenda-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid var(--border);
+        }
+        .agenda-col {
+            padding: 25px 30px;
+            border-right: 1px solid var(--border);
+        }
+        .agenda-col:last-child { border-right: none; }
+        .section-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--cyan);
+        }
+        .email-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--orange);
+        }
+        .agenda-list {
+            margin-top: 15px;
+        }
+        .agenda-item {
+            display: flex;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .agenda-item:last-child { border-bottom: none; }
+        .agenda-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--cyan);
+            min-width: 50px;
+        }
+        .agenda-title {
+            font-size: 0.9rem;
+        }
+        .agenda-upcoming {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+        }
+        .upcoming-header {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .upcoming-item {
+            display: flex;
+            gap: 15px;
+            padding: 8px 0;
+            font-size: 0.85rem;
+        }
+        .upcoming-date {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--orange);
+            min-width: 60px;
+        }
+        .upcoming-title {
+            color: var(--muted);
+        }
+        .email-list {
+            margin-top: 15px;
+        }
+        .email-item {
+            display: grid;
+            grid-template-columns: 100px 1fr 50px;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.85rem;
+        }
+        .email-item:last-child { border-bottom: none; }
+        .email-item.unread .email-sender,
+        .email-item.unread .email-subject {
+            font-weight: 600;
+        }
+        .email-sender {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--cyan);
+            font-size: 0.8rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .email-subject {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .email-time {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--muted);
+            font-size: 0.75rem;
+            text-align: right;
+        }
+        
         /* Projects Grid */
         .projects-grid {
             display: grid;
@@ -523,6 +625,8 @@
             .hero-time { text-align: center; }
             .stats-row { grid-template-columns: repeat(3, 1fr); }
             .stat-box { border-bottom: 1px solid var(--border); }
+            .agenda-section { grid-template-columns: 1fr; }
+            .agenda-col { border-right: none; border-bottom: 1px solid var(--border); }
             .main-grid { grid-template-columns: 1fr; }
             .main-section { border-right: none; border-bottom: 1px solid var(--border); }
             .projects-grid { grid-template-columns: repeat(2, 1fr); }
@@ -537,6 +641,8 @@
             .hero { padding: 30px 20px; }
             .hero-title { font-size: 2rem; letter-spacing: 4px; }
             .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .agenda-section { grid-template-columns: 1fr; }
+            .email-item { grid-template-columns: 80px 1fr 45px; }
             .team-grid { grid-template-columns: 1fr; }
             .projects-grid { grid-template-columns: 1fr; }
             .quick-section { grid-template-columns: repeat(2, 1fr); }
@@ -614,6 +720,91 @@
         <div class="stat-box success">
             <div class="stat-value" id="statContacted">0</div>
             <div class="stat-label">Contacted</div>
+        </div>
+    </section>
+    
+    <!-- Today's Agenda -->
+    <section class="agenda-section">
+        <div class="agenda-col">
+            <div class="section-header">
+                <div class="section-title">📅 TODAY'S SCHEDULE</div>
+                <div class="section-date" id="todayDate">Mon, Jan 27</div>
+            </div>
+            <div class="agenda-list" id="calendarEvents">
+                <div class="agenda-item">
+                    <div class="agenda-time">07:30</div>
+                    <div class="agenda-content">
+                        <div class="agenda-title">Deporte</div>
+                    </div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-time">10:30</div>
+                    <div class="agenda-content">
+                        <div class="agenda-title">Reunión restructuración</div>
+                    </div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-time">11:30</div>
+                    <div class="agenda-content">
+                        <div class="agenda-title">Varios / Mint</div>
+                    </div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-time">13:00</div>
+                    <div class="agenda-content">
+                        <div class="agenda-title">Dinia en el piso</div>
+                    </div>
+                </div>
+            </div>
+            <div class="agenda-upcoming">
+                <div class="upcoming-header">PRÓXIMOS DÍAS</div>
+                <div class="upcoming-item">
+                    <span class="upcoming-date">Mar 28</span>
+                    <span class="upcoming-title">Marina Abramovic (19:00)</span>
+                </div>
+                <div class="upcoming-item">
+                    <span class="upcoming-date">Vie 31</span>
+                    <span class="upcoming-title">Zoo avec les enfants (10:00)</span>
+                </div>
+            </div>
+        </div>
+        <div class="agenda-col">
+            <div class="section-header">
+                <div class="section-title">📧 RECENT EMAILS</div>
+                <div class="email-count"><span id="unreadCount">8</span> unread</div>
+            </div>
+            <div class="email-list" id="emailList">
+                <div class="email-item unread">
+                    <div class="email-sender">Juliette</div>
+                    <div class="email-subject">Lys Fernandez se irá a las 14:45 los jueves</div>
+                    <div class="email-time">21:31</div>
+                </div>
+                <div class="email-item unread">
+                    <div class="email-sender">Juliette</div>
+                    <div class="email-subject">Re: Renovación del contrato de arrendamiento</div>
+                    <div class="email-time">21:21</div>
+                </div>
+                <div class="email-item unread">
+                    <div class="email-sender">Juliette</div>
+                    <div class="email-subject">Re: Proposta de reunió</div>
+                    <div class="email-time">21:18</div>
+                </div>
+                <div class="email-item">
+                    <div class="email-sender">IE Londres</div>
+                    <div class="email-subject">Proposta de reunió</div>
+                    <div class="email-time">19:34</div>
+                </div>
+                <div class="email-item unread">
+                    <div class="email-sender">SELTZ</div>
+                    <div class="email-subject">IVA CULTURAL, ¡YA!</div>
+                    <div class="email-time">18:35</div>
+                </div>
+                <div class="email-item unread">
+                    <div class="email-sender">Bitcoin Conference</div>
+                    <div class="email-subject">📢 Speakers Dropped + Price Increase Friday</div>
+                    <div class="email-time">17:22</div>
+                </div>
+            </div>
         </div>
     </section>
     
@@ -861,6 +1052,79 @@
             }, delay);
         }
         scheduleNuriaBlink();
+        
+        // Load dashboard data
+        async function loadDashboardData() {
+            try {
+                // Load calendar
+                const calRes = await fetch('api/calendar.json');
+                if (calRes.ok) {
+                    const calData = await calRes.json();
+                    renderCalendar(calData);
+                }
+                
+                // Load emails
+                const emailRes = await fetch('api/emails.json');
+                if (emailRes.ok) {
+                    const emailData = await emailRes.json();
+                    renderEmails(emailData);
+                }
+            } catch (err) {
+                console.log('Using static data');
+            }
+        }
+        
+        function renderCalendar(data) {
+            // Update today's date
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+            document.getElementById('todayDate').textContent = dateStr;
+            
+            // Render today's events
+            const eventsHtml = data.today.map(e => `
+                <div class="agenda-item">
+                    <div class="agenda-time">${e.time}</div>
+                    <div class="agenda-content">
+                        <div class="agenda-title">${e.title}</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Render upcoming
+            const upcomingHtml = data.upcoming.map(e => {
+                const date = new Date(e.date);
+                const dateStr = date.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric' });
+                return `
+                    <div class="upcoming-item">
+                        <span class="upcoming-date">${dateStr}</span>
+                        <span class="upcoming-title">${e.title} (${e.time})</span>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('calendarEvents').innerHTML = eventsHtml;
+            document.querySelector('.agenda-upcoming').innerHTML = `
+                <div class="upcoming-header">PRÓXIMOS DÍAS</div>
+                ${upcomingHtml}
+            `;
+        }
+        
+        function renderEmails(data) {
+            document.getElementById('unreadCount').textContent = data.unreadCount;
+            
+            const emailsHtml = data.emails.map(e => `
+                <div class="email-item ${e.unread ? 'unread' : ''}">
+                    <div class="email-sender">${e.sender}</div>
+                    <div class="email-subject">${e.subject}</div>
+                    <div class="email-time">${e.time}</div>
+                </div>
+            `).join('');
+            
+            document.getElementById('emailList').innerHTML = emailsHtml;
+        }
+        
+        // Load data on page load
+        loadDashboardData();
     </script>
 </body>
 </html>

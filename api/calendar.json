@@ -1,0 +1,47 @@
+{
+  "today": [
+    {
+      "time": "07:30",
+      "title": "Deporte",
+      "date": "2026-01-27"
+    },
+    {
+      "time": "10:30",
+      "title": "reunión restructuración",
+      "date": "2026-01-27"
+    },
+    {
+      "time": "11:30",
+      "title": "Varios",
+      "date": "2026-01-27"
+    },
+    {
+      "time": "11:30",
+      "title": "Mint",
+      "date": "2026-01-27"
+    },
+    {
+      "time": "13:00",
+      "title": "Dinia en el piso",
+      "date": "2026-01-27"
+    },
+    {
+      "time": "All day",
+      "title": "Teletrabajo Arturo",
+      "date": "2026-01-27"
+    }
+  ],
+  "upcoming": [
+    {
+      "time": "19:00",
+      "title": "Marina Abramovic",
+      "date": "2026-01-28"
+    },
+    {
+      "time": "10:00",
+      "title": "Zoo avec les enfants",
+      "date": "2026-01-31"
+    }
+  ],
+  "updated": "2026-01-27T20:34:21.884Z"
+}

@@ -1,0 +1,66 @@
+{
+  "emails": [
+    {
+      "sender": "Juliette Lavedan-For",
+      "subject": "Lys Fernandez se irá a las 14:45 los jueves",
+      "time": "21:31",
+      "unread": true
+    },
+    {
+      "sender": "Juliette Lavedan-For",
+      "subject": "Re: Renovación del contrato de arrendamiento – vencimiento enero 2027",
+      "time": "21:21",
+      "unread": true
+    },
+    {
+      "sender": "Juliette Lavedan-For",
+      "subject": "Re: Proposta de reunió",
+      "time": "21:18",
+      "unread": true
+    },
+    {
+      "sender": "noreply-apps-scripts",
+      "subject": "Summary of failures for Google Apps Script: Untitled project",
+      "time": "21:18",
+      "unread": true
+    },
+    {
+      "sender": "IE Londres",
+      "subject": "Proposta de reunió",
+      "time": "19:34",
+      "unread": false
+    },
+    {
+      "sender": "SELTZ by Ritter Ferr",
+      "subject": "SELTZ - IVA CULTURAL, ¡YA!",
+      "time": "18:35",
+      "unread": true
+    },
+    {
+      "sender": "The Bitcoin Conferen",
+      "subject": "📢 Speakers Dropped + Price Increase Friday",
+      "time": "17:22",
+      "unread": true
+    },
+    {
+      "sender": "Juliette Lavedan-For",
+      "subject": "Invitation: Esto es.. Brossa @ Fri 22 May 2026 7:30pm - 8:30pm (CEST) (hartostud",
+      "time": "17:11",
+      "unread": false
+    },
+    {
+      "sender": "Juliette Lavedan-For",
+      "subject": "Invitation: Guerrilla - Brossa @ Wed 17 Jun 2026 7:30pm - 8:30pm (CEST) (hartost",
+      "time": "17:09",
+      "unread": false
+    },
+    {
+      "sender": "Juliette Lavedan-For",
+      "subject": "Invitation: Blattodea - Brossa @ Sun 7 Jun 2026 12pm - 1pm (CEST) (hartostudio@g",
+      "time": "17:06",
+      "unread": false
+    }
+  ],
+  "unreadCount": 6,
+  "updated": "2026-01-27T20:34:22.960Z"
+}
