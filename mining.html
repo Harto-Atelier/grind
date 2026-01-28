@@ -411,30 +411,109 @@ async function fetchRetry(url, retries=3) {
     try {
       const r=await fetch(url);
       if(r.ok) return await r.json();
-      if(r.status===429) { const w=(i+1)*10000; log(`⏳ Rate limit ${w/1000}s`,'warn'); await sleep(w); }
-      else throw new Error('HTTP '+r.status);
+      if(r.status===429) {
+        // Check retry-after header
+        const retryAfter=r.headers.get('retry-after');
+        const wait=retryAfter?Math.min(parseInt(retryAfter),30)*1000:(i+1)*15000;
+        log(`⏳ 429 — retry in ${Math.round(wait/1000)}s (${i+1}/${retries})`,'warn');
+        await sleep(wait);
+        if(i===retries-1) throw new Error('429');
+      } else throw new Error('HTTP '+r.status);
     } catch(e) { if(i===retries-1) throw e; await sleep(3000) }
   }
   return null;
 }
 
+// Multi-source listing fetcher with fallback
+async function fetchFromME(slug,minP,maxP,lim,off) {
+  let url=`/api/me/v2/ord/btc/tokens?sortBy=priceAsc&limit=${lim}&offset=${off}&minPrice=${minP}&maxPrice=${maxP}`;
+  if(slug) url+=`&collectionSymbol=${slug}`;
+  const d=await fetchRetry(url,2);
+  if(!d) return null;
+  const tk=d.tokens||d||[];
+  if(!Array.isArray(tk)) return null;
+  return tk.map(t=>({id:t.id,name:t.meta?.name||t.id?.substring(0,16)+'...',collection:t.collection?.name||t.collectionSymbol||'—',slug:t.collectionSymbol||'',price:t.listedPrice,imageUrl:t.contentURI||t.meta?.imageURI||'',source:'ME'})).filter(t=>t.price&&t.price>=minP&&t.price<=maxP);
+}
+
+async function fetchFromMECollection(slug,minP,maxP,lim,off) {
+  if(!slug) return null; // collection endpoint needs slug
+  let url=`/api/me/v2/ord/btc/tokens?collectionSymbol=${slug}&sortBy=priceAsc&limit=${lim}&offset=${off}&minPrice=${minP}&maxPrice=${maxP}`;
+  const d=await fetchRetry(url,2);
+  if(!d) return null;
+  const tk=d.tokens||d||[];
+  if(!Array.isArray(tk)) return null;
+  return tk.map(t=>({id:t.id,name:t.meta?.name||t.id?.substring(0,16)+'...',collection:t.collection?.name||slug,slug:slug,price:t.listedPrice,imageUrl:t.contentURI||t.meta?.imageURI||'',source:'ME'})).filter(t=>t.price&&t.price>=minP&&t.price<=maxP);
+}
+
+// Scrape via ordinals.com (no API key needed)
+async function fetchFromOrdScrape(slug,minP,maxP,lim) {
+  // This is a last resort - try ME activities which has different rate limits
+  try {
+    let url=`/api/me/v2/ord/btc/activities?kind=listing&limit=${lim}`;
+    if(slug) url+=`&collectionSymbol=${slug}`;
+    const d=await fetchRetry(url,1);
+    if(!d||!Array.isArray(d)) return null;
+    return d.filter(a=>a.listedPrice>=minP&&a.listedPrice<=maxP).map(a=>({
+      id:a.tokenId||a.inscriptionId,name:a.token?.meta?.name||a.tokenId?.substring(0,16)+'...',
+      collection:a.collectionSymbol||'—',slug:a.collectionSymbol||'',price:a.listedPrice,
+      imageUrl:a.token?.contentURI||'',source:'ME-act'
+    }));
+  } catch { return null }
+}
+
 async function fetchListings(slug,minP,maxP,maxPg) {
-  const ls=[]; const lim=20;
+  const ls=[]; const lim=20; const seen=new Set();
+  let source='ME'; let consecutive429=0;
+
   for(let pg=0; pg<maxPg; pg++) {
     if(shouldStop) break;
     const off=pg*lim;
-    let url=`/api/me/v2/ord/btc/tokens?sortBy=priceAsc&limit=${lim}&offset=${off}&minPrice=${minP}&maxPrice=${maxP}`;
-    if(slug) url+=`&collectionSymbol=${slug}`;
-    log(`📄 Pág ${pg+1}/${maxPg}`);
+    log(`📄 Pág ${pg+1}/${maxPg} [${source}]`);
+
+    let items=null;
     try {
-      const d=await fetchRetry(url); if(!d){log('❌ Sin datos','error');break}
-      const tk=d.tokens||d||[]; if(!Array.isArray(tk)||!tk.length){log(`Pág ${pg+1}: vacía`,'warn');break}
-      tk.forEach(t=>{const p=t.listedPrice;if(p&&p>=minP&&p<=maxP) ls.push({id:t.id,name:t.meta?.name||t.id?.substring(0,16)+'...',collection:t.collection?.name||t.collectionSymbol||'—',slug:t.collectionSymbol||'',price:p,imageUrl:t.contentURI||t.meta?.imageURI||''})});
-      document.getElementById('statListings').textContent=ls.length;
-      log(`✅ +${tk.length} (total: ${ls.length})`,'ok');
-      if(tk.length<lim) break;
-      await sleep(1000);
-    } catch(e) { log(`❌ ${e.message}`,'error'); await sleep(5000) }
+      // Try main endpoint
+      items=await fetchFromME(slug,minP,maxP,lim,off);
+      if(items) { consecutive429=0; source='ME' }
+    } catch(e) {
+      if(e.message?.includes('429')) consecutive429++;
+    }
+
+    // If rate limited, try activities endpoint
+    if(!items && consecutive429>0) {
+      log('⚡ ME rate limited, trying activities...','warn');
+      try {
+        items=await fetchFromOrdScrape(slug,minP,maxP,lim);
+        if(items) source='ME-act';
+      } catch{}
+    }
+
+    // If still nothing after 2 consecutive 429s, add longer backoff
+    if(!items && consecutive429>=2) {
+      const wait=Math.min(consecutive429*15,60);
+      log(`⏳ Rate limited — waiting ${wait}s (attempt ${consecutive429})...`,'warn');
+      await sleep(wait*1000);
+      try {
+        items=await fetchFromME(slug,minP,maxP,lim,off);
+        if(items) { consecutive429=0; source='ME' }
+      } catch(e) {
+        if(e.message?.includes('429')) consecutive429++;
+      }
+    }
+
+    if(!items||!items.length) {
+      if(consecutive429>=3) { log(`❌ ME API bloqueada — ${ls.length} listings recogidos`,'error'); break }
+      log(`Pág ${pg+1}: vacía`,'warn'); break;
+    }
+
+    items.forEach(t=>{if(!seen.has(t.id)){seen.add(t.id);ls.push(t)}});
+    document.getElementById('statListings').textContent=ls.length;
+    log(`✅ +${items.length} (total: ${ls.length}) [${source}]`,'ok');
+
+    if(items.length<lim) break;
+    // Adaptive delay: slower when near rate limit
+    const delay=consecutive429>0?3000:1200;
+    await sleep(delay);
   }
   return ls;
 }
