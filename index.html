@@ -754,6 +754,33 @@
             margin-top: 5px;
             font-style: italic;
         }
+        .member-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+            justify-content: center;
+        }
+        .action-btn {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 6px 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .action-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: scale(1.1);
+        }
+        .action-btn:active {
+            transform: scale(0.95);
+        }
+        .action-btn.loading {
+            opacity: 0.5;
+            pointer-events: none;
+        }
         .activity-log {
             background: var(--card);
             border: 1px solid var(--border);
@@ -1343,6 +1370,10 @@
                 <div class="member-model">Claude Opus</div>
                 <div class="member-status">● WORKING</div>
                 <div class="member-task" id="task-nuria">Coordinando equipo</div>
+                <div class="member-actions">
+                    <button class="action-btn" onclick="triggerTask('nuria', 'check-emails')" title="Check Emails">📧</button>
+                    <button class="action-btn" onclick="triggerTask('nuria', 'status-report')" title="Status Report">📊</button>
+                </div>
             </div>
             <div class="team-member" id="member-amy">
                 <div class="member-emoji">📋</div>
@@ -1351,6 +1382,10 @@
                 <div class="member-model">Kimi 2.5</div>
                 <div class="member-status">○ IDLE</div>
                 <div class="member-task" id="task-amy"></div>
+                <div class="member-actions">
+                    <button class="action-btn" onclick="triggerTask('amy', 'sync-tasks')" title="Sync Tasks">🔄</button>
+                    <button class="action-btn" onclick="triggerTask('amy', 'check-sheets')" title="Check Sheets">📑</button>
+                </div>
             </div>
             <div class="team-member" id="member-jack">
                 <div class="member-emoji">🔧</div>
@@ -1359,6 +1394,10 @@
                 <div class="member-model">Claude Sonnet</div>
                 <div class="member-status">○ IDLE</div>
                 <div class="member-task" id="task-jack"></div>
+                <div class="member-actions">
+                    <button class="action-btn" onclick="triggerTask('jack', 'scan-repos')" title="Scan Repos">📂</button>
+                    <button class="action-btn" onclick="triggerTask('jack', 'run-diagnostics')" title="Diagnostics">🔍</button>
+                </div>
             </div>
             <div class="team-member" id="member-pepe">
                 <div class="member-emoji">🎨</div>
@@ -1367,6 +1406,10 @@
                 <div class="member-model">Kimi 2.5</div>
                 <div class="member-status">○ IDLE</div>
                 <div class="member-task" id="task-pepe"></div>
+                <div class="member-actions">
+                    <button class="action-btn" onclick="triggerTask('pepe', 'twitter-trends')" title="Twitter Trends">🐦</button>
+                    <button class="action-btn" onclick="triggerTask('pepe', 'find-viral')" title="Find Viral">🔥</button>
+                </div>
             </div>
         </div>
         
@@ -1678,6 +1721,45 @@
                     <div class="activity-log-title">📜 ACTIVITY LOG <span style="font-size: 0.6rem; color: var(--green);">● LIVE</span></div>
                     ${logHtml}
                 `;
+            }
+        }
+        
+        // Trigger agent task
+        const TRIGGER_API = 'https://hartostrategy.fun/api/trigger';
+        
+        async function triggerTask(agent, taskId) {
+            const btn = event.target;
+            btn.classList.add('loading');
+            
+            try {
+                const res = await fetch(TRIGGER_API, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ agent, taskId }),
+                });
+                
+                const data = await res.json();
+                
+                if (data.success) {
+                    // Show success feedback
+                    btn.style.background = 'var(--green)';
+                    setTimeout(() => {
+                        btn.style.background = '';
+                        btn.classList.remove('loading');
+                    }, 1000);
+                    
+                    // Refresh team status to show queued task
+                    fetchTeamStatusRealtime();
+                } else {
+                    throw new Error(data.error || 'Failed');
+                }
+            } catch (e) {
+                console.error('Trigger failed:', e);
+                btn.style.background = 'var(--red)';
+                setTimeout(() => {
+                    btn.style.background = '';
+                    btn.classList.remove('loading');
+                }, 1000);
             }
         }
         
