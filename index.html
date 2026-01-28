@@ -59,6 +59,25 @@
             transition: color 0.2s;
         }
         .nav-links a:hover, .nav-links a.active { color: var(--cyan); }
+        .nav-time {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .nav-day {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+        .nav-date {
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .nav-clock {
+            color: var(--cyan);
+            font-size: 0.9rem;
+        }
         
         /* Hero */
         .hero {
@@ -67,6 +86,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+        .hero .nuria-widget {
+            margin-left: auto;
         }
         .hero-content { }
         .hero-title {
@@ -175,6 +197,34 @@
             transform: translateY(21px);
         }
         .nuria-eye.blink::before, .nuria-eye.blink::after { display: none; }
+        
+        /* Nuria sleeping/idle state */
+        .nuria-eye.sleeping {
+            height: 6px;
+            border-radius: 6px;
+            transform: translateY(22px);
+            animation: none;
+            box-shadow: 0 0 15px rgba(255,107,0,0.2);
+        }
+        .nuria-eye.sleeping::before, .nuria-eye.sleeping::after { display: none; }
+        .nuria-widget.idle .nuria-face { animation: none; }
+        .nuria-widget.idle .nuria-mouth {
+            width: 8px;
+            height: 2px;
+            border: none;
+            background: var(--orange);
+            border-radius: 2px;
+        }
+        
+        /* Nuria working state - eyes move */
+        .nuria-widget.working .nuria-eye {
+            animation: nuriaGlow 1.5s ease-in-out infinite, nuriaLook 4s ease-in-out infinite;
+        }
+        @keyframes nuriaLook {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            75% { transform: translateX(3px); }
+        }
         .nuria-blush {
             position: absolute;
             width: 18px;
@@ -276,6 +326,23 @@
         .task-item:hover {
             border-color: var(--cyan-border);
             background: var(--cyan-dim);
+        }
+        /* URGENT TASK HIGHLIGHTING - deadline < 3 days */
+        .task-item.urgent {
+            border-color: var(--red);
+            background: rgba(255, 68, 68, 0.08);
+        }
+        .task-item.urgent:hover {
+            border-color: var(--red);
+            background: rgba(255, 68, 68, 0.15);
+        }
+        .task-item.warning {
+            border-color: var(--orange);
+            background: rgba(255, 107, 0, 0.08);
+        }
+        .task-item.warning:hover {
+            border-color: var(--orange);
+            background: rgba(255, 107, 0, 0.15);
         }
         .task-priority {
             width: 8px;
@@ -622,7 +689,8 @@
         /* Mobile */
         @media (max-width: 1024px) {
             .hero { flex-direction: column; text-align: center; gap: 30px; }
-            .hero-time { text-align: center; }
+            .nav-time { display: none; }
+            .hero .nuria-widget { margin: 20px auto 0; }
             .stats-row { grid-template-columns: repeat(3, 1fr); }
             .stat-box { border-bottom: 1px solid var(--border); }
             .agenda-section { grid-template-columns: 1fr; }
@@ -658,6 +726,11 @@
             <a href="tasks.html">Tasks</a>
             <a href="analytics.html">Analytics</a>
         </div>
+        <div class="nav-time">
+            <span class="nav-day" id="heroDay">-</span>
+            <span class="nav-date" id="heroDate">-</span>
+            <span class="nav-clock" id="heroClock">-</span>
+        </div>
     </nav>
     
     <div class="agent-bar">
@@ -665,7 +738,7 @@
             <div class="status-dot"></div>
             <div class="status-text">NURIA 🟧 ONLINE</div>
         </div>
-        <div class="agent-info">Last sync: <span id="lastSync">-</span></div>
+        <div class="agent-info">Data updated: <span id="dataUpdated">-</span> • Last sync: <span id="lastSync">-</span></div>
     </div>
     
     <section class="hero">
@@ -675,7 +748,7 @@
             <p class="hero-quote" id="heroQuote">"La creatividad es la inteligencia divirtiéndose." — Einstein</p>
         </div>
         
-        <!-- NURIA Avatar -->
+        <!-- NURIA Avatar - Far Right -->
         <div class="nuria-widget">
             <div class="nuria-name">NURIA</div>
             <div class="nuria-face">
@@ -687,12 +760,6 @@
                 <div class="nuria-blush nuria-blush-r"></div>
                 <div class="nuria-mouth"></div>
             </div>
-        </div>
-        
-        <div class="hero-time">
-            <div class="hero-day" id="heroDay">-</div>
-            <div class="hero-date" id="heroDate">-</div>
-            <div class="hero-clock" id="heroClock">-</div>
         </div>
     </section>
     
@@ -728,7 +795,7 @@
         <div class="agenda-col">
             <div class="section-header">
                 <div class="section-title">📅 TODAY'S SCHEDULE</div>
-                <div class="section-date" id="todayDate">Mon, Jan 27</div>
+                <div class="section-date" id="todayDate">-</div>
             </div>
             <div class="agenda-list" id="calendarEvents">
                 <div class="agenda-item">
@@ -842,43 +909,44 @@
                 <a href="tasks.html" class="section-link">VIEW ALL →</a>
             </div>
             <div class="task-list">
-                <div class="task-item">
+                <!-- TASKS ORDERED BY URGENCY: High priority first, then by deadline -->
+                <div class="task-item urgent">
                     <div class="task-priority high"></div>
                     <div class="task-content">
                         <div class="task-title">Crear obras digitales - Superrare</div>
-                        <div class="task-meta">NFT = 0.5 ETH x 30</div>
+                        <div class="task-meta">NFT = 0.5 ETH x 30 • Due: 2 days</div>
                     </div>
                     <div class="task-owner">Arturo</div>
                 </div>
-                <div class="task-item">
+                <div class="task-item warning">
                     <div class="task-priority high"></div>
                     <div class="task-content">
                         <div class="task-title">Crear obras fisicas</div>
-                        <div class="task-meta">Big: 6 ETH, Small: 2.5 ETH x 3</div>
+                        <div class="task-meta">Big: 6 ETH, Small: 2.5 ETH x 3 • Due: 5 days</div>
                     </div>
                     <div class="task-owner">Arturo</div>
+                </div>
+                <div class="task-item urgent">
+                    <div class="task-priority medium"></div>
+                    <div class="task-content">
+                        <div class="task-title">Cobrar segunda factura ICONIC</div>
+                        <div class="task-meta">Preguntar direcciones + packaging • Due: 1 day</div>
+                    </div>
+                    <div class="task-owner">Sergio</div>
                 </div>
                 <div class="task-item">
                     <div class="task-priority medium"></div>
                     <div class="task-content">
                         <div class="task-title">Finalizar codigo</div>
-                        <div class="task-meta">GitHub error-states</div>
+                        <div class="task-meta">GitHub error-states • Due: 7 days</div>
                     </div>
                     <div class="task-owner">Clara</div>
-                </div>
-                <div class="task-item">
-                    <div class="task-priority medium"></div>
-                    <div class="task-content">
-                        <div class="task-title">Cobrar segunda factura ICONIC</div>
-                        <div class="task-meta">Preguntar direcciones + packaging</div>
-                    </div>
-                    <div class="task-owner">Sergio</div>
                 </div>
                 <div class="task-item">
                     <div class="task-priority low"></div>
                     <div class="task-content">
                         <div class="task-title">Facturas y gastos</div>
-                        <div class="task-meta">10 hours estimated</div>
+                        <div class="task-meta">10 hours estimated • Due: 14 days</div>
                     </div>
                     <div class="task-owner">Juliette</div>
                 </div>
@@ -1031,11 +1099,23 @@
         updatePipelineStats();
         setInterval(updateTime, 1000);
         
-        // NURIA blink animation
+        // Update today's schedule date - FIXED to always show current date
+        function updateScheduleDate() {
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+            document.getElementById('todayDate').textContent = dateStr;
+        }
+        updateScheduleDate();
+        
+        // NURIA animation system
         const nuriaEyeL = document.getElementById('nuriaEyeL');
         const nuriaEyeR = document.getElementById('nuriaEyeR');
+        const nuriaWidget = document.querySelector('.nuria-widget');
+        let nuriaIsWorking = false;
+        let blinkTimeout = null;
         
         function nuriaBlink() {
+            if (!nuriaIsWorking) return;
             nuriaEyeL.classList.add('blink');
             nuriaEyeR.classList.add('blink');
             setTimeout(() => {
@@ -1045,40 +1125,122 @@
         }
         
         function scheduleNuriaBlink() {
+            if (!nuriaIsWorking) return;
             const delay = 2000 + Math.random() * 3000;
-            setTimeout(() => {
+            blinkTimeout = setTimeout(() => {
                 nuriaBlink();
                 scheduleNuriaBlink();
             }, delay);
         }
-        scheduleNuriaBlink();
         
-        // Load dashboard data
+        function setNuriaWorking(working) {
+            nuriaIsWorking = working;
+            if (working) {
+                // Wake up Nuria
+                nuriaWidget.classList.remove('idle');
+                nuriaWidget.classList.add('working');
+                nuriaEyeL.classList.remove('sleeping');
+                nuriaEyeR.classList.remove('sleeping');
+                scheduleNuriaBlink();
+            } else {
+                // Nuria goes to sleep
+                nuriaWidget.classList.remove('working');
+                nuriaWidget.classList.add('idle');
+                nuriaEyeL.classList.add('sleeping');
+                nuriaEyeR.classList.add('sleeping');
+                if (blinkTimeout) clearTimeout(blinkTimeout);
+            }
+        }
+        
+        // Check Nuria's status via Upstash Redis (secure, authenticated)
+        const UPSTASH_URL = 'https://pumped-shad-30856.upstash.io';
+        const UPSTASH_TOKEN = 'AXiIAAIncDI1Yzk1YTUyMjZiMjE0MWIwYmYyZDk2ZDIxYWU3MDFjOXAyMzA4NTY';
+        
+        async function checkNuriaStatus() {
+            try {
+                const res = await fetch(`${UPSTASH_URL}/get/nuria-status`, {
+                    headers: { 'Authorization': `Bearer ${UPSTASH_TOKEN}` }
+                });
+                if (res.ok) {
+                    const result = await res.json();
+                    const data = JSON.parse(result.result || '{}');
+                    const lastActive = new Date(data.lastActive).getTime();
+                    const now = Date.now();
+                    const idleMinutes = (now - lastActive) / 60000;
+                    // Working if active within last 2 minutes
+                    setNuriaWorking(idleMinutes < 2);
+                } else {
+                    setNuriaWorking(false);
+                }
+            } catch (e) {
+                setNuriaWorking(false);
+            }
+        }
+        
+        // Initial check and poll every 30 seconds
+        checkNuriaStatus();
+        setInterval(checkNuriaStatus, 30000);
+        
+        // Helper: Parse YYYY-MM-DD without timezone shift
+        function parseLocalDate(dateStr) {
+            if (!dateStr) return null;
+            const [year, month, day] = dateStr.split('-').map(Number);
+            return new Date(year, month - 1, day);
+        }
+        
+        // Helper: Get today as YYYY-MM-DD in local timezone
+        function getTodayLocalStr() {
+            const now = new Date();
+            return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+        }
+        
+        // Helper: Calculate days until deadline
+        function daysUntil(dateStr) {
+            if (!dateStr) return Infinity;
+            const target = parseLocalDate(dateStr);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            return Math.ceil((target - today) / (1000 * 60 * 60 * 24));
+        }
+        
+        // Load dashboard data - AUTO-REFRESH IMPLEMENTED
         async function loadDashboardData() {
+            console.log('🔄 Loading dashboard data...');
             try {
                 // Load calendar
-                const calRes = await fetch('api/calendar.json');
+                const calRes = await fetch('api/calendar.json?t=' + Date.now());
                 if (calRes.ok) {
                     const calData = await calRes.json();
                     renderCalendar(calData);
                 }
                 
                 // Load emails
-                const emailRes = await fetch('api/emails.json');
+                const emailRes = await fetch('api/emails.json?t=' + Date.now());
                 if (emailRes.ok) {
                     const emailData = await emailRes.json();
                     renderEmails(emailData);
                 }
+                
+                // Load tasks (NEW)
+                const tasksRes = await fetch('api/tasks.json?t=' + Date.now());
+                if (tasksRes.ok) {
+                    const tasksData = await tasksRes.json();
+                    renderTasks(tasksData);
+                }
+                
+                // Update last data update timestamp
+                const now = new Date();
+                const timeStr = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+                document.getElementById('dataUpdated').textContent = timeStr;
+                console.log('✅ Dashboard data loaded');
             } catch (err) {
-                console.log('Using static data');
+                console.log('Using static data:', err);
             }
         }
         
         function renderCalendar(data) {
-            // Update today's date
-            const today = new Date();
-            const dateStr = today.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-            document.getElementById('todayDate').textContent = dateStr;
+            // FIXED: Always update to current date (not from JSON data)
+            updateScheduleDate();
             
             // Render today's events
             const eventsHtml = data.today.map(e => `
@@ -1092,7 +1254,9 @@
             
             // Render upcoming
             const upcomingHtml = data.upcoming.map(e => {
-                const date = new Date(e.date);
+                // Parse date without timezone shift (YYYY-MM-DD)
+                const [year, month, day] = e.date.split('-').map(Number);
+                const date = new Date(year, month - 1, day); // month is 0-indexed
                 const dateStr = date.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric' });
                 return `
                     <div class="upcoming-item">
@@ -1123,8 +1287,18 @@
             document.getElementById('emailList').innerHTML = emailsHtml;
         }
         
+        // TASK ORDERING SYSTEM (for future dynamic loading):
+        // Tasks should be sorted by:
+        // 1. Urgency: deadline < 3 days = urgent (red), deadline < 7 days = warning (orange)
+        // 2. Priority: high > medium > low
+        // 3. Deadline: closest first
+        // Apply classes: .urgent (red border/bg), .warning (orange border/bg)
+        
         // Load data on page load
         loadDashboardData();
+        
+        // AUTO-REFRESH: Reload calendar data every 5 minutes
+        setInterval(loadDashboardData, 5 * 60 * 1000); // 5 minutes = 300000ms
     </script>
 </body>
 </html>

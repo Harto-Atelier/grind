@@ -1,66 +1,66 @@
 {
   "emails": [
     {
-      "sender": "Juliette Lavedan-For",
-      "subject": "Lys Fernandez se irá a las 14:45 los jueves",
-      "time": "21:31",
+      "sender": "UPS",
+      "subject": "Se ha 29V0QFI5FABrealizado la recogida",
+      "time": "10:46",
+      "unread": true
+    },
+    {
+      "sender": "sgseaux@gmail.com",
+      "subject": "Exquisite Daily Report - 2026-01-28",
+      "time": "10:28",
+      "unread": true
+    },
+    {
+      "sender": "sgseaux@gmail.com",
+      "subject": "Exquisite Daily Report - 2026-01-28",
+      "time": "10:11",
+      "unread": true
+    },
+    {
+      "sender": "The AI Art Magazine",
+      "subject": "Submit your work for Edition 3 by January 31",
+      "time": "10:04",
       "unread": true
     },
     {
       "sender": "Juliette Lavedan-For",
-      "subject": "Re: Renovación del contrato de arrendamiento – vencimiento enero 2027",
-      "time": "21:21",
+      "subject": "Invitation: Rdv Susana colegio @ Fri 6 Feb 2026 1:30pm - 2:30pm (CET) (hartostud",
+      "time": "08:18",
       "unread": true
     },
     {
-      "sender": "Juliette Lavedan-For",
-      "subject": "Re: Proposta de reunió",
-      "time": "21:18",
-      "unread": true
-    },
-    {
-      "sender": "noreply-apps-scripts",
-      "subject": "Summary of failures for Google Apps Script: Untitled project",
-      "time": "21:18",
+      "sender": "Slack",
+      "subject": "Aviso: El contenido de tu espacio de trabajo gratuito con más de un año de antig",
+      "time": "08:15",
       "unread": true
     },
     {
       "sender": "IE Londres",
-      "subject": "Proposta de reunió",
-      "time": "19:34",
-      "unread": false
-    },
-    {
-      "sender": "SELTZ by Ritter Ferr",
-      "subject": "SELTZ - IVA CULTURAL, ¡YA!",
-      "time": "18:35",
+      "subject": "Re: Proposta de reunió",
+      "time": "08:00",
       "unread": true
     },
     {
-      "sender": "The Bitcoin Conferen",
-      "subject": "📢 Speakers Dropped + Price Increase Friday",
-      "time": "17:22",
+      "sender": "UPS",
+      "subject": "Hoy tienes una recogida",
+      "time": "06:40",
       "unread": true
     },
     {
-      "sender": "Juliette Lavedan-For",
-      "subject": "Invitation: Esto es.. Brossa @ Fri 22 May 2026 7:30pm - 8:30pm (CEST) (hartostud",
-      "time": "17:11",
-      "unread": false
+      "sender": "UPS",
+      "subject": "Hoy tienes una recogida",
+      "time": "06:40",
+      "unread": true
     },
     {
-      "sender": "Juliette Lavedan-For",
-      "subject": "Invitation: Guerrilla - Brossa @ Wed 17 Jun 2026 7:30pm - 8:30pm (CEST) (hartost",
-      "time": "17:09",
-      "unread": false
-    },
-    {
-      "sender": "Juliette Lavedan-For",
-      "subject": "Invitation: Blattodea - Brossa @ Sun 7 Jun 2026 12pm - 1pm (CEST) (hartostudio@g",
-      "time": "17:06",
-      "unread": false
+      "sender": "Vercel",
+      "subject": "Failed preview deployment on team 'harto11's projects'",
+      "time": "00:32",
+      "unread": true
     }
   ],
-  "unreadCount": 6,
-  "updated": "2026-01-27T20:34:22.960Z"
+  "unreadCount": 10,
+  "updated": "2026-01-28T09:49:10.303Z"
 }
