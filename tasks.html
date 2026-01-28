@@ -30,8 +30,8 @@
             color: var(--text);
         }
         
-        /* Password Gate */
-        .password-gate {
+        /* Login Overlay (Google Auth) */
+        .login-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -44,10 +44,10 @@
             justify-content: center;
             z-index: 9999;
         }
-        .password-gate.hidden {
+        .login-overlay.hidden {
             display: none;
         }
-        .password-box {
+        .login-box {
             background: var(--card);
             border: 1px solid var(--border);
             padding: 40px;
@@ -55,58 +55,34 @@
             max-width: 400px;
             width: 90%;
         }
-        .password-box h2 {
+        .login-logo {
             font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 8px;
             color: var(--cyan);
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
+            margin-bottom: 8px;
         }
-        .password-box p {
+        .login-subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+            letter-spacing: 4px;
+            margin-bottom: 30px;
+        }
+        .login-text {
             color: var(--muted);
             font-size: 0.85rem;
             margin-bottom: 25px;
         }
-        .password-input {
-            width: 100%;
-            padding: 14px 18px;
-            background: var(--bg);
-            border: 2px solid var(--border);
-            color: var(--text);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1rem;
-            text-align: center;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-            transition: border-color 0.2s;
+        .login-error {
+            color: var(--red);
+            font-size: 0.8rem;
+            margin-top: 15px;
         }
-        .password-input:focus {
-            outline: none;
-            border-color: var(--cyan);
-        }
-        .password-input.error {
-            border-color: var(--red);
-            animation: shake 0.3s ease;
-        }
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-        .password-btn {
-            width: 100%;
-            padding: 14px;
-            background: var(--cyan);
-            border: none;
-            color: #000;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .password-btn:hover {
-            background: #6b75c4;
+        #googleSignInBtn {
+            display: flex;
+            justify-content: center;
         }
         
         .main-content {
@@ -554,13 +530,14 @@
     </style>
 </head>
 <body>
-    <!-- Password Gate -->
-    <div class="password-gate" id="passwordGate">
-        <div class="password-box">
-            <h2>🔒 TASKS // HARTO</h2>
-            <p>Enter password to access</p>
-            <input type="password" class="password-input" id="passwordInput" placeholder="••••••••" autocomplete="off">
-            <button class="password-btn" onclick="checkPassword()">ENTER</button>
+    <!-- Login Overlay (Google Auth) -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-box">
+            <div class="login-logo">HARTO</div>
+            <div class="login-subtitle">TASKS</div>
+            <p class="login-text">Acceso restringido. Inicia sesión con tu cuenta autorizada.</p>
+            <div id="googleSignInBtn"></div>
+            <p class="login-error" id="loginError" style="display:none;"></p>
         </div>
     </div>
     
@@ -1084,57 +1061,77 @@
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
         
-        // Init - only load if authenticated
-        if (isAuthenticated()) {
-            unlockPage();
-        }
+        // Init handled by Google Auth below
     </script>
     </div><!-- End main-content -->
     
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
-        // Password Protection
-        const PASS_HASH = '8a9f2b3c'; // Simple hash of h@rto2030
+        // Google Auth
+        const GOOGLE_CLIENT_ID = '324032999377-gtrvtkbln1qlujfcmlo5pim0qo98m1ca.apps.googleusercontent.com';
+        const ALLOWED_EMAILS = [
+            'hartostudio@gmail.com',
+            'arturo@hartostudio.org',
+            'harto@hartostudio.org'
+        ];
         
-        function simpleHash(str) {
-            let hash = 0;
-            for (let i = 0; i < str.length; i++) {
-                const char = str.charCodeAt(i);
-                hash = ((hash << 5) - hash) + char;
-                hash = hash & hash;
+        let currentUser = null;
+        
+        function checkAuth() {
+            const savedUser = localStorage.getItem('dashboardUser');
+            if (savedUser) {
+                try {
+                    currentUser = JSON.parse(savedUser);
+                    if (currentUser.email && ALLOWED_EMAILS.includes(currentUser.email)) {
+                        unlockPage();
+                        return true;
+                    }
+                } catch (e) {}
             }
-            return Math.abs(hash).toString(16).substring(0, 8);
+            showLogin();
+            return false;
         }
         
-        function isAuthenticated() {
-            const stored = localStorage.getItem('harto_tasks_auth');
-            return stored === PASS_HASH;
-        }
-        
-        function checkPassword() {
-            const input = document.getElementById('passwordInput');
-            const inputHash = simpleHash(input.value);
-            
-            // Check against actual password
-            if (input.value === 'h@rto2030') {
-                localStorage.setItem('harto_tasks_auth', PASS_HASH);
-                unlockPage();
-            } else {
-                input.classList.add('error');
-                setTimeout(() => input.classList.remove('error'), 300);
-                input.value = '';
-            }
+        function showLogin() {
+            document.getElementById('loginOverlay').classList.remove('hidden');
         }
         
         function unlockPage() {
-            document.getElementById('passwordGate').classList.add('hidden');
+            document.getElementById('loginOverlay').classList.add('hidden');
             document.getElementById('mainContent').classList.add('unlocked');
             loadTasks();
         }
         
-        // Enter key to submit
-        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') checkPassword();
-        });
+        function handleCredentialResponse(response) {
+            const payload = JSON.parse(atob(response.credential.split('.')[1]));
+            
+            if (ALLOWED_EMAILS.includes(payload.email)) {
+                currentUser = {
+                    email: payload.email,
+                    name: payload.name,
+                    picture: payload.picture
+                };
+                localStorage.setItem('dashboardUser', JSON.stringify(currentUser));
+                unlockPage();
+            } else {
+                document.getElementById('loginError').textContent = 'Email no autorizado: ' + payload.email;
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+        
+        // Initialize
+        window.onload = function() {
+            if (!checkAuth()) {
+                google.accounts.id.initialize({
+                    client_id: GOOGLE_CLIENT_ID,
+                    callback: handleCredentialResponse
+                });
+                google.accounts.id.renderButton(
+                    document.getElementById('googleSignInBtn'),
+                    { theme: 'filled_black', size: 'large', width: 280 }
+                );
+            }
+        };
     </script>
 </body>
 </html>

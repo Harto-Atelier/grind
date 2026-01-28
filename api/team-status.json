@@ -5,9 +5,9 @@
       "role": "Jefa",
       "emoji": "🟧",
       "model": "Claude Opus",
-      "status": "working",
-      "task": "hablando con Harto",
-      "lastActive": "2026-01-28T11:17:39.827Z"
+      "status": "idle",
+      "task": "",
+      "lastActive": "2026-01-28T11:19:53.559Z"
     },
     "amy": {
       "name": "Amy",
@@ -39,6 +39,11 @@
   },
   "activityLog": [
     {
+      "time": "12:19",
+      "agent": "nuria",
+      "action": "🚀 sesión completada con Harto"
+    },
+    {
       "time": "12:17",
       "agent": "nuria",
       "action": "🚀 hablando con Harto"
@@ -69,5 +74,5 @@
       "action": "🔒 Completó audit de seguridad - FileVault, Firewall, permisos"
     }
   ],
-  "updated": "2026-01-28T11:17:39.971Z"
+  "updated": "2026-01-28T11:19:53.573Z"
 }

@@ -1,5 +1,5 @@
 # Tareas Pendientes
-*Última actualización: 2026-01-28 10:45*
+*Última actualización: 2026-01-28 12:56*
 
 ## 🔴 TO DO (Urgentes)
 
@@ -42,6 +42,7 @@
 ### General / Sin Proyecto
 | Tarea | Detalle |
 |-------|---------|
+| Comprar en Aldi | Via Sergio (2026-01-28) |
 | Factura final CM Chino | - |
 | Desarrollo Token | - |
 | nurIA Trading | Darle 100$ para Polymarket |
