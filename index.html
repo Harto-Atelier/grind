@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HARTO // COMMAND CENTER</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -846,9 +847,118 @@
             .projects-grid { grid-template-columns: 1fr; }
             .quick-section { grid-template-columns: repeat(2, 1fr); }
         }
+        /* Login Overlay */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .login-overlay.hidden {
+            display: none;
+        }
+        .login-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 50px;
+            text-align: center;
+            max-width: 400px;
+        }
+        .login-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+        .login-subtitle {
+            color: var(--cyan);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+        .login-text {
+            color: var(--muted);
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+        .google-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #333;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .google-btn:hover {
+            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        .google-btn img {
+            width: 20px;
+            height: 20px;
+        }
+        .login-error {
+            color: var(--red);
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .user-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+        }
+        .user-name {
+            font-size: 0.8rem;
+            color: var(--text);
+        }
+        .logout-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .logout-btn:hover {
+            border-color: var(--red);
+            color: var(--red);
+        }
     </style>
 </head>
 <body>
+    <!-- Login Overlay -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-box">
+            <div class="login-logo">HARTO</div>
+            <div class="login-subtitle">COMMAND CENTER</div>
+            <p class="login-text">Acceso restringido. Inicia sesión con tu cuenta autorizada.</p>
+            <div id="googleSignInBtn"></div>
+            <p class="login-error" id="loginError" style="display:none;"></p>
+        </div>
+    </div>
+
     <nav class="nav">
         <div class="nav-brand">HARTO // COMMAND CENTER</div>
         <div class="nav-links">
@@ -869,7 +979,14 @@
             <div class="status-dot"></div>
             <div class="status-text">NURIA 🟧 ONLINE</div>
         </div>
-        <div class="agent-info">Data updated: <span id="dataUpdated">-</span> • Last sync: <span id="lastSync">-</span></div>
+        <div class="agent-info">
+            Data updated: <span id="dataUpdated">-</span> • 
+            <span class="user-info" id="userInfo" style="display:none;">
+                <img class="user-avatar" id="userAvatar" src="" alt="">
+                <span class="user-name" id="userName"></span>
+                <button class="logout-btn" onclick="logout()">Salir</button>
+            </span>
+        </div>
     </div>
     
     <section class="hero">
@@ -1249,6 +1366,98 @@
     </footer>
     
     <script>
+        // ===================
+        // AUTHENTICATION
+        // ===================
+        const GOOGLE_CLIENT_ID = '324032999377-gtrvtkbln1qlujfcmlo5pim0qo98m1ca.apps.googleusercontent.com';
+        const ALLOWED_EMAILS = [
+            'hartostudio@gmail.com',
+            'arturo@hartostudio.org',
+            'harto@hartostudio.org'
+        ];
+        
+        let currentUser = null;
+        
+        function checkAuth() {
+            const savedUser = localStorage.getItem('dashboardUser');
+            if (savedUser) {
+                try {
+                    currentUser = JSON.parse(savedUser);
+                    if (currentUser.email && ALLOWED_EMAILS.includes(currentUser.email)) {
+                        showDashboard();
+                        return true;
+                    }
+                } catch (e) {}
+            }
+            showLogin();
+            return false;
+        }
+        
+        function showLogin() {
+            document.getElementById('loginOverlay').classList.remove('hidden');
+        }
+        
+        function showDashboard() {
+            document.getElementById('loginOverlay').classList.add('hidden');
+            if (currentUser) {
+                document.getElementById('userInfo').style.display = 'flex';
+                document.getElementById('userName').textContent = currentUser.name || currentUser.email;
+                if (currentUser.picture) {
+                    document.getElementById('userAvatar').src = currentUser.picture;
+                }
+            }
+        }
+        
+        function handleCredentialResponse(response) {
+            const payload = parseJwt(response.credential);
+            
+            if (ALLOWED_EMAILS.includes(payload.email)) {
+                currentUser = {
+                    email: payload.email,
+                    name: payload.name,
+                    picture: payload.picture
+                };
+                localStorage.setItem('dashboardUser', JSON.stringify(currentUser));
+                document.getElementById('loginError').style.display = 'none';
+                showDashboard();
+            } else {
+                document.getElementById('loginError').textContent = '❌ Email no autorizado: ' + payload.email;
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+        
+        function parseJwt(token) {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            return JSON.parse(decodeURIComponent(atob(base64).split('').map(c => 
+                '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+            ).join('')));
+        }
+        
+        function logout() {
+            localStorage.removeItem('dashboardUser');
+            currentUser = null;
+            location.reload();
+        }
+        
+        // Initialize Google Sign-In
+        window.onload = function() {
+            if (!checkAuth()) {
+                google.accounts.id.initialize({
+                    client_id: GOOGLE_CLIENT_ID,
+                    callback: handleCredentialResponse
+                });
+                google.accounts.id.renderButton(
+                    document.getElementById('googleSignInBtn'),
+                    { theme: 'filled_black', size: 'large', text: 'signin_with', shape: 'rectangular' }
+                );
+            }
+        };
+        
+        // ===================
+        // DASHBOARD
+        // ===================
+        
         // Quotes
         const quotes = [
             { text: "La creatividad es la inteligencia divirtiéndose.", author: "Einstein" },

@@ -6,8 +6,8 @@
       "emoji": "🟧",
       "model": "Claude Opus",
       "status": "working",
-      "task": "creando panel de equipo en dashboard",
-      "lastActive": "2026-01-28T11:17:04.537Z"
+      "task": "hablando con Harto",
+      "lastActive": "2026-01-28T11:17:39.827Z"
     },
     "amy": {
       "name": "Amy",
@@ -16,7 +16,7 @@
       "model": "Kimi 2.5",
       "status": "idle",
       "task": "",
-      "lastActive": "2026-01-28T11:40:00.000Z"
+      "lastActive": "2026-01-28T11:17:39.957Z"
     },
     "jack": {
       "name": "Jack",
@@ -25,7 +25,7 @@
       "model": "Claude Sonnet",
       "status": "idle",
       "task": "",
-      "lastActive": "2026-01-28T12:00:00.000Z"
+      "lastActive": "2026-01-28T11:17:39.892Z"
     },
     "pepe": {
       "name": "Pepe",
@@ -38,6 +38,11 @@
     }
   },
   "activityLog": [
+    {
+      "time": "12:17",
+      "agent": "nuria",
+      "action": "🚀 hablando con Harto"
+    },
     {
       "time": "12:17",
       "agent": "nuria",
@@ -64,5 +69,5 @@
       "action": "🔒 Completó audit de seguridad - FileVault, Firewall, permisos"
     }
   ],
-  "updated": "2026-01-28T11:17:04.578Z"
+  "updated": "2026-01-28T11:17:39.971Z"
 }
