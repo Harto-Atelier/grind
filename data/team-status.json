@@ -5,9 +5,9 @@
       "role": "Jefa",
       "emoji": "🟧",
       "model": "Claude Opus",
-      "status": "idle",
-      "task": "",
-      "lastActive": "2026-01-28T11:19:53.559Z"
+      "status": "working",
+      "task": "Configurando Sat Mining tool",
+      "lastActive": "2026-01-28T16:10:00.000Z"
     },
     "amy": {
       "name": "Amy",
@@ -25,7 +25,7 @@
       "model": "Claude Sonnet",
       "status": "idle",
       "task": "",
-      "lastActive": "2026-01-28T11:17:39.892Z"
+      "lastActive": "2026-01-28T16:56:00.000Z"
     },
     "pepe": {
       "name": "Pepe",
@@ -34,45 +34,45 @@
       "model": "Kimi 2.5",
       "status": "idle",
       "task": "",
-      "lastActive": null
+      "lastActive": "2026-01-28T17:00:00.000Z"
     }
   },
   "activityLog": [
     {
-      "time": "12:19",
+      "time": "17:09",
       "agent": "nuria",
-      "action": "🚀 sesión completada con Harto"
+      "action": "🚀 Añadió botón Mining al dashboard"
     },
     {
-      "time": "12:17",
-      "agent": "nuria",
-      "action": "🚀 hablando con Harto"
+      "time": "17:05",
+      "agent": "pepe",
+      "action": "🐦 Completó análisis de Twitter trends"
     },
     {
-      "time": "12:17",
+      "time": "17:02",
       "agent": "nuria",
-      "action": "🚀 creando panel de equipo en dashboard"
+      "action": "⛏️ Movió Sat Mining a dashboard personal"
     },
     {
-      "time": "12:00",
+      "time": "16:56",
       "agent": "jack",
-      "action": "✅ Completó fix del dashboard - schedule date, auto-refresh, tasks urgentes"
+      "action": "✅ Creó Sat Mining scanner (UTXO arbitrage)"
     },
     {
-      "time": "11:40",
-      "agent": "amy",
-      "action": "⚠️ Analizó tasks pero se quedó sin tokens (Groq limit)"
+      "time": "16:30",
+      "agent": "jack",
+      "action": "🔍 Analizó colección 2048 Ordinals"
     },
     {
-      "time": "11:35",
+      "time": "16:00",
       "agent": "nuria",
-      "action": "🎭 Configuró equipo: Amy, Jack, Pepe con diferentes modelos"
+      "action": "📊 Añadió Listings tab a opportunities"
     },
     {
-      "time": "11:20",
+      "time": "15:30",
       "agent": "nuria",
-      "action": "🔒 Completó audit de seguridad - FileVault, Firewall, permisos"
+      "action": "💼 Procesó tarea de Sergio - wallet analysis"
     }
   ],
-  "updated": "2026-01-28T11:19:53.573Z"
+  "updated": "2026-01-28T16:10:00.000Z"
 }
