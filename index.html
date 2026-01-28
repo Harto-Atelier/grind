@@ -690,9 +690,26 @@
         .team-member.working {
             border-color: var(--green);
             box-shadow: 0 0 15px rgba(0,255,136,0.2);
+            animation: cardPulse 2s ease-in-out infinite;
+        }
+        @keyframes cardPulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(0,255,136,0.2); }
+            50% { box-shadow: 0 0 25px rgba(0,255,136,0.4); }
         }
         .team-member.working .member-status {
             color: var(--green);
+            animation: statusPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .team-member.working .member-emoji {
+            animation: emojiPulse 2s ease-in-out infinite;
+        }
+        @keyframes emojiPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
         .member-emoji {
             font-size: 2rem;
@@ -722,6 +739,14 @@
         .member-status {
             font-size: 0.7rem;
             color: var(--muted);
+            transition: all 0.3s ease;
+        }
+        .member-status.idle {
+            animation: idleBreathe 4s ease-in-out infinite;
+        }
+        @keyframes idleBreathe {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.9; }
         }
         .member-task {
             font-size: 0.7rem;
@@ -1777,6 +1802,7 @@
                 if (statusEl) {
                     statusEl.textContent = isWorking ? '● WORKING' : '○ IDLE';
                     statusEl.style.color = isWorking ? 'var(--green)' : 'var(--muted)';
+                    statusEl.classList.toggle('idle', !isWorking);
                 }
                 
                 const taskEl = document.getElementById(`task-${id}`);
