@@ -1752,19 +1752,12 @@
             taskList.innerHTML = tasksHtml || '<div style="color: var(--muted); padding: 15px;">No pending tasks 🎉</div>';
         }
         
-        // Load data when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                console.log('📄 DOM ready, loading data...');
-                loadDashboardData();
-            });
-        } else {
-            console.log('📄 DOM already ready, loading data...');
+        // Initialize dashboard
+        (function init() {
+            console.log('🚀 Initializing dashboard...');
             loadDashboardData();
-        }
-        
-        // AUTO-REFRESH: Reload data every 5 minutes
-        setInterval(loadDashboardData, 5 * 60 * 1000);
+            setInterval(loadDashboardData, 5 * 60 * 1000);
+        })();
         
         // Render team status
         function renderTeamStatus(data) {
