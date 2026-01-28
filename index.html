@@ -1592,9 +1592,10 @@
             }
         }
         
-        // Check Nuria's status via Upstash Redis (secure, authenticated)
+        // Real-time team status via Upstash Redis
         const UPSTASH_URL = 'https://pumped-shad-30856.upstash.io';
         const UPSTASH_TOKEN = 'AXiIAAIncDI1Yzk1YTUyMjZiMjE0MWIwYmYyZDk2ZDIxYWU3MDFjOXAyMzA4NTY';
+        const agentEmojis = { nuria: '🟧', amy: '📋', jack: '🔧', pepe: '🎨' };
         
         async function checkNuriaStatus() {
             try {
@@ -1617,9 +1618,74 @@
             }
         }
         
-        // Initial check and poll every 30 seconds
+        // Fetch full team status from Upstash (real-time)
+        async function fetchTeamStatusRealtime() {
+            try {
+                const res = await fetch(`${UPSTASH_URL}/get/team-status`, {
+                    headers: { 'Authorization': `Bearer ${UPSTASH_TOKEN}` }
+                });
+                if (res.ok) {
+                    const result = await res.json();
+                    if (result.result) {
+                        const data = JSON.parse(result.result);
+                        renderTeamStatusRealtime(data);
+                    }
+                }
+            } catch (e) {
+                console.error('Failed to fetch team status:', e);
+            }
+        }
+        
+        function renderTeamStatusRealtime(data) {
+            const now = Date.now();
+            
+            // Update each team member
+            for (const [id, agent] of Object.entries(data.agents || {})) {
+                const card = document.getElementById(`member-${id}`);
+                if (!card) continue;
+                
+                // Check if active in last 2 minutes
+                const lastActive = agent.lastActive ? new Date(agent.lastActive).getTime() : 0;
+                const idleMinutes = (now - lastActive) / 60000;
+                const isWorking = idleMinutes < 2;
+                
+                card.classList.toggle('working', isWorking);
+                
+                const statusEl = card.querySelector('.member-status');
+                if (statusEl) {
+                    statusEl.textContent = isWorking ? '● WORKING' : '○ IDLE';
+                    statusEl.style.color = isWorking ? 'var(--green)' : 'var(--muted)';
+                }
+                
+                const taskEl = document.getElementById(`task-${id}`);
+                if (taskEl) {
+                    taskEl.textContent = isWorking ? (agent.task || 'Processing...') : '';
+                }
+            }
+            
+            // Update activity log
+            const logContainer = document.getElementById('activityLog');
+            if (logContainer && data.activityLog && data.activityLog.length > 0) {
+                const logHtml = data.activityLog.slice(0, 10).map(item => `
+                    <div class="activity-item">
+                        <span class="activity-time">${item.time}</span>
+                        <span class="activity-agent">${agentEmojis[item.agent] || '🤖'}</span>
+                        <span class="activity-text">${item.action}</span>
+                    </div>
+                `).join('');
+                
+                logContainer.innerHTML = `
+                    <div class="activity-log-title">📜 ACTIVITY LOG <span style="font-size: 0.6rem; color: var(--green);">● LIVE</span></div>
+                    ${logHtml}
+                `;
+            }
+        }
+        
+        // Initial check and poll every 10 seconds for real-time feel
         checkNuriaStatus();
+        fetchTeamStatusRealtime();
         setInterval(checkNuriaStatus, 30000);
+        setInterval(fetchTeamStatusRealtime, 10000);
         
         // Helper: Parse YYYY-MM-DD without timezone shift
         function parseLocalDate(dateStr) {
