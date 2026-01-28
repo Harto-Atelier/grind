@@ -715,6 +715,18 @@
             font-size: 2rem;
             margin-bottom: 8px;
         }
+        .member-pfp {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            margin-bottom: 8px;
+            border: 2px solid var(--border);
+            transition: all 0.3s;
+        }
+        .team-member.working .member-pfp {
+            border-color: var(--green);
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.5);
+        }
         .member-name {
             font-family: 'JetBrains Mono', monospace;
             font-weight: 600;
@@ -1364,7 +1376,7 @@
         
         <div class="team-grid" id="teamGrid">
             <div class="team-member working" id="member-nuria">
-                <div class="member-emoji">🟧</div>
+                <img src="pfps/nuria.png" alt="Nuria" class="member-pfp">
                 <div class="member-name">Nuria</div>
                 <div class="member-role">Jefa</div>
                 <div class="member-model">Claude Opus</div>
@@ -1376,7 +1388,7 @@
                 </div>
             </div>
             <div class="team-member" id="member-amy">
-                <div class="member-emoji">📋</div>
+                <img src="pfps/amy.png" alt="Amy" class="member-pfp">
                 <div class="member-name">Amy</div>
                 <div class="member-role">Administración</div>
                 <div class="member-model">Kimi 2.5</div>
@@ -1388,7 +1400,7 @@
                 </div>
             </div>
             <div class="team-member" id="member-jack">
-                <div class="member-emoji">🔧</div>
+                <img src="pfps/jack.png" alt="Jack" class="member-pfp">
                 <div class="member-name">Jack</div>
                 <div class="member-role">Técnico</div>
                 <div class="member-model">Claude Sonnet</div>
@@ -1400,7 +1412,7 @@
                 </div>
             </div>
             <div class="team-member" id="member-pepe">
-                <div class="member-emoji">🎨</div>
+                <img src="pfps/pepe.png" alt="Pepe" class="member-pfp">
                 <div class="member-name">Pepe</div>
                 <div class="member-role">Ideas Locas</div>
                 <div class="member-model">Kimi 2.5</div>
