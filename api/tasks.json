@@ -1,60 +1,140 @@
 {
-  "lastUpdate": "2026-01-28T13:08:00+01:00",
+  "lastUpdate": "2026-01-28T12:26:11.868Z",
+  "sheetId": "1LIdaTvRvKEZOMJbqXcBIrA5Xq6bEnzfiiFkFp_A6pTY",
+  "stats": {
+    "total": 67,
+    "pending": 35,
+    "todo": 8,
+    "done": 32,
+    "totalHours": 29
+  },
   "mits": [
     {
-      "id": 1,
-      "title": "Comprar en Aldi",
-      "meta": "Sergio • Aprobado hoy",
+      "id": 42,
+      "title": "Cobrar segunda factura",
+      "meta": "Sergio • ICONIC",
       "xp": 50,
       "done": false,
-      "date": "2026-01-28",
+      "date": null,
       "priority": "urgent"
     },
     {
-      "id": 2,
-      "title": "Depreciar activos mal estado",
-      "meta": "Sergio • Cámara 10k",
+      "id": 43,
+      "title": "Enviar 1 of 1 museo ",
+      "meta": "Sergio • ICONIC",
       "xp": 50,
       "done": false,
-      "date": "2026-01-28",
+      "date": null,
       "priority": "urgent"
     },
     {
-      "id": 3,
-      "title": "Enviar movimientos Binance",
-      "meta": "Sergio • Finance",
+      "id": 44,
+      "title": "Caja obra museo",
+      "meta": "Sergio • ICONIC",
       "xp": 50,
       "done": false,
-      "date": "2026-01-27",
-      "priority": "normal"
+      "date": null,
+      "priority": "urgent"
+    },
+    {
+      "id": 45,
+      "title": "Enviar obras paul US",
+      "meta": "Juliette • ICONIC",
+      "xp": 50,
+      "done": false,
+      "date": null,
+      "priority": "urgent"
+    },
+    {
+      "id": 46,
+      "title": "Cortar impresiones",
+      "meta": "Arturo  • ICONIC",
+      "xp": 50,
+      "done": false,
+      "date": null,
+      "priority": "urgent"
     }
   ],
   "tasks": [
     {
-      "id": 4,
-      "title": "Ver video YouTube",
-      "meta": "Sergio • Pending review",
-      "xp": 15,
-      "done": false,
-      "date": "2026-01-28",
-      "priority": "normal"
-    },
-    {
-      "id": 5,
-      "title": "Revisar Nifty Gateway",
-      "meta": "Cierre plataforma",
+      "id": 33,
+      "title": "Sin título",
+      "meta": "Juliette • Facturas y gastos",
       "xp": 15,
       "done": false,
       "priority": "normal"
     },
     {
-      "id": 6,
-      "title": "Deploy Vercel rarity fix",
-      "meta": "harto-strategy",
-      "xp": 10,
+      "id": 34,
+      "title": "https://docs.google.com/document/d/1EJJwBCa-ZONr-W4xBX8GWHyt2_x5DTVqJBZHzPk8XyU/edit?usp=drive_web&ouid=111720475375411282818",
+      "meta": "Arturo  • Superrare",
+      "xp": 15,
       "done": false,
-      "priority": "low"
+      "priority": "normal"
+    },
+    {
+      "id": 35,
+      "title": "Teaser asset (example) - Artist\nAnnouncement asset (example) - Artist\nNow live asset (example) - Artist",
+      "meta": "Arturo  • Superrare",
+      "xp": 15,
+      "done": false,
+      "priority": "normal"
+    },
+    {
+      "id": 36,
+      "title": "Sin título",
+      "meta": "Clara • Superrare",
+      "xp": 15,
+      "done": false,
+      "priority": "normal"
+    },
+    {
+      "id": 37,
+      "title": "https://manifold.xyz/",
+      "meta": "Clara • Superrare",
+      "xp": 15,
+      "done": false,
+      "priority": "normal"
+    },
+    {
+      "id": 38,
+      "title": "https://github.com/Harto-Atelier/error-states",
+      "meta": "Clara • Superrare",
+      "xp": 15,
+      "done": false,
+      "priority": "normal"
+    },
+    {
+      "id": 39,
+      "title": "NFT = 0.5 ETH x 30",
+      "meta": "Arturo  • Superrare",
+      "xp": 15,
+      "done": false,
+      "priority": "normal"
+    },
+    {
+      "id": 40,
+      "title": "Big piece(130x97cm): 6 ETH\nSmall piece(65x46cm): 2.5 ETH x 3\n",
+      "meta": "Arturo  • Superrare",
+      "xp": 15,
+      "done": false,
+      "priority": "normal"
+    },
+    {
+      "id": 41,
+      "title": "Preguntar sobre cobros de venta ",
+      "meta": "Sergio • Superrare",
+      "xp": 15,
+      "done": false,
+      "priority": "normal"
+    },
+    {
+      "id": 51,
+      "title": "PROJECT TASKS  = ",
+      "meta": "Sin asignar • PFP",
+      "xp": 15,
+      "done": false,
+      "priority": "normal"
     }
-  ],
-  "events": []
+  ]
 }

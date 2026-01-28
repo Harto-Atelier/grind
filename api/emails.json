@@ -1,6 +1,18 @@
 {
   "emails": [
     {
+      "sender": "\"Núria",
+      "subject": "Nadal\" <nnadal@centregestor.es>",
+      "time": "13:23",
+      "unread": false
+    },
+    {
+      "sender": "Patricia DELEAU",
+      "subject": "✨La Peña Madrid - Save The Date✨ - Déjeuner de La Peña le mercredi 11 février 20",
+      "time": "13:09",
+      "unread": true
+    },
+    {
       "sender": "Sergio Saravia",
       "subject": "Re: 2026 Presupuesto Asesoría HARTO ATELIER",
       "time": "12:57",
@@ -47,20 +59,8 @@
       "subject": "Exquisite Daily Report - 2026-01-28",
       "time": "10:28",
       "unread": true
-    },
-    {
-      "sender": "sgseaux@gmail.com",
-      "subject": "Exquisite Daily Report - 2026-01-28",
-      "time": "10:11",
-      "unread": true
-    },
-    {
-      "sender": "The AI Art Magazine",
-      "subject": "Submit your work for Edition 3 by January 31",
-      "time": "10:04",
-      "unread": true
     }
   ],
-  "unreadCount": 10,
-  "updated": "2026-01-28T12:04:56.778Z"
+  "unreadCount": 9,
+  "updated": "2026-01-28T12:26:11.017Z"
 }
