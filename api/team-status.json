@@ -1,0 +1,68 @@
+{
+  "agents": {
+    "nuria": {
+      "name": "Nuria",
+      "role": "Jefa",
+      "emoji": "🟧",
+      "model": "Claude Opus",
+      "status": "working",
+      "task": "creando panel de equipo en dashboard",
+      "lastActive": "2026-01-28T11:17:04.537Z"
+    },
+    "amy": {
+      "name": "Amy",
+      "role": "Administración",
+      "emoji": "📋",
+      "model": "Kimi 2.5",
+      "status": "idle",
+      "task": "",
+      "lastActive": "2026-01-28T11:40:00.000Z"
+    },
+    "jack": {
+      "name": "Jack",
+      "role": "Técnico",
+      "emoji": "🔧",
+      "model": "Claude Sonnet",
+      "status": "idle",
+      "task": "",
+      "lastActive": "2026-01-28T12:00:00.000Z"
+    },
+    "pepe": {
+      "name": "Pepe",
+      "role": "Ideas Locas",
+      "emoji": "🎨",
+      "model": "Kimi 2.5",
+      "status": "idle",
+      "task": "",
+      "lastActive": null
+    }
+  },
+  "activityLog": [
+    {
+      "time": "12:17",
+      "agent": "nuria",
+      "action": "🚀 creando panel de equipo en dashboard"
+    },
+    {
+      "time": "12:00",
+      "agent": "jack",
+      "action": "✅ Completó fix del dashboard - schedule date, auto-refresh, tasks urgentes"
+    },
+    {
+      "time": "11:40",
+      "agent": "amy",
+      "action": "⚠️ Analizó tasks pero se quedó sin tokens (Groq limit)"
+    },
+    {
+      "time": "11:35",
+      "agent": "nuria",
+      "action": "🎭 Configuró equipo: Amy, Jack, Pepe con diferentes modelos"
+    },
+    {
+      "time": "11:20",
+      "agent": "nuria",
+      "action": "🔒 Completó audit de seguridad - FileVault, Firewall, permisos"
+    }
+  ],
+  "updated": "2026-01-28T11:17:04.578Z"
+}

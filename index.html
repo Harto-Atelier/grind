@@ -650,6 +650,128 @@
             letter-spacing: 1px;
         }
         
+        /* Team Panel */
+        .team-panel {
+            border-top: 1px solid var(--border);
+            padding: 30px 40px;
+            background: rgba(0,0,0,0.3);
+        }
+        .team-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .team-panel-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--cyan);
+            letter-spacing: 2px;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .team-member {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .team-member:hover {
+            border-color: var(--cyan-border);
+            background: var(--cyan-dim);
+        }
+        .team-member.working {
+            border-color: var(--green);
+            box-shadow: 0 0 15px rgba(0,255,136,0.2);
+        }
+        .team-member.working .member-status {
+            color: var(--green);
+        }
+        .member-emoji {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        .member-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+        .member-role {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+        .member-model {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--cyan);
+            background: var(--cyan-dim);
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .member-status {
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+        .member-task {
+            font-size: 0.7rem;
+            color: var(--text);
+            margin-top: 5px;
+            font-style: italic;
+        }
+        .activity-log {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .activity-log-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .activity-item {
+            display: flex;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.8rem;
+        }
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        .activity-time {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--muted);
+            min-width: 50px;
+        }
+        .activity-agent {
+            min-width: 25px;
+        }
+        .activity-text {
+            color: var(--text);
+        }
+        @media (max-width: 900px) {
+            .team-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .team-grid { grid-template-columns: 1fr; }
+            .team-panel { padding: 20px; }
+        }
+        
         /* Agent Status */
         .agent-bar {
             display: flex;
@@ -1060,6 +1182,68 @@
         </a>
     </section>
     
+    <!-- Team Activity Panel -->
+    <section class="team-panel">
+        <div class="team-panel-header">
+            <div class="team-panel-title">🎭 TEAM NURIA</div>
+            <div style="font-size: 0.75rem; color: var(--muted);">Real-time status</div>
+        </div>
+        
+        <div class="team-grid" id="teamGrid">
+            <div class="team-member working" id="member-nuria">
+                <div class="member-emoji">🟧</div>
+                <div class="member-name">Nuria</div>
+                <div class="member-role">Jefa</div>
+                <div class="member-model">Claude Opus</div>
+                <div class="member-status">● WORKING</div>
+                <div class="member-task" id="task-nuria">Coordinando equipo</div>
+            </div>
+            <div class="team-member" id="member-amy">
+                <div class="member-emoji">📋</div>
+                <div class="member-name">Amy</div>
+                <div class="member-role">Administración</div>
+                <div class="member-model">Kimi 2.5</div>
+                <div class="member-status">○ IDLE</div>
+                <div class="member-task" id="task-amy"></div>
+            </div>
+            <div class="team-member" id="member-jack">
+                <div class="member-emoji">🔧</div>
+                <div class="member-name">Jack</div>
+                <div class="member-role">Técnico</div>
+                <div class="member-model">Claude Sonnet</div>
+                <div class="member-status">○ IDLE</div>
+                <div class="member-task" id="task-jack"></div>
+            </div>
+            <div class="team-member" id="member-pepe">
+                <div class="member-emoji">🎨</div>
+                <div class="member-name">Pepe</div>
+                <div class="member-role">Ideas Locas</div>
+                <div class="member-model">Kimi 2.5</div>
+                <div class="member-status">○ IDLE</div>
+                <div class="member-task" id="task-pepe"></div>
+            </div>
+        </div>
+        
+        <div class="activity-log" id="activityLog">
+            <div class="activity-log-title">📜 ACTIVITY LOG</div>
+            <div class="activity-item">
+                <span class="activity-time">12:00</span>
+                <span class="activity-agent">🔧</span>
+                <span class="activity-text">Jack completó fix del dashboard</span>
+            </div>
+            <div class="activity-item">
+                <span class="activity-time">11:40</span>
+                <span class="activity-agent">📋</span>
+                <span class="activity-text">Amy analizó tasks urgentes</span>
+            </div>
+            <div class="activity-item">
+                <span class="activity-time">11:35</span>
+                <span class="activity-agent">🟧</span>
+                <span class="activity-text">Nuria configuró equipo de agentes</span>
+            </div>
+        </div>
+    </section>
+    
     <footer class="footer">
         <a href="https://hartostudio.org">hartostudio.org</a> — Powered by <a href="#">Nuria 🟧</a>
     </footer>
@@ -1237,6 +1421,13 @@
                     renderTasks(tasksData);
                 }
                 
+                // Load team status
+                const teamRes = await fetch('api/team-status.json?t=' + Date.now());
+                if (teamRes.ok) {
+                    const teamData = await teamRes.json();
+                    renderTeamStatus(teamData);
+                }
+                
                 // Update last data update timestamp
                 const now = new Date();
                 const timeStr = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
@@ -1357,6 +1548,47 @@
         
         // AUTO-REFRESH: Reload calendar data every 5 minutes
         setInterval(loadDashboardData, 5 * 60 * 1000); // 5 minutes = 300000ms
+        // Render team status
+        function renderTeamStatus(data) {
+            const agentEmojis = { nuria: '🟧', amy: '📋', jack: '🔧', pepe: '🎨' };
+            
+            // Update each team member
+            for (const [id, agent] of Object.entries(data.agents)) {
+                const card = document.getElementById(`member-${id}`);
+                if (!card) continue;
+                
+                const isWorking = agent.status === 'working';
+                card.classList.toggle('working', isWorking);
+                
+                const statusEl = card.querySelector('.member-status');
+                if (statusEl) {
+                    statusEl.textContent = isWorking ? '● WORKING' : '○ IDLE';
+                    statusEl.style.color = isWorking ? 'var(--green)' : 'var(--muted)';
+                }
+                
+                const taskEl = document.getElementById(`task-${id}`);
+                if (taskEl) {
+                    taskEl.textContent = agent.task || '';
+                }
+            }
+            
+            // Update activity log
+            const logContainer = document.getElementById('activityLog');
+            if (logContainer && data.activityLog) {
+                const logHtml = data.activityLog.map(item => `
+                    <div class="activity-item">
+                        <span class="activity-time">${item.time}</span>
+                        <span class="activity-agent">${agentEmojis[item.agent] || '🤖'}</span>
+                        <span class="activity-text">${item.action}</span>
+                    </div>
+                `).join('');
+                
+                logContainer.innerHTML = `
+                    <div class="activity-log-title">📜 ACTIVITY LOG</div>
+                    ${logHtml}
+                `;
+            }
+        }
     </script>
 </body>
 </html>

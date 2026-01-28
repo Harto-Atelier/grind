@@ -1,6 +1,30 @@
 {
   "emails": [
     {
+      "sender": "Ryanair",
+      "subject": "¡Las plazas vuelan! 🚨",
+      "time": "11:31",
+      "unread": true
+    },
+    {
+      "sender": "Vercel",
+      "subject": "Two Factor Authentication Successfully Enabled",
+      "time": "11:18",
+      "unread": true
+    },
+    {
+      "sender": "Upstash",
+      "subject": "Welcome to Upstash",
+      "time": "11:10",
+      "unread": true
+    },
+    {
+      "sender": "Juliette Lavedan-For",
+      "subject": "Re: Proposta de reunió",
+      "time": "10:56",
+      "unread": true
+    },
+    {
       "sender": "UPS",
       "subject": "Se ha 29V0QFI5FABrealizado la recogida",
       "time": "10:46",
@@ -35,32 +59,8 @@
       "subject": "Aviso: El contenido de tu espacio de trabajo gratuito con más de un año de antig",
       "time": "08:15",
       "unread": true
-    },
-    {
-      "sender": "IE Londres",
-      "subject": "Re: Proposta de reunió",
-      "time": "08:00",
-      "unread": true
-    },
-    {
-      "sender": "UPS",
-      "subject": "Hoy tienes una recogida",
-      "time": "06:40",
-      "unread": true
-    },
-    {
-      "sender": "UPS",
-      "subject": "Hoy tienes una recogida",
-      "time": "06:40",
-      "unread": true
-    },
-    {
-      "sender": "Vercel",
-      "subject": "Failed preview deployment on team 'harto11's projects'",
-      "time": "00:32",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-01-28T09:49:10.303Z"
+  "updated": "2026-01-28T11:14:50.174Z"
 }
