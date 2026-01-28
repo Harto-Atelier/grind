@@ -327,6 +327,15 @@
             border-color: var(--cyan-border);
             background: var(--cyan-dim);
         }
+        .task-item.urgent-deadline {
+            border-color: var(--red);
+            background: rgba(255, 68, 68, 0.1);
+            animation: urgentPulse 2s ease-in-out infinite;
+        }
+        @keyframes urgentPulse {
+            0%, 100% { border-color: var(--red); }
+            50% { border-color: rgba(255, 68, 68, 0.5); }
+        }
         /* URGENT TASK HIGHLIGHTING - deadline < 3 days */
         .task-item.urgent {
             border-color: var(--red);
@@ -1287,12 +1296,61 @@
             document.getElementById('emailList').innerHTML = emailsHtml;
         }
         
-        // TASK ORDERING SYSTEM (for future dynamic loading):
-        // Tasks should be sorted by:
-        // 1. Urgency: deadline < 3 days = urgent (red), deadline < 7 days = warning (orange)
-        // 2. Priority: high > medium > low
-        // 3. Deadline: closest first
-        // Apply classes: .urgent (red border/bg), .warning (orange border/bg)
+        // Render tasks sorted by urgency (deadline closest first, with visual highlighting)
+        function renderTasks(data) {
+            // Combine MITs and tasks
+            const allTasks = [
+                ...(data.mits || []).map(t => ({ ...t, isMit: true })),
+                ...(data.tasks || [])
+            ].filter(t => !t.done);
+            
+            // Sort by urgency: priority first, then by deadline (closest first)
+            const priorityOrder = { urgent: 0, high: 1, normal: 2, low: 3 };
+            allTasks.sort((a, b) => {
+                // First by priority
+                const priorityA = priorityOrder[a.priority] ?? 2;
+                const priorityB = priorityOrder[b.priority] ?? 2;
+                if (priorityA !== priorityB) return priorityA - priorityB;
+                
+                // Then by deadline (closest first)
+                return daysUntil(a.date) - daysUntil(b.date);
+            });
+            
+            // Update stats
+            document.getElementById('statPendingTasks').textContent = allTasks.length;
+            const todoCount = allTasks.filter(t => priorityOrder[t.priority] >= 2).length;
+            document.getElementById('statTodoTasks').textContent = todoCount;
+            
+            // Render priority tasks (top 5)
+            const taskList = document.querySelector('.task-list');
+            const topTasks = allTasks.slice(0, 5);
+            
+            const tasksHtml = topTasks.map(task => {
+                const days = daysUntil(task.date);
+                const isUrgentDeadline = days <= 3 && days >= 0;
+                const priorityClass = task.priority === 'urgent' || task.priority === 'high' ? 'high' 
+                    : task.priority === 'low' ? 'low' : 'medium';
+                
+                // Highlight tasks with deadline < 3 days
+                const urgentStyle = isUrgentDeadline ? 'border-color: var(--red); background: rgba(255,68,68,0.1);' : '';
+                const deadlineBadge = isUrgentDeadline 
+                    ? `<span style="color: var(--red); font-size: 0.7rem; margin-left: 8px; font-weight: 600;">⚠️ ${days === 0 ? 'TODAY' : days === 1 ? 'TOMORROW' : days + ' DAYS'}</span>` 
+                    : '';
+                
+                return `
+                    <div class="task-item" style="${urgentStyle}">
+                        <div class="task-priority ${priorityClass}"></div>
+                        <div class="task-content">
+                            <div class="task-title">${task.title}${deadlineBadge}</div>
+                            <div class="task-meta">${task.meta || ''}</div>
+                        </div>
+                        <div class="task-owner">${task.isMit ? 'MIT' : 'Task'}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            taskList.innerHTML = tasksHtml || '<div style="color: var(--muted); padding: 15px;">No pending tasks 🎉</div>';
+        }
         
         // Load data on page load
         loadDashboardData();
