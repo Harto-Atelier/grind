@@ -1537,32 +1537,37 @@
     
     <!-- 💎 TIBBIR + MARKETPLACE WIDGETS -->
     <section class="widget-grid">
-        <!-- TIBBIR Widget -->
+        <!-- TIBBIR Widget (Base Chain) -->
         <div class="widget-card tibbir-widget">
             <div class="tibbir-header">
-                <div class="tibbir-logo">🐰</div>
+                <div class="tibbir-logo">🐸</div>
                 <div class="tibbir-info">
                     <h3>$TIBBIR</h3>
-                    <span>BRC-20 Token</span>
+                    <span>Ribbita by Virtuals • Base</span>
                 </div>
             </div>
             <div class="tibbir-stats">
                 <div class="tibbir-stat">
-                    <div class="tibbir-stat-value" id="tibbirPrice">$0.00</div>
+                    <div class="tibbir-stat-value" id="tibbirPrice">$0.188</div>
                     <div class="tibbir-stat-label">Price</div>
                 </div>
                 <div class="tibbir-stat">
-                    <div class="tibbir-stat-value" id="tibbirMcap">$0</div>
+                    <div class="tibbir-stat-value" id="tibbirMcap">$187.8M</div>
                     <div class="tibbir-stat-label">Market Cap</div>
                 </div>
                 <div class="tibbir-stat">
-                    <div class="tibbir-stat-value" id="tibbirChange">0%</div>
+                    <div class="tibbir-stat-value positive" id="tibbirChange">+19.07%</div>
                     <div class="tibbir-stat-label">24h Change</div>
                 </div>
             </div>
-            <a href="https://bubblemaps.io/btc/token/tibbir" target="_blank" class="tibbir-btn">
-                🗺️ VIEW BUBBLE MAP →
-            </a>
+            <div style="display: flex; gap: 0.5rem;">
+                <a href="https://dexscreener.com/base/0x0c3b466104545efa096b8f944c1e524e1d0d4888" target="_blank" class="tibbir-btn" style="flex: 1;">
+                    📊 DEXSCREENER →
+                </a>
+                <a href="https://bubblemaps.io/base/token/0xA4A2E2ca3fBfE21aed83471D28b6f65A233C6e00" target="_blank" class="tibbir-btn" style="flex: 1; background: linear-gradient(135deg, #a855f7, #6366f1);">
+                    🗺️ BUBBLES →
+                </a>
+            </div>
         </div>
         
         <!-- Marketplace Widget -->
@@ -2360,15 +2365,25 @@
         // 💎 TIBBIR Data
         async function loadTibbirData() {
             try {
-                const res = await fetch('data/tibbir.json?t=' + Date.now());
+                // TIBBIR on Base - Ribbita by Virtuals
+                const res = await fetch('https://api.dexscreener.com/latest/dex/pairs/base/0x0c3b466104545efa096b8f944c1e524e1d0d4888');
                 if (res.ok) {
                     const data = await res.json();
-                    document.getElementById('tibbirPrice').textContent = `$${data.price.toFixed(6)}`;
-                    document.getElementById('tibbirMcap').textContent = `$${(data.mcap / 1000).toFixed(1)}K`;
-                    
-                    const changeEl = document.getElementById('tibbirChange');
-                    changeEl.textContent = `${data.change24h > 0 ? '+' : ''}${data.change24h.toFixed(1)}%`;
-                    changeEl.className = 'tibbir-stat-value ' + (data.change24h >= 0 ? 'positive' : 'negative');
+                    const pair = data.pair;
+                    if (pair) {
+                        const price = parseFloat(pair.priceUsd);
+                        const mcap = pair.marketCap || pair.fdv;
+                        const change24h = pair.priceChange?.h24 || 0;
+                        
+                        document.getElementById('tibbirPrice').textContent = `$${price.toFixed(3)}`;
+                        document.getElementById('tibbirMcap').textContent = mcap > 1000000 
+                            ? `$${(mcap / 1000000).toFixed(1)}M` 
+                            : `$${(mcap / 1000).toFixed(1)}K`;
+                        
+                        const changeEl = document.getElementById('tibbirChange');
+                        changeEl.textContent = `${change24h > 0 ? '+' : ''}${parseFloat(change24h).toFixed(2)}%`;
+                        changeEl.className = 'tibbir-stat-value ' + (change24h >= 0 ? 'positive' : 'negative');
+                    }
                 }
             } catch (e) {
                 console.error('Failed to load TIBBIR data:', e);

@@ -1,17 +1,16 @@
 {
-  "ticker": "TIBBIR",
-  "price": 0.000042,
-  "priceUsd": 0.000042,
-  "mcap": 42000,
-  "change24h": 12.5,
-  "volume24h": 1500,
-  "holders": 847,
-  "supply": "1000000000",
-  "maxSupply": "1000000000",
-  "links": {
-    "bubbleMap": "https://bubblemaps.io/btc/token/tibbir",
-    "unisat": "https://unisat.io/brc20/tibbir",
-    "ordinals": "https://ordinals.com/brc20/tibbir"
-  },
-  "updated": "2026-01-29T16:50:00.000Z"
+  "symbol": "TIBBIR",
+  "name": "Ribbita by Virtuals",
+  "chain": "base",
+  "contract": "0xA4A2E2ca3fBfE21aed83471D28b6f65A233C6e00",
+  "pair": "0x0c3b466104545efa096b8f944c1e524e1d0d4888",
+  "dex": "uniswap-v2",
+  "price": 0.1879,
+  "mcap": 187887754,
+  "change24h": 19.07,
+  "volume24h": 2167809,
+  "liquidity": 2944454,
+  "dexscreener": "https://dexscreener.com/base/0x0c3b466104545efa096b8f944c1e524e1d0d4888",
+  "bubblemaps": "https://bubblemaps.io/base/token/0xA4A2E2ca3fBfE21aed83471D28b6f65A233C6e00",
+  "updated": "2026-01-29T18:48:00.000Z"
 }
