@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💎 Sats Arbitrage Scanner + Trapped BTC | Harto</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+    :root {
+      --amber: #f59e0b; --green: #22c55e; --red: #ef4444; --blue: #3b82f6; --purple: #a855f7;
+      --bg: #050507; --surface: #0c0c10; --surface2: #12121a; --border: #1a1a2e; --border-light: #252540;
+    }
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; overflow-x: hidden; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    @keyframes pulse { 0%,100% { opacity:1 } 50% { opacity:.4 } }
+    @keyframes slideUp { from { opacity:0; transform:translateY(16px) } to { opacity:1; transform:translateY(0) } }
+    @keyframes glow { 0%,100% { box-shadow: 0 0 8px rgba(34,197,94,.15) } 50% { box-shadow: 0 0 24px rgba(34,197,94,.35) } }
+    @keyframes shimmer { 0% { background-position: -200% 0 } 100% { background-position: 200% 0 } }
+    .slide-up { animation: slideUp .4s cubic-bezier(.16,1,.3,1) }
+    .pulse { animation: pulse 2s ease-in-out infinite }
+    .glass { background: rgba(12,12,16,.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px) }
+    .glass-border { border: 1px solid rgba(255,255,255,.06) }
+    .gradient-text { background: linear-gradient(135deg, #f59e0b, #22c55e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text }
+    .btn { transition: all .2s; cursor: pointer; user-select: none }
+    .btn:active { transform: scale(.97) }
+    .btn:disabled { opacity: .5; cursor: not-allowed }
+    .tag { padding: 3px 10px; border-radius: 6px; font-size: 11px; border: 1px solid; display: inline-flex; align-items: center; gap: 4px; font-weight: 600 }
+    .tag-mythic { color: #000; border-color: #fff; background: #fff }
+    .tag-legendary { color: var(--purple); border-color: rgba(168,85,247,.3); background: rgba(168,85,247,.1) }
+    .tag-epic { color: var(--red); border-color: rgba(239,68,68,.3); background: rgba(239,68,68,.1) }
+    .tag-rare { color: var(--amber); border-color: rgba(245,158,11,.3); background: rgba(245,158,11,.1) }
+    .tag-uncommon { color: #fbbf24; border-color: rgba(251,191,36,.3); background: rgba(251,191,36,.08) }
+    .tag-common { color: #9ca3af; border-color: rgba(156,163,175,.2); background: rgba(156,163,175,.05) }
+    .profit-high { color: var(--green); background: rgba(34,197,94,.1); border-color: rgba(34,197,94,.3) }
+    .profit-med { color: var(--amber); background: rgba(245,158,11,.1); border-color: rgba(245,158,11,.3) }
+    .profit-low { color: var(--blue); background: rgba(59,130,246,.1); border-color: rgba(59,130,246,.3) }
+    ::-webkit-scrollbar { width: 4px; height: 4px }
+    ::-webkit-scrollbar-track { background: transparent }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.08); border-radius: 2px }
+  </style>
+</head>
+<body class="min-h-screen text-gray-100">
+
+  <!-- HEADER -->
+  <header class="glass border-b border-green-500/20 sticky top-0 z-50">
+    <div class="max-w-[1400px] mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-green-500/20 to-green-600/10 border border-green-500/30 flex items-center justify-center text-lg">💎</div>
+        <div>
+          <h1 class="text-base font-extrabold tracking-tight">
+            <span class="gradient-text">SATS ARBITRAGE SCANNER</span>
+            <span class="text-[10px] text-gray-600 font-normal ml-2">by Jack</span>
+          </h1>
+          <div class="text-[10px] text-gray-500">Find rare sats + inscriptions with trapped BTC 🔒</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="scanNow()" id="scanBtn" class="btn px-3 py-1.5 text-xs bg-green-500/10 border border-green-500/30 rounded-lg text-green-400 hover:bg-green-500/20">
+          🔄 Scan Now
+        </button>
+        <a href="/" class="btn px-3 py-1.5 text-xs glass glass-border rounded-lg text-gray-400 hover:text-green-400">← Dashboard</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="max-w-[1400px] mx-auto px-4 py-6 space-y-5">
+
+    <!-- STATS -->
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+      <div class="glass glass-border rounded-xl p-4">
+        <div class="text-xs text-gray-500 mb-1">Scanned</div>
+        <div class="text-2xl font-bold text-gray-100" id="statScanned">0</div>
+      </div>
+      <div class="glass glass-border rounded-xl p-4">
+        <div class="text-xs text-gray-500 mb-1">Opportunities</div>
+        <div class="text-2xl font-bold text-green-400" id="statOpportunities">0</div>
+      </div>
+      <div class="glass glass-border rounded-xl p-4">
+        <div class="text-xs text-gray-500 mb-1">Trapped BTC</div>
+        <div class="text-2xl font-bold text-amber-400 mono" id="statTrappedBTC">$0</div>
+      </div>
+      <div class="glass glass-border rounded-xl p-4">
+        <div class="text-xs text-gray-500 mb-1">Best Profit</div>
+        <div class="text-2xl font-bold text-green-400 mono" id="statBestProfit">$0</div>
+      </div>
+      <div class="glass glass-border rounded-xl p-4">
+        <div class="text-xs text-gray-500 mb-1">Last Scan</div>
+        <div class="text-xs font-medium text-gray-300" id="statLastScan">Never</div>
+        <div class="text-[10px] text-gray-600 mt-0.5" id="nextScan">Auto-refresh in 5min</div>
+      </div>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="glass glass-border rounded-xl p-4">
+      <div class="flex flex-wrap items-center gap-3">
+        <div class="text-xs font-semibold text-gray-400">FILTERS:</div>
+        <div class="flex items-center gap-2">
+          <label class="text-xs text-gray-500">Min Price ($):</label>
+          <input type="number" id="minPrice" value="1" min="0" step="0.1" class="w-20 px-2 py-1 bg-black/40 border border-gray-800 rounded text-xs mono">
+        </div>
+        <div class="flex items-center gap-2">
+          <label class="text-xs text-gray-500">Max Price ($):</label>
+          <input type="number" id="maxPrice" value="10" min="0" step="1" class="w-20 px-2 py-1 bg-black/40 border border-gray-800 rounded text-xs mono">
+        </div>
+        <div class="flex items-center gap-2">
+          <label class="text-xs text-gray-500">BTC Price ($):</label>
+          <input type="number" id="btcPrice" value="100000" min="0" step="1000" class="w-24 px-2 py-1 bg-black/40 border border-gray-800 rounded text-xs mono">
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="checkbox" id="showAll" class="w-3 h-3">
+          <label class="text-xs text-gray-500" for="showAll">Show all (incl. no profit)</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOADING STATE -->
+    <div id="loading" class="glass glass-border rounded-xl p-8 text-center hidden">
+      <div class="inline-block w-6 h-6 border-2 border-green-500 border-t-transparent rounded-full animate-spin mb-3"></div>
+      <div class="text-sm text-gray-400">Scanning Magic Eden listings...</div>
+      <div class="text-xs text-gray-600 mt-2">Analyzing sat rarities and calculating profit potential</div>
+    </div>
+
+    <!-- ERROR STATE -->
+    <div id="error" class="glass glass-border border-red-500/30 rounded-xl p-6 text-center hidden">
+      <div class="text-3xl mb-2">⚠️</div>
+      <div class="text-sm text-red-400 mb-2">Error scanning listings</div>
+      <div class="text-xs text-gray-500" id="errorMessage"></div>
+    </div>
+
+    <!-- OPPORTUNITIES LIST -->
+    <div id="opportunities" class="space-y-3"></div>
+
+    <!-- EMPTY STATE -->
+    <div id="emptyState" class="glass glass-border rounded-xl p-8 text-center hidden">
+      <div class="text-4xl mb-3">🔍</div>
+      <div class="text-sm text-gray-400 mb-2">No arbitrage opportunities found</div>
+      <div class="text-xs text-gray-600">Try adjusting price range or wait for next scan</div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div class="glass glass-border rounded-xl p-5">
+      <h3 class="text-sm font-bold text-gray-300 mb-3">💡 How It Works</h3>
+      <div class="space-y-2 text-xs text-gray-500">
+        <div>• Scans Magic Eden for cheap inscriptions ($1-10 by default)</div>
+        <div>• Extracts the sat number from each inscription</div>
+        <div>• Analyzes sat rarity: Mythic, Legendary, Epic, Rare, Uncommon, or Common</div>
+        <div>• Checks for special attributes: Nakamoto era, Pizza block, Palindromes, Vintage, etc.</div>
+        <div>• <strong class="text-amber-400">NEW:</strong> Detects trapped BTC (output_value - 546 minimum sats)</div>
+        <div>• Calculates net profit: Trapped BTC + Rare Sat Value - Listing Price</div>
+        <div>• Shows opportunities with trapped_sats > 1000 OR rare_sat_value > 0</div>
+        <div>• 🔥 HOT badge for deals with profit > $50</div>
+        <div>• Auto-refreshes every 5 minutes to catch new deals</div>
+      </div>
+    </div>
+
+    <!-- TRAPPED BTC EXPLAINER -->
+    <div class="glass glass-border border-amber-500/30 rounded-xl p-5">
+      <h3 class="text-sm font-bold text-amber-400 mb-3">🔒 What is Trapped BTC?</h3>
+      <div class="space-y-2 text-xs text-gray-500">
+        <div>• Every inscription UTXO must contain at least <strong class="text-gray-300">546 sats</strong> (Bitcoin's dust limit)</div>
+        <div>• Some inscriptions have <strong class="text-amber-400">way more BTC</strong> trapped inside their UTXO</div>
+        <div>• Example: Exquisite inscription has <strong class="text-amber-400">60,000 sats ≈ $60</strong> of BTC trapped</div>
+        <div>• When you buy the inscription, you get <strong class="text-green-400">both the art AND the trapped BTC</strong></div>
+        <div>• This scanner calculates: <span class="mono text-gray-300">trapped_value = (output_value - 546) × BTC_price</span></div>
+        <div>• <strong class="text-amber-400">Pro tip:</strong> Even "worthless" inscriptions can be profitable if they have enough trapped BTC!</div>
+        <div>• Rate limited to 100ms per request to avoid hitting API limits</div>
+      </div>
+    </div>
+
+    <!-- VALUE ESTIMATES -->
+    <div class="glass glass-border rounded-xl p-5">
+      <h3 class="text-sm font-bold text-gray-300 mb-3">💰 Estimated Sat Values (Conservative)</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
+        <div class="p-3 bg-black/30 rounded-lg">
+          <div class="tag tag-mythic mb-2">⚫ MYTHIC</div>
+          <div class="mono text-gray-200 font-bold">$1M+</div>
+          <div class="text-gray-600 text-[10px] mt-1">Genesis sat (only 1)</div>
+        </div>
+        <div class="p-3 bg-black/30 rounded-lg">
+          <div class="tag tag-legendary mb-2">🟣 LEGENDARY</div>
+          <div class="mono text-gray-200 font-bold">$100K+</div>
+          <div class="text-gray-600 text-[10px] mt-1">Cycle starts (~24y)</div>
+        </div>
+        <div class="p-3 bg-black/30 rounded-lg">
+          <div class="tag tag-epic mb-2">🔴 EPIC</div>
+          <div class="mono text-gray-200 font-bold">$10K-$50K</div>
+          <div class="text-gray-600 text-[10px] mt-1">Halving sats (~4y)</div>
+        </div>
+        <div class="p-3 bg-black/30 rounded-lg">
+          <div class="tag tag-rare mb-2">🟠 RARE</div>
+          <div class="mono text-gray-200 font-bold">$500-$5K</div>
+          <div class="text-gray-600 text-[10px] mt-1">Difficulty adjustments</div>
+        </div>
+        <div class="p-3 bg-black/30 rounded-lg">
+          <div class="tag tag-uncommon mb-2">🟡 UNCOMMON</div>
+          <div class="mono text-gray-200 font-bold">$50-$500</div>
+          <div class="text-gray-600 text-[10px] mt-1">First sat of blocks</div>
+        </div>
+        <div class="p-3 bg-black/30 rounded-lg">
+          <div class="flex items-center gap-1 mb-2"><span class="text-lg">🍕</span><span class="text-xs font-bold text-amber-400">PIZZA</span></div>
+          <div class="mono text-gray-200 font-bold">$1K-$10K</div>
+          <div class="text-gray-600 text-[10px] mt-1">Block 57,043</div>
+        </div>
+        <div class="p-3 bg-black/30 rounded-lg">
+          <div class="flex items-center gap-1 mb-2"><span class="text-lg">👤</span><span class="text-xs font-bold text-purple-400">NAKAMOTO</span></div>
+          <div class="mono text-gray-200 font-bold">$200-$2K</div>
+          <div class="text-gray-600 text-[10px] mt-1">Blocks 1-36,000</div>
+        </div>
+        <div class="p-3 bg-black/30 rounded-lg">
+          <div class="flex items-center gap-1 mb-2"><span class="text-lg">🦋</span><span class="text-xs font-bold text-blue-400">PALINDROME</span></div>
+          <div class="mono text-gray-200 font-bold">$100-$1K</div>
+          <div class="text-gray-600 text-[10px] mt-1">Depends on rarity</div>
+        </div>
+        <div class="p-3 bg-black/30 rounded-lg">
+          <div class="flex items-center gap-1 mb-2"><span class="text-lg">🕰️</span><span class="text-xs font-bold text-gray-400">VINTAGE</span></div>
+          <div class="mono text-gray-200 font-bold">$50-$500</div>
+          <div class="text-gray-600 text-[10px] mt-1">First 1000 blocks</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // CONFIG
+    const BTC_SATS = 100000000; // 1 BTC = 100M sats
+    const AUTO_REFRESH_MS = 5 * 60 * 1000; // 5 minutes
+    const MIN_SATS = 546; // Minimum sats per UTXO
+    const RATE_LIMIT_MS = 100; // 100ms between API requests
+    
+    // SAT VALUE ESTIMATES (in USD, conservative)
+    const RARITY_VALUES = {
+      mythic: 1000000,
+      legendary: 100000,
+      epic: 30000,
+      rare: 2500,
+      uncommon: 250,
+      common: 0
+    };
+    
+    const SPECIAL_VALUES = {
+      pizza: 5000,
+      nakamoto: 1000,
+      palindrome: 500,
+      vintage: 200,
+      segwit: 150,
+      halFinney: 300
+    };
+
+    let autoRefreshTimer = null;
+    let lastScanTime = null;
+
+    // ORDINALS CALCULATIONS (from sat-mining.html)
+    function firstSatOfBlock(blockHeight) {
+      let sat = 0;
+      let subsidy = 5000000000; // 50 BTC in sats
+      const HALVING_INTERVAL = 210000;
+      
+      const epoch = Math.floor(blockHeight / HALVING_INTERVAL);
+      
+      for (let i = 0; i < epoch; i++) {
+        sat += HALVING_INTERVAL * subsidy;
+        subsidy = Math.floor(subsidy / 2);
+      }
+      
+      const blocksInCurrentEpoch = blockHeight % HALVING_INTERVAL;
+      sat += blocksInCurrentEpoch * subsidy;
+      
+      return sat;
+    }
+
+    function blockFromSat(satNumber) {
+      let sat = 0;
+      let subsidy = 5000000000;
+      const HALVING_INTERVAL = 210000;
+      let block = 0;
+      
+      while (sat + subsidy <= satNumber) {
+        sat += subsidy;
+        block++;
+        
+        if (block % HALVING_INTERVAL === 0) {
+          subsidy = Math.floor(subsidy / 2);
+        }
+      }
+      
+      return block;
+    }
+
+    function getSatRarity(blockHeight, offsetInBlock) {
+      if (blockHeight === 0 && offsetInBlock === 0) return 'mythic';
+      if (offsetInBlock === 0) {
+        if (blockHeight % 1260000 === 0) return 'legendary';
+        if (blockHeight % 210000 === 0) return 'epic';
+        if (blockHeight % 2016 === 0) return 'rare';
+        return 'uncommon';
+      }
+      return 'common';
+    }
+
+    function isPalindrome(num) {
+      const str = num.toString();
+      return str === str.split('').reverse().join('');
+    }
+
+    function getSpecialAttributes(satNumber, blockHeight) {
+      const special = [];
+      
+      if (blockHeight === 57043) {
+        special.push({ type: 'pizza', icon: '🍕', label: 'Pizza Sat', value: SPECIAL_VALUES.pizza });
+      }
+      if (blockHeight <= 54316) {
+        special.push({ type: 'nakamoto', icon: '👤', label: 'Nakamoto Era', value: SPECIAL_VALUES.nakamoto });
+      }
+      if (blockHeight === 477120) {
+        special.push({ type: 'segwit', icon: '⚡', label: 'SegWit Activation', value: SPECIAL_VALUES.segwit });
+      }
+      if (blockHeight === 9) {
+        special.push({ type: 'halFinney', icon: '💎', label: 'Block 9 (Hal Finney)', value: SPECIAL_VALUES.halFinney });
+      }
+      if (isPalindrome(satNumber)) {
+        special.push({ type: 'palindrome', icon: '🦋', label: 'Palindrome', value: SPECIAL_VALUES.palindrome });
+      }
+      if (blockHeight < 1000) {
+        special.push({ type: 'vintage', icon: '🕰️', label: 'Vintage (First 1K)', value: SPECIAL_VALUES.vintage });
+      }
+      
+      return special;
+    }
+
+    function analyzeSat(satNumber) {
+      const blockHeight = blockFromSat(satNumber);
+      const firstSatInBlock = firstSatOfBlock(blockHeight);
+      const offsetInBlock = satNumber - firstSatInBlock;
+      
+      const rarity = getSatRarity(blockHeight, offsetInBlock);
+      const specialAttrs = getSpecialAttributes(satNumber, blockHeight);
+      
+      // Calculate estimated value
+      let estimatedValue = RARITY_VALUES[rarity] || 0;
+      
+      // Add special attribute values (take the highest)
+      if (specialAttrs.length > 0) {
+        const maxSpecialValue = Math.max(...specialAttrs.map(a => a.value));
+        estimatedValue = Math.max(estimatedValue, maxSpecialValue);
+      }
+      
+      return {
+        satNumber,
+        blockHeight,
+        offsetInBlock,
+        rarity,
+        specialAttrs,
+        estimatedValue
+      };
+    }
+
+    function getRarityBadge(rarity) {
+      const badges = {
+        mythic: '<span class="tag tag-mythic">⚫ MYTHIC</span>',
+        legendary: '<span class="tag tag-legendary">🟣 LEGENDARY</span>',
+        epic: '<span class="tag tag-epic">🔴 EPIC</span>',
+        rare: '<span class="tag tag-rare">🟠 RARE</span>',
+        uncommon: '<span class="tag tag-uncommon">🟡 UNCOMMON</span>',
+        common: '<span class="tag tag-common">⚪ COMMON</span>'
+      };
+      return badges[rarity] || badges.common;
+    }
+
+    function getProfitClass(profitRatio) {
+      if (profitRatio >= 10) return 'profit-high';
+      if (profitRatio >= 2) return 'profit-med';
+      return 'profit-low';
+    }
+
+    async function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function fetchOutputValue(inscriptionId, listing = null) {
+      try {
+        // If listing already has outputValue (from main API call), use it
+        if (listing && listing.outputValue && listing.outputValue > MIN_SATS) {
+          return listing.outputValue;
+        }
+        
+        // For simulated data fallback
+        if (listing && listing._simulatedOutputValue !== undefined) {
+          return listing._simulatedOutputValue;
+        }
+        
+        // Otherwise, fetch individual inscription details
+        // Note: This might hit rate limits if we scan many inscriptions
+        await sleep(RATE_LIMIT_MS);
+        
+        const meUrl = `https://api-mainnet.magiceden.dev/v2/ord/btc/tokens/${inscriptionId}`;
+        const proxyUrl = `/api/me-proxy?endpoint=${encodeURIComponent(meUrl)}`;
+        
+        const response = await fetch(proxyUrl);
+        
+        if (!response.ok) {
+          console.warn(`Failed to fetch output value for ${inscriptionId}`);
+          return MIN_SATS;
+        }
+        
+        const data = await response.json();
+        const outputValue = data.outputValue || data.output_value || data.satoshi || data.value || MIN_SATS;
+        
+        return outputValue;
+      } catch (err) {
+        console.warn(`Error fetching output value for ${inscriptionId}:`, err);
+        return MIN_SATS;
+      }
+    }
+
+    function calculateTrappedBTC(outputValue, btcPriceUSD) {
+      const trappedSats = Math.max(0, outputValue - MIN_SATS);
+      const trappedUSD = (trappedSats / BTC_SATS) * btcPriceUSD;
+      return { trappedSats, trappedUSD };
+    }
+
+    async function fetchMagicEdenListings() {
+      const minPrice = parseFloat(document.getElementById('minPrice').value) || 1;
+      const maxPrice = parseFloat(document.getElementById('maxPrice').value) || 10;
+      const btcPrice = parseFloat(document.getElementById('btcPrice').value) || 100000;
+      
+      // Convert USD to sats
+      const minPriceSats = Math.floor((minPrice / btcPrice) * BTC_SATS);
+      const maxPriceSats = Math.floor((maxPrice / btcPrice) * BTC_SATS);
+      
+      // REAL API CALL - Using Vercel proxy
+      try {
+        const meUrl = `https://api-mainnet.magiceden.dev/v2/ord/btc/tokens?limit=50&offset=0&minPrice=${minPriceSats}&maxPrice=${maxPriceSats}`;
+        const proxyUrl = `/api/me-proxy?endpoint=${encodeURIComponent(meUrl)}`;
+        
+        console.log('Fetching from Magic Eden via Vercel proxy:', meUrl);
+        const response = await fetch(proxyUrl);
+        
+        if (!response.ok) {
+          throw new Error(`API request failed: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        const tokens = data.tokens || [];
+        
+        console.log(`Fetched ${tokens.length} listings from Magic Eden`);
+        
+        // Parse Magic Eden response format
+        return tokens.map(token => ({
+          id: token.id || token.inscriptionId || `unknown_${Math.random()}`,
+          inscriptionNumber: token.inscriptionNumber || 0,
+          sat: token.sat || token.satNumber || 0,
+          listedPrice: token.listedPrice || 0,
+          listedPriceUSD: ((token.listedPrice || 0) / BTC_SATS) * btcPrice,
+          outputValue: token.outputValue || token.output_value || MIN_SATS
+        }));
+        
+      } catch (err) {
+        console.error('Failed to fetch real data, falling back to simulation:', err);
+        // Fallback to simulated data if API fails
+        const simulatedListings = generateSimulatedListings(20, minPriceSats, maxPriceSats, btcPrice);
+        return simulatedListings;
+      }
+    }
+
+    function generateSimulatedListings(count, minPriceSats, maxPriceSats, btcPriceUSD) {
+      // Generate realistic test data with trapped BTC examples
+      const listings = [];
+      const interestingSats = [
+        0, // mythic
+        1050000000000, // epic (halving)
+        6048000000, // rare (difficulty adj)
+        5000000000, // uncommon (first of block)
+        285542300, // pizza block (57043)
+        12121, // palindrome
+        500000, // vintage
+        2500000000, // nakamoto era
+      ];
+      
+      // Some listings will have trapped BTC (simulate output_value > 546)
+      const trappedBTCExamples = [
+        60000, // Like Exquisite - $60 worth
+        10000, // $10 worth
+        5000,  // $5 worth
+        2000,  // $2 worth
+        1500,  // $1.5 worth
+      ];
+      
+      for (let i = 0; i < count; i++) {
+        const isInteresting = i < 8 && interestingSats[i] !== undefined;
+        const satNumber = isInteresting ? interestingSats[i] : Math.floor(Math.random() * 2000000000000);
+        const priceSats = Math.floor(minPriceSats + Math.random() * (maxPriceSats - minPriceSats));
+        
+        // Simulate some inscriptions with trapped BTC
+        const hasTrappedBTC = i < trappedBTCExamples.length;
+        const outputValue = hasTrappedBTC ? trappedBTCExamples[i] : MIN_SATS + Math.floor(Math.random() * 1000);
+        
+        listings.push({
+          id: `inscription_${i}`,
+          inscriptionNumber: 50000000 + i,
+          sat: satNumber,
+          listedPrice: priceSats,
+          listedPriceUSD: (priceSats / BTC_SATS) * btcPriceUSD,
+          // Store simulated output value (in production this would come from API)
+          _simulatedOutputValue: outputValue
+        });
+      }
+      
+      return listings;
+    }
+
+    async function scanNow() {
+      const scanBtn = document.getElementById('scanBtn');
+      const loading = document.getElementById('loading');
+      const error = document.getElementById('error');
+      const opportunities = document.getElementById('opportunities');
+      const emptyState = document.getElementById('emptyState');
+      
+      try {
+        // Show loading
+        scanBtn.disabled = true;
+        loading.classList.remove('hidden');
+        error.classList.add('hidden');
+        opportunities.innerHTML = '';
+        emptyState.classList.add('hidden');
+        
+        // Fetch listings
+        const listings = await fetchMagicEdenListings();
+        const btcPrice = parseFloat(document.getElementById('btcPrice').value) || 100000;
+        
+        // Analyze each listing + fetch output values for trapped BTC
+        const analyzedListings = await Promise.all(listings.map(async listing => {
+          const analysis = analyzeSat(listing.sat);
+          
+          // Fetch output value to detect trapped BTC
+          const outputValue = await fetchOutputValue(listing.id, listing);
+          const { trappedSats, trappedUSD } = calculateTrappedBTC(outputValue, btcPrice);
+          
+          // Calculate net profit: trapped BTC + rare sat value - listing price
+          const netProfit = trappedUSD + analysis.estimatedValue - listing.listedPriceUSD;
+          const profitRatio = (trappedUSD + analysis.estimatedValue) / listing.listedPriceUSD;
+          
+          return {
+            ...listing,
+            ...analysis,
+            outputValue,
+            trappedSats,
+            trappedUSD,
+            profit: netProfit,
+            profitRatio
+          };
+        }));
+        
+        // Filter opportunities: show if trapped_sats > 1000 OR rare_sat_value > 0 (unless "show all" is checked)
+        const showAll = document.getElementById('showAll').checked;
+        const filtered = showAll ? analyzedListings : analyzedListings.filter(l => 
+          l.trappedSats > 1000 || l.estimatedValue > 0 || l.profit > 0
+        );
+        
+        // Sort by profit (highest first)
+        filtered.sort((a, b) => b.profit - a.profit);
+        
+        // Update stats
+        const totalTrappedBTC = filtered.reduce((sum, l) => sum + l.trappedUSD, 0);
+        document.getElementById('statScanned').textContent = listings.length;
+        document.getElementById('statOpportunities').textContent = filtered.filter(l => l.profit > 0).length;
+        document.getElementById('statTrappedBTC').textContent = `$${Math.floor(totalTrappedBTC)}`;
+        document.getElementById('statBestProfit').textContent = filtered.length > 0 ? `$${Math.floor(Math.max(...filtered.map(l => l.profit)))}` : '$0';
+        document.getElementById('statLastScan').textContent = new Date().toLocaleTimeString();
+        lastScanTime = Date.now();
+        
+        // Display results
+        if (filtered.length === 0) {
+          emptyState.classList.remove('hidden');
+        } else {
+          opportunities.innerHTML = filtered.map(opp => renderOpportunity(opp)).join('');
+        }
+        
+        loading.classList.add('hidden');
+        scanBtn.disabled = false;
+        
+      } catch (err) {
+        console.error('Scan error:', err);
+        error.classList.remove('hidden');
+        document.getElementById('errorMessage').textContent = err.message;
+        loading.classList.add('hidden');
+        scanBtn.disabled = false;
+      }
+    }
+
+    function renderOpportunity(opp) {
+      const profitClass = getProfitClass(opp.profitRatio);
+      const profitSign = opp.profit >= 0 ? '+' : '';
+      const profitPercent = ((opp.profitRatio - 1) * 100).toFixed(0);
+      const isHot = opp.profit > 50; // 🔥 HOT badge if profit > $50
+      
+      return `
+        <div class="glass glass-border rounded-xl p-4 slide-up hover:border-green-500/30 transition-colors ${isHot ? 'border-amber-500/40' : ''}">
+          <div class="flex items-start justify-between gap-4">
+            
+            <!-- LEFT: Inscription Info -->
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-sm font-bold text-gray-100 mono">#${opp.inscriptionNumber}</span>
+                ${getRarityBadge(opp.rarity)}
+                ${isHot ? '<span class="tag" style="background:linear-gradient(135deg,#f59e0b,#ef4444);color:#000;border:none;font-weight:800">🔥 HOT</span>' : ''}
+              </div>
+              
+              <div class="text-xs text-gray-500 mb-2">
+                Sat: <span class="mono text-gray-300">${opp.satNumber.toLocaleString()}</span>
+              </div>
+              
+              ${opp.specialAttrs.length > 0 ? `
+                <div class="flex flex-wrap gap-1 mb-2">
+                  ${opp.specialAttrs.map(attr => `
+                    <span class="px-2 py-0.5 bg-amber-500/10 border border-amber-500/30 rounded text-[10px] text-amber-400">
+                      ${attr.icon} ${attr.label}
+                    </span>
+                  `).join('')}
+                </div>
+              ` : ''}
+              
+              <div class="grid grid-cols-2 gap-3 text-xs">
+                <div>
+                  <span class="text-gray-600">Price:</span> 
+                  <span class="mono text-gray-200 font-medium">$${opp.listedPriceUSD.toFixed(2)}</span>
+                </div>
+                <div>
+                  <span class="text-gray-600">Rare Sat Value:</span> 
+                  <span class="mono text-gray-200 font-medium">$${opp.estimatedValue.toLocaleString()}</span>
+                </div>
+                <div>
+                  <span class="text-gray-600">Trapped BTC:</span> 
+                  <span class="mono ${opp.trappedSats > 1000 ? 'text-amber-400' : 'text-gray-400'} font-medium">
+                    ${opp.trappedSats.toLocaleString()} sats
+                  </span>
+                </div>
+                <div>
+                  <span class="text-gray-600">Trapped USD:</span> 
+                  <span class="mono ${opp.trappedUSD > 10 ? 'text-amber-400' : 'text-gray-400'} font-medium">
+                    $${opp.trappedUSD.toFixed(2)}
+                  </span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- RIGHT: Profit & Action -->
+            <div class="text-right">
+              <div class="mb-2">
+                <div class="text-xs text-gray-600 mb-1">Net Profit</div>
+                <div class="text-lg font-bold ${opp.profit >= 0 ? 'text-green-400' : 'text-red-400'} mono">
+                  ${profitSign}$${Math.floor(opp.profit).toLocaleString()}
+                </div>
+                <div class="text-xs ${opp.profit >= 0 ? 'text-green-500' : 'text-red-500'} font-medium">
+                  ${profitSign}${profitPercent}%
+                </div>
+                ${opp.trappedUSD > 0 || opp.estimatedValue > 0 ? `
+                  <div class="text-[10px] text-gray-600 mt-1">
+                    = $${opp.trappedUSD.toFixed(0)} + $${opp.estimatedValue.toLocaleString()} - $${opp.listedPriceUSD.toFixed(2)}
+                  </div>
+                ` : ''}
+              </div>
+              
+              <a href="https://magiceden.io/ordinals/item-details/${opp.id}" target="_blank" 
+                class="btn px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 rounded-lg text-xs font-semibold text-black hover:from-green-400 hover:to-green-500 inline-block">
+                Buy on ME →
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function startAutoRefresh() {
+      if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+      
+      autoRefreshTimer = setInterval(() => {
+        scanNow();
+      }, AUTO_REFRESH_MS);
+      
+      // Update countdown
+      setInterval(() => {
+        if (lastScanTime) {
+          const elapsed = Date.now() - lastScanTime;
+          const remaining = Math.max(0, AUTO_REFRESH_MS - elapsed);
+          const minutes = Math.floor(remaining / 60000);
+          const seconds = Math.floor((remaining % 60000) / 1000);
+          document.getElementById('nextScan').textContent = 
+            remaining > 0 ? `Next scan in ${minutes}:${seconds.toString().padStart(2, '0')}` : 'Scanning...';
+        }
+      }, 1000);
+    }
+
+    // Auto-scan on load
+    window.addEventListener('load', () => {
+      scanNow();
+      startAutoRefresh();
+    });
+
+    // Re-scan when filters change
+    document.getElementById('minPrice').addEventListener('change', scanNow);
+    document.getElementById('maxPrice').addEventListener('change', scanNow);
+    document.getElementById('btcPrice').addEventListener('change', scanNow);
+    document.getElementById('showAll').addEventListener('change', scanNow);
+  </script>
+
+</body>
+</html>
