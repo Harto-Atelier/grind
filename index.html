@@ -1799,7 +1799,7 @@
             <div class="team-member" id="member-sergia">
                 <img src="pfps/sergia.png" alt="Sergia" class="member-pfp">
                 <div class="member-name">Sergia</div>
-                <div class="member-role">Finanzas</div>
+                <div class="member-role">Finance</div>
                 <div class="member-model">Claude Sonnet</div>
                 <div class="member-status">○ IDLE</div>
                 <div class="member-task" id="task-sergia"></div>
@@ -1808,16 +1808,68 @@
                     <button class="action-btn" onclick="triggerTask('sergia', 'finance-report')" title="Finance Report">💰</button>
                 </div>
             </div>
+            <div class="team-member" id="member-marcus">
+                <img src="pfps/marcus.png" alt="Marcus" class="member-pfp" onerror="this.src='pfps/default.png'">
+                <div class="member-name">Marcus</div>
+                <div class="member-role">HR / Chief of Staff</div>
+                <div class="member-model">Claude Opus</div>
+                <div class="member-status">○ IDLE</div>
+                <div class="member-task" id="task-marcus"></div>
+                <div class="member-actions">
+                    <button class="action-btn" onclick="triggerTask('marcus', 'team-status')" title="Team Status">📋</button>
+                    <button class="action-btn" onclick="triggerTask('marcus', 'metrics')" title="Metrics">📊</button>
+                </div>
+            </div>
+            <div class="team-member" id="member-luna">
+                <img src="pfps/luna.png" alt="Luna" class="member-pfp" onerror="this.src='pfps/default.png'">
+                <div class="member-name">Luna</div>
+                <div class="member-role">Content Creator</div>
+                <div class="member-model">Kimi K2</div>
+                <div class="member-status">○ IDLE</div>
+                <div class="member-task" id="task-luna"></div>
+                <div class="member-actions">
+                    <button class="action-btn" onclick="triggerTask('luna', 'viral-research')" title="Viral Research">🔥</button>
+                    <button class="action-btn" onclick="triggerTask('luna', 'draft-content')" title="Draft Content">✍️</button>
+                </div>
+            </div>
+            <div class="team-member" id="member-victor">
+                <img src="pfps/victor.png" alt="Victor" class="member-pfp" onerror="this.src='pfps/default.png'">
+                <div class="member-name">Victor</div>
+                <div class="member-role">Sales / Collectors</div>
+                <div class="member-model">Kimi K2</div>
+                <div class="member-status">○ IDLE</div>
+                <div class="member-task" id="task-victor"></div>
+                <div class="member-actions">
+                    <button class="action-btn" onclick="triggerTask('victor', 'check-pipeline')" title="Check Pipeline">💼</button>
+                    <button class="action-btn" onclick="triggerTask('victor', 'outreach')" title="Outreach">📤</button>
+                </div>
+            </div>
+            <div class="team-member" id="member-max">
+                <img src="pfps/max.png" alt="Max" class="member-pfp" onerror="this.src='pfps/default.png'">
+                <div class="member-name">Max</div>
+                <div class="member-role">QA / Testing</div>
+                <div class="member-model">Kimi K2</div>
+                <div class="member-status">○ IDLE</div>
+                <div class="member-task" id="task-max"></div>
+                <div class="member-actions">
+                    <button class="action-btn" onclick="triggerTask('max', 'audit')" title="Run Audit">🔍</button>
+                    <button class="action-btn" onclick="triggerTask('max', 'test')" title="Run Tests">🧪</button>
+                </div>
+            </div>
         </div>
         
         <!-- Command Input -->
         <div class="command-bar">
             <select id="commandAgent" class="command-select">
                 <option value="nuria">🟧 Nuria</option>
+                <option value="marcus">📋 Marcus</option>
+                <option value="amy">📊 Amy</option>
+                <option value="sergia">💰 Sergia</option>
                 <option value="jack">🔧 Jack</option>
-                <option value="pepe">🎨 Pepe</option>
-                <option value="amy">📋 Amy</option>
-                <option value="sergia">💼 Sergia</option>
+                <option value="pepe">🐸 Pepe</option>
+                <option value="luna">🌙 Luna</option>
+                <option value="victor">💼 Victor</option>
+                <option value="max">🔍 Max</option>
             </select>
             <input type="text" id="commandInput" class="command-input" placeholder="Escribe un comando..." onkeypress="if(event.key==='Enter')sendCommand()">
             <button class="command-send" onclick="sendCommand()">▶</button>
