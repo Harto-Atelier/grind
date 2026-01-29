@@ -35,6 +35,16 @@
       "status": "idle",
       "task": "",
       "lastActive": "2026-01-28T17:00:00.000Z"
+    },
+    "sergia": {
+      "name": "Sergia",
+      "role": "Finanzas",
+      "emoji": "💼",
+      "model": "Claude Sonnet",
+      "status": "idle",
+      "task": "",
+      "lastActive": "2026-01-29T09:30:00.000Z",
+      "avatar": "pfps/sergia.png"
     }
   },
   "activityLog": [
