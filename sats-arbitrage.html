@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💎 Sats Arbitrage Scanner | Harto</title>
+  <title>💎 Sats Arbitrage Scanner + Trapped BTC | Harto</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
@@ -53,7 +53,7 @@
             <span class="gradient-text">SATS ARBITRAGE SCANNER</span>
             <span class="text-[10px] text-gray-600 font-normal ml-2">by Jack</span>
           </h1>
-          <div class="text-[10px] text-gray-500">Find inscriptions with valuable trapped sats</div>
+          <div class="text-[10px] text-gray-500">Find rare sats + inscriptions with trapped BTC 🔒</div>
         </div>
       </div>
       <div class="flex items-center gap-2">
@@ -69,7 +69,7 @@
   <main class="max-w-[1400px] mx-auto px-4 py-6 space-y-5">
 
     <!-- STATS -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
       <div class="glass glass-border rounded-xl p-4">
         <div class="text-xs text-gray-500 mb-1">Scanned</div>
         <div class="text-2xl font-bold text-gray-100" id="statScanned">0</div>
@@ -79,8 +79,12 @@
         <div class="text-2xl font-bold text-green-400" id="statOpportunities">0</div>
       </div>
       <div class="glass glass-border rounded-xl p-4">
+        <div class="text-xs text-gray-500 mb-1">Trapped BTC</div>
+        <div class="text-2xl font-bold text-amber-400 mono" id="statTrappedBTC">$0</div>
+      </div>
+      <div class="glass glass-border rounded-xl p-4">
         <div class="text-xs text-gray-500 mb-1">Best Profit</div>
-        <div class="text-2xl font-bold text-amber-400 mono" id="statBestProfit">$0</div>
+        <div class="text-2xl font-bold text-green-400 mono" id="statBestProfit">$0</div>
       </div>
       <div class="glass glass-border rounded-xl p-4">
         <div class="text-xs text-gray-500 mb-1">Last Scan</div>
@@ -144,9 +148,25 @@
         <div>• Extracts the sat number from each inscription</div>
         <div>• Analyzes sat rarity: Mythic, Legendary, Epic, Rare, Uncommon, or Common</div>
         <div>• Checks for special attributes: Nakamoto era, Pizza block, Palindromes, Vintage, etc.</div>
-        <div>• Estimates sat value based on rarity and historical sales</div>
-        <div>• Shows only profitable opportunities where sat value > listing price</div>
+        <div>• <strong class="text-amber-400">NEW:</strong> Detects trapped BTC (output_value - 546 minimum sats)</div>
+        <div>• Calculates net profit: Trapped BTC + Rare Sat Value - Listing Price</div>
+        <div>• Shows opportunities with trapped_sats > 1000 OR rare_sat_value > 0</div>
+        <div>• 🔥 HOT badge for deals with profit > $50</div>
         <div>• Auto-refreshes every 5 minutes to catch new deals</div>
+      </div>
+    </div>
+
+    <!-- TRAPPED BTC EXPLAINER -->
+    <div class="glass glass-border border-amber-500/30 rounded-xl p-5">
+      <h3 class="text-sm font-bold text-amber-400 mb-3">🔒 What is Trapped BTC?</h3>
+      <div class="space-y-2 text-xs text-gray-500">
+        <div>• Every inscription UTXO must contain at least <strong class="text-gray-300">546 sats</strong> (Bitcoin's dust limit)</div>
+        <div>• Some inscriptions have <strong class="text-amber-400">way more BTC</strong> trapped inside their UTXO</div>
+        <div>• Example: Exquisite inscription has <strong class="text-amber-400">60,000 sats ≈ $60</strong> of BTC trapped</div>
+        <div>• When you buy the inscription, you get <strong class="text-green-400">both the art AND the trapped BTC</strong></div>
+        <div>• This scanner calculates: <span class="mono text-gray-300">trapped_value = (output_value - 546) × BTC_price</span></div>
+        <div>• <strong class="text-amber-400">Pro tip:</strong> Even "worthless" inscriptions can be profitable if they have enough trapped BTC!</div>
+        <div>• Rate limited to 100ms per request to avoid hitting API limits</div>
       </div>
     </div>
 
@@ -208,6 +228,8 @@
     // CONFIG
     const BTC_SATS = 100000000; // 1 BTC = 100M sats
     const AUTO_REFRESH_MS = 5 * 60 * 1000; // 5 minutes
+    const MIN_SATS = 546; // Minimum sats per UTXO
+    const RATE_LIMIT_MS = 100; // 100ms between API requests
     
     // SAT VALUE ESTIMATES (in USD, conservative)
     const RARITY_VALUES = {
@@ -354,6 +376,47 @@
       return 'profit-low';
     }
 
+    async function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function fetchOutputValue(inscriptionId, listing = null) {
+      try {
+        // Rate limiting
+        await sleep(RATE_LIMIT_MS);
+        
+        // For testing: use simulated data if available
+        if (listing && listing._simulatedOutputValue !== undefined) {
+          return listing._simulatedOutputValue;
+        }
+        
+        // Production: fetch from Magic Eden API
+        const url = `https://api-mainnet.magiceden.dev/v2/ord/btc/tokens/${inscriptionId}`;
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+          console.warn(`Failed to fetch output value for ${inscriptionId}`);
+          return MIN_SATS; // Assume minimum if API fails
+        }
+        
+        const data = await response.json();
+        
+        // Try different possible field names
+        const outputValue = data.outputValue || data.output_value || data.satoshi || data.value || MIN_SATS;
+        
+        return outputValue;
+      } catch (err) {
+        console.warn(`Error fetching output value for ${inscriptionId}:`, err);
+        return MIN_SATS; // Assume minimum on error
+      }
+    }
+
+    function calculateTrappedBTC(outputValue, btcPriceUSD) {
+      const trappedSats = Math.max(0, outputValue - MIN_SATS);
+      const trappedUSD = (trappedSats / BTC_SATS) * btcPriceUSD;
+      return { trappedSats, trappedUSD };
+    }
+
     async function fetchMagicEdenListings() {
       const minPrice = parseFloat(document.getElementById('minPrice').value) || 1;
       const maxPrice = parseFloat(document.getElementById('maxPrice').value) || 10;
@@ -381,7 +444,7 @@
     }
 
     function generateSimulatedListings(count, minPriceSats, maxPriceSats, btcPriceUSD) {
-      // Generate realistic test data
+      // Generate realistic test data with trapped BTC examples
       const listings = [];
       const interestingSats = [
         0, // mythic
@@ -394,17 +457,32 @@
         2500000000, // nakamoto era
       ];
       
+      // Some listings will have trapped BTC (simulate output_value > 546)
+      const trappedBTCExamples = [
+        60000, // Like Exquisite - $60 worth
+        10000, // $10 worth
+        5000,  // $5 worth
+        2000,  // $2 worth
+        1500,  // $1.5 worth
+      ];
+      
       for (let i = 0; i < count; i++) {
         const isInteresting = i < 8 && interestingSats[i] !== undefined;
         const satNumber = isInteresting ? interestingSats[i] : Math.floor(Math.random() * 2000000000000);
         const priceSats = Math.floor(minPriceSats + Math.random() * (maxPriceSats - minPriceSats));
+        
+        // Simulate some inscriptions with trapped BTC
+        const hasTrappedBTC = i < trappedBTCExamples.length;
+        const outputValue = hasTrappedBTC ? trappedBTCExamples[i] : MIN_SATS + Math.floor(Math.random() * 1000);
         
         listings.push({
           id: `inscription_${i}`,
           inscriptionNumber: 50000000 + i,
           sat: satNumber,
           listedPrice: priceSats,
-          listedPriceUSD: (priceSats / BTC_SATS) * btcPriceUSD
+          listedPriceUSD: (priceSats / BTC_SATS) * btcPriceUSD,
+          // Store simulated output value (in production this would come from API)
+          _simulatedOutputValue: outputValue
         });
       }
       
@@ -428,31 +506,45 @@
         
         // Fetch listings
         const listings = await fetchMagicEdenListings();
+        const btcPrice = parseFloat(document.getElementById('btcPrice').value) || 100000;
         
-        // Analyze each listing
-        const analyzedListings = listings.map(listing => {
+        // Analyze each listing + fetch output values for trapped BTC
+        const analyzedListings = await Promise.all(listings.map(async listing => {
           const analysis = analyzeSat(listing.sat);
-          const profit = analysis.estimatedValue - listing.listedPriceUSD;
-          const profitRatio = analysis.estimatedValue / listing.listedPriceUSD;
+          
+          // Fetch output value to detect trapped BTC
+          const outputValue = await fetchOutputValue(listing.id, listing);
+          const { trappedSats, trappedUSD } = calculateTrappedBTC(outputValue, btcPrice);
+          
+          // Calculate net profit: trapped BTC + rare sat value - listing price
+          const netProfit = trappedUSD + analysis.estimatedValue - listing.listedPriceUSD;
+          const profitRatio = (trappedUSD + analysis.estimatedValue) / listing.listedPriceUSD;
           
           return {
             ...listing,
             ...analysis,
-            profit,
+            outputValue,
+            trappedSats,
+            trappedUSD,
+            profit: netProfit,
             profitRatio
           };
-        });
+        }));
         
-        // Filter profitable opportunities (unless "show all" is checked)
+        // Filter opportunities: show if trapped_sats > 1000 OR rare_sat_value > 0 (unless "show all" is checked)
         const showAll = document.getElementById('showAll').checked;
-        const filtered = showAll ? analyzedListings : analyzedListings.filter(l => l.profit > 0);
+        const filtered = showAll ? analyzedListings : analyzedListings.filter(l => 
+          l.trappedSats > 1000 || l.estimatedValue > 0 || l.profit > 0
+        );
         
         // Sort by profit (highest first)
         filtered.sort((a, b) => b.profit - a.profit);
         
         // Update stats
+        const totalTrappedBTC = filtered.reduce((sum, l) => sum + l.trappedUSD, 0);
         document.getElementById('statScanned').textContent = listings.length;
         document.getElementById('statOpportunities').textContent = filtered.filter(l => l.profit > 0).length;
+        document.getElementById('statTrappedBTC').textContent = `$${Math.floor(totalTrappedBTC)}`;
         document.getElementById('statBestProfit').textContent = filtered.length > 0 ? `$${Math.floor(Math.max(...filtered.map(l => l.profit)))}` : '$0';
         document.getElementById('statLastScan').textContent = new Date().toLocaleTimeString();
         lastScanTime = Date.now();
@@ -480,9 +572,10 @@
       const profitClass = getProfitClass(opp.profitRatio);
       const profitSign = opp.profit >= 0 ? '+' : '';
       const profitPercent = ((opp.profitRatio - 1) * 100).toFixed(0);
+      const isHot = opp.profit > 50; // 🔥 HOT badge if profit > $50
       
       return `
-        <div class="glass glass-border rounded-xl p-4 slide-up hover:border-green-500/30 transition-colors">
+        <div class="glass glass-border rounded-xl p-4 slide-up hover:border-green-500/30 transition-colors ${isHot ? 'border-amber-500/40' : ''}">
           <div class="flex items-start justify-between gap-4">
             
             <!-- LEFT: Inscription Info -->
@@ -490,6 +583,7 @@
               <div class="flex items-center gap-2 mb-2">
                 <span class="text-sm font-bold text-gray-100 mono">#${opp.inscriptionNumber}</span>
                 ${getRarityBadge(opp.rarity)}
+                ${isHot ? '<span class="tag" style="background:linear-gradient(135deg,#f59e0b,#ef4444);color:#000;border:none;font-weight:800">🔥 HOT</span>' : ''}
               </div>
               
               <div class="text-xs text-gray-500 mb-2">
@@ -506,14 +600,26 @@
                 </div>
               ` : ''}
               
-              <div class="flex items-center gap-3 text-xs">
+              <div class="grid grid-cols-2 gap-3 text-xs">
                 <div>
                   <span class="text-gray-600">Price:</span> 
                   <span class="mono text-gray-200 font-medium">$${opp.listedPriceUSD.toFixed(2)}</span>
                 </div>
                 <div>
-                  <span class="text-gray-600">Est. Value:</span> 
+                  <span class="text-gray-600">Rare Sat Value:</span> 
                   <span class="mono text-gray-200 font-medium">$${opp.estimatedValue.toLocaleString()}</span>
+                </div>
+                <div>
+                  <span class="text-gray-600">Trapped BTC:</span> 
+                  <span class="mono ${opp.trappedSats > 1000 ? 'text-amber-400' : 'text-gray-400'} font-medium">
+                    ${opp.trappedSats.toLocaleString()} sats
+                  </span>
+                </div>
+                <div>
+                  <span class="text-gray-600">Trapped USD:</span> 
+                  <span class="mono ${opp.trappedUSD > 10 ? 'text-amber-400' : 'text-gray-400'} font-medium">
+                    $${opp.trappedUSD.toFixed(2)}
+                  </span>
                 </div>
               </div>
             </div>
@@ -521,13 +627,18 @@
             <!-- RIGHT: Profit & Action -->
             <div class="text-right">
               <div class="mb-2">
-                <div class="text-xs text-gray-600 mb-1">Profit Potential</div>
+                <div class="text-xs text-gray-600 mb-1">Net Profit</div>
                 <div class="text-lg font-bold ${opp.profit >= 0 ? 'text-green-400' : 'text-red-400'} mono">
                   ${profitSign}$${Math.floor(opp.profit).toLocaleString()}
                 </div>
                 <div class="text-xs ${opp.profit >= 0 ? 'text-green-500' : 'text-red-500'} font-medium">
                   ${profitSign}${profitPercent}%
                 </div>
+                ${opp.trappedUSD > 0 || opp.estimatedValue > 0 ? `
+                  <div class="text-[10px] text-gray-600 mt-1">
+                    = $${opp.trappedUSD.toFixed(0)} + $${opp.estimatedValue.toLocaleString()} - $${opp.listedPriceUSD.toFixed(2)}
+                  </div>
+                ` : ''}
               </div>
               
               <a href="https://magiceden.io/ordinals/item-details/${opp.id}" target="_blank" 
