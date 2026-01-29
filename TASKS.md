@@ -50,6 +50,7 @@
 ### General / Sin Proyecto
 | Tarea | Detalle |
 |-------|---------|
+| **Evaluar TradingAgents** | Framework multi-agente LLM para trading - [GitHub](https://github.com/TauricResearch/TradingAgents) - Revisar lunes 3 Feb |
 | Factura final CM Chino | - |
 | Desarrollo Token | - |
 | nurIA Trading | Darle 100$ para Polymarket |

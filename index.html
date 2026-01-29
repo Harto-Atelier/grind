@@ -2303,7 +2303,17 @@
         // Real-time team status via Upstash Redis
         const UPSTASH_URL = 'https://pumped-shad-30856.upstash.io';
         const UPSTASH_TOKEN = 'AXiIAAIncDI1Yzk1YTUyMjZiMjE0MWIwYmYyZDk2ZDIxYWU3MDFjOXAyMzA4NTY';
-        const agentEmojis = { nuria: '🟧', amy: '📋', jack: '🔧', pepe: '🎨', sergia: '💼' };
+        const agentEmojis = { 
+            nuria: '🟧', 
+            marcus: '📋', 
+            amy: '📊', 
+            sergia: '💰', 
+            jack: '🔧', 
+            pepe: '🐸', 
+            luna: '🌙', 
+            victor: '💼', 
+            max: '🔍' 
+        };
         
         async function checkNuriaStatus() {
             try {
@@ -2832,12 +2842,8 @@
                     renderTasks(tasksData);
                 }
                 
-                // Load team status
-                const teamRes = await fetch('data/team-status.json?t=' + Date.now());
-                if (teamRes.ok) {
-                    const teamData = await teamRes.json();
-                    renderTeamStatus(teamData);
-                }
+                // Team status is loaded from Upstash Redis in realtime (fetchTeamStatusRealtime)
+                // No need to load from static JSON
                 
                 // Update timestamp
                 const now = new Date();
