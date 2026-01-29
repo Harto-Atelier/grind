@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Nuria - Command Center</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🟧</text></svg>">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --card: #111;
+            --border: #222;
+            --text: #fff;
+            --muted: #666;
+            --orange: #ff6b00;
+            --green: #00ff88;
+            --red: #ff4444;
+            --yellow: #ffcc00;
+            --cyan: #00d9ff;
+            --purple: #a855f7;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        
+        .header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .header-stats {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.85rem;
+        }
+        
+        .stat { color: var(--muted); }
+        .stat span { color: var(--green); font-weight: 600; }
+        
+        .back-link {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .back-link:hover { color: var(--orange); }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Pyramid Structure */
+        .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .tier {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .tier-label {
+            width: 100%;
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        /* Agent Cards */
+        .agent-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            width: 220px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .agent-card:hover {
+            border-color: var(--orange);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(255, 107, 0, 0.15);
+        }
+        
+        .agent-card.working {
+            border-color: var(--green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+        }
+        
+        .agent-card.working::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--green);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .agent-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .agent-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border);
+        }
+        
+        .agent-card.working .agent-avatar {
+            border-color: var(--green);
+        }
+        
+        .agent-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .agent-role {
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+        
+        .agent-model {
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            background: var(--border);
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+        
+        .agent-model.opus { background: rgba(255, 107, 0, 0.2); color: var(--orange); }
+        .agent-model.sonnet { background: rgba(168, 85, 247, 0.2); color: var(--purple); }
+        .agent-model.kimi { background: rgba(0, 217, 255, 0.2); color: var(--cyan); }
+        
+        .agent-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--muted);
+        }
+        
+        .status-dot.working { background: var(--green); animation: blink 1s infinite; }
+        .status-dot.idle { background: var(--muted); }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .agent-task {
+            font-size: 0.75rem;
+            color: var(--cyan);
+            min-height: 2.5em;
+            margin-bottom: 1rem;
+        }
+        
+        .agent-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .action-btn {
+            flex: 1;
+            padding: 0.5rem;
+            background: var(--border);
+            border: none;
+            border-radius: 6px;
+            color: var(--text);
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+        
+        .action-btn:hover {
+            background: var(--orange);
+        }
+        
+        /* Command Panel */
+        .command-panel {
+            margin-top: 2rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        
+        .command-panel h2 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .command-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .command-select {
+            padding: 0.75rem 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 0.9rem;
+            min-width: 180px;
+        }
+        
+        .command-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+        
+        .command-input:focus {
+            outline: none;
+            border-color: var(--orange);
+        }
+        
+        .command-send {
+            padding: 0.75rem 1.5rem;
+            background: var(--orange);
+            border: none;
+            border-radius: 8px;
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .command-send:hover {
+            background: #ff8533;
+            transform: scale(1.02);
+        }
+        
+        /* Activity Log */
+        .activity-log {
+            margin-top: 1rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .log-item {
+            display: flex;
+            gap: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.8rem;
+        }
+        
+        .log-time {
+            color: var(--muted);
+            min-width: 50px;
+        }
+        
+        .log-agent {
+            min-width: 24px;
+        }
+        
+        .log-action {
+            color: var(--text);
+        }
+        
+        /* Live indicator */
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--green);
+        }
+        
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: blink 1s infinite;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .agent-card { width: 100%; max-width: 300px; }
+            .header { flex-direction: column; gap: 1rem; text-align: center; }
+            .header-stats { flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div>
+            <a href="index.html" class="back-link">← Back to Dashboard</a>
+            <h1>🎭 Team Nuria — Command Center</h1>
+        </div>
+        <div class="header-stats">
+            <div class="stat">Agents: <span id="totalAgents">10</span></div>
+            <div class="stat">Working: <span id="workingCount">1</span></div>
+            <div class="stat">Tasks Today: <span id="tasksToday">18</span></div>
+            <div class="live-indicator">
+                <div class="live-dot"></div>
+                LIVE
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Pyramid Structure -->
+        <div class="pyramid">
+            <!-- Tier 1: CEO -->
+            <div class="tier-label">👑 Leadership</div>
+            <div class="tier">
+                <div class="agent-card working" id="card-nuria">
+                    <div class="agent-header">
+                        <img src="pfps/nuria.png" alt="Nuria" class="agent-avatar">
+                        <div class="agent-info">
+                            <h3>Nuria 🟧</h3>
+                            <div class="agent-role">CEO / Main</div>
+                            <div class="agent-model opus">Claude Opus</div>
+                        </div>
+                    </div>
+                    <div class="agent-status">
+                        <div class="status-dot working"></div>
+                        <span>WORKING</span>
+                    </div>
+                    <div class="agent-task" id="task-nuria">Conversación con Harto</div>
+                    <div class="agent-actions">
+                        <button class="action-btn" onclick="sendTask('nuria', 'status')">📊 Status</button>
+                        <button class="action-btn" onclick="sendTask('nuria', 'emails')">📧 Emails</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tier 2: Chiefs -->
+            <div class="tier-label">⭐ Chiefs</div>
+            <div class="tier">
+                <div class="agent-card" id="card-marcus">
+                    <div class="agent-header">
+                        <img src="pfps/marcus.png" alt="Marcus" class="agent-avatar">
+                        <div class="agent-info">
+                            <h3>Marcus 📋</h3>
+                            <div class="agent-role">HR / Chief of Staff</div>
+                            <div class="agent-model opus">Claude Opus</div>
+                        </div>
+                    </div>
+                    <div class="agent-status">
+                        <div class="status-dot idle"></div>
+                        <span>IDLE</span>
+                    </div>
+                    <div class="agent-task" id="task-marcus"></div>
+                    <div class="agent-actions">
+                        <button class="action-btn" onclick="sendTask('marcus', 'team-status')">👥 Team</button>
+                        <button class="action-btn" onclick="sendTask('marcus', 'metrics')">📈 Metrics</button>
+                    </div>
+                </div>
+                <div class="agent-card" id="card-sergia">
+                    <div class="agent-header">
+                        <img src="pfps/sergia.png" alt="Sergia" class="agent-avatar">
+                        <div class="agent-info">
+                            <h3>Sergia 💰</h3>
+                            <div class="agent-role">Finance</div>
+                            <div class="agent-model sonnet">Claude Sonnet</div>
+                        </div>
+                    </div>
+                    <div class="agent-status">
+                        <div class="status-dot idle"></div>
+                        <span>IDLE</span>
+                    </div>
+                    <div class="agent-task" id="task-sergia"></div>
+                    <div class="agent-actions">
+                        <button class="action-btn" onclick="sendTask('sergia', 'invoices')">🧾 Invoices</button>
+                        <button class="action-btn" onclick="sendTask('sergia', 'report')">💰 Report</button>
+                    </div>
+                </div>
+                <div class="agent-card" id="card-jack">
+                    <div class="agent-header">
+                        <img src="pfps/jack.png" alt="Jack" class="agent-avatar">
+                        <div class="agent-info">
+                            <h3>Jack 🔧</h3>
+                            <div class="agent-role">Tech Lead</div>
+                            <div class="agent-model sonnet">Claude Sonnet</div>
+                        </div>
+                    </div>
+                    <div class="agent-status">
+                        <div class="status-dot idle"></div>
+                        <span>IDLE</span>
+                    </div>
+                    <div class="agent-task" id="task-jack"></div>
+                    <div class="agent-actions">
+                        <button class="action-btn" onclick="sendTask('jack', 'diagnostics')">🔍 Diag</button>
+                        <button class="action-btn" onclick="sendTask('jack', 'deploy')">🚀 Deploy</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tier 3: Operations -->
+            <div class="tier-label">⚙️ Operations</div>
+            <div class="tier">
+                <div class="agent-card" id="card-amy">
+                    <div class="agent-header">
+                        <img src="pfps/amy.png" alt="Amy" class="agent-avatar">
+                        <div class="agent-info">
+                            <h3>Amy 📊</h3>
+                            <div class="agent-role">Operations</div>
+                            <div class="agent-model kimi">Kimi K2 FREE</div>
+                        </div>
+                    </div>
+                    <div class="agent-status">
+                        <div class="status-dot idle"></div>
+                        <span>IDLE</span>
+                    </div>
+                    <div class="agent-task" id="task-amy"></div>
+                    <div class="agent-actions">
+                        <button class="action-btn" onclick="sendTask('amy', 'sync')">🔄 Sync</button>
+                        <button class="action-btn" onclick="sendTask('amy', 'sheets')">📑 Sheets</button>
+                    </div>
+                </div>
+                <div class="agent-card" id="card-pepe">
+                    <div class="agent-header">
+                        <img src="pfps/pepe.png" alt="Pepe" class="agent-avatar">
+                        <div class="agent-info">
+                            <h3>Pepe 🐸</h3>
+                            <div class="agent-role">Research / Social</div>
+                            <div class="agent-model kimi">Kimi K2 FREE</div>
+                        </div>
+                    </div>
+                    <div class="agent-status">
+                        <div class="status-dot idle"></div>
+                        <span>IDLE</span>
+                    </div>
+                    <div class="agent-task" id="task-pepe"></div>
+                    <div class="agent-actions">
+                        <button class="action-btn" onclick="sendTask('pepe', 'twitter')">🐦 Twitter</button>
+                        <button class="action-btn" onclick="sendTask('pepe', 'viral')">🔥 Viral</button>
+                    </div>
+                </div>
+                <div class="agent-card" id="card-luna">
+                    <div class="agent-header">
+                        <img src="pfps/luna.png" alt="Luna" class="agent-avatar">
+                        <div class="agent-info">
+                            <h3>Luna 🌙</h3>
+                            <div class="agent-role">Content Creator</div>
+                            <div class="agent-model kimi">Kimi K2 FREE</div>
+                        </div>
+                    </div>
+                    <div class="agent-status">
+                        <div class="status-dot idle"></div>
+                        <span>IDLE</span>
+                    </div>
+                    <div class="agent-task" id="task-luna"></div>
+                    <div class="agent-actions">
+                        <button class="action-btn" onclick="sendTask('luna', 'draft')">✍️ Draft</button>
+                        <button class="action-btn" onclick="sendTask('luna', 'research')">🔥 Research</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tier 4: Specialists -->
+            <div class="tier-label">🎯 Specialists</div>
+            <div class="tier">
+                <div class="agent-card" id="card-victor">
+                    <div class="agent-header">
+                        <img src="pfps/victor.png" alt="Victor" class="agent-avatar">
+                        <div class="agent-info">
+                            <h3>Victor 💼</h3>
+                            <div class="agent-role">Sales / Collectors</div>
+                            <div class="agent-model kimi">Kimi K2 FREE</div>
+                        </div>
+                    </div>
+                    <div class="agent-status">
+                        <div class="status-dot idle"></div>
+                        <span>IDLE</span>
+                    </div>
+                    <div class="agent-task" id="task-victor"></div>
+                    <div class="agent-actions">
+                        <button class="action-btn" onclick="sendTask('victor', 'pipeline')">💼 Pipeline</button>
+                        <button class="action-btn" onclick="sendTask('victor', 'outreach')">📤 Outreach</button>
+                    </div>
+                </div>
+                <div class="agent-card" id="card-max">
+                    <div class="agent-header">
+                        <img src="pfps/max.png" alt="Max" class="agent-avatar">
+                        <div class="agent-info">
+                            <h3>Max 🔍</h3>
+                            <div class="agent-role">QA / Testing</div>
+                            <div class="agent-model kimi">Kimi K2 FREE</div>
+                        </div>
+                    </div>
+                    <div class="agent-status">
+                        <div class="status-dot idle"></div>
+                        <span>IDLE</span>
+                    </div>
+                    <div class="agent-task" id="task-max"></div>
+                    <div class="agent-actions">
+                        <button class="action-btn" onclick="sendTask('max', 'audit')">🔍 Audit</button>
+                        <button class="action-btn" onclick="sendTask('max', 'test')">🧪 Test</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Command Panel -->
+        <div class="command-panel">
+            <h2>⚡ Command Center</h2>
+            <div class="command-row">
+                <select id="targetAgent" class="command-select">
+                    <option value="nuria">🟧 Nuria (CEO)</option>
+                    <option value="marcus">📋 Marcus (HR)</option>
+                    <option value="sergia">💰 Sergia (Finance)</option>
+                    <option value="jack">🔧 Jack (Tech)</option>
+                    <option value="amy">📊 Amy (Ops)</option>
+                    <option value="pepe">🐸 Pepe (Research)</option>
+                    <option value="luna">🌙 Luna (Content)</option>
+                    <option value="victor">💼 Victor (Sales)</option>
+                    <option value="max">🔍 Max (QA)</option>
+                    <option value="all">📢 ALL AGENTS</option>
+                </select>
+                <input type="text" id="commandInput" class="command-input" placeholder="Escribe una tarea o comando..." onkeypress="if(event.key==='Enter')sendCommand()">
+                <button class="command-send" onclick="sendCommand()">SEND ▶</button>
+            </div>
+            
+            <div class="activity-log" id="activityLog">
+                <div class="log-item">
+                    <span class="log-time">18:36</span>
+                    <span class="log-agent">🟧</span>
+                    <span class="log-action">Añadió 4 nuevos agentes al dashboard</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const UPSTASH_URL = 'https://pumped-shad-30856.upstash.io';
+        const UPSTASH_TOKEN = 'AXiIAAIncDI1Yzk1YTUyMjZiMjE0MWIwYmYyZDk2ZDIxYWU3MDFjOXAyMzA4NTY';
+        
+        const AGENT_EMOJIS = {
+            nuria: '🟧', marcus: '📋', sergia: '💰', jack: '🔧',
+            amy: '📊', pepe: '🐸', luna: '🌙', victor: '💼', max: '🔍'
+        };
+        
+        async function loadTeamStatus() {
+            try {
+                const res = await fetch(`${UPSTASH_URL}/get/team-status`, {
+                    headers: { 'Authorization': `Bearer ${UPSTASH_TOKEN}` }
+                });
+                if (res.ok) {
+                    const result = await res.json();
+                    if (result.result) {
+                        const data = JSON.parse(result.result);
+                        updateUI(data);
+                    }
+                }
+            } catch (e) {
+                console.error('Failed to load team status:', e);
+            }
+        }
+        
+        function updateUI(data) {
+            let workingCount = 0;
+            
+            for (const [id, agent] of Object.entries(data.agents || {})) {
+                const card = document.getElementById(`card-${id}`);
+                if (!card) continue;
+                
+                const isWorking = agent.status === 'working';
+                if (isWorking) workingCount++;
+                
+                card.className = `agent-card ${isWorking ? 'working' : ''}`;
+                
+                const statusDot = card.querySelector('.status-dot');
+                const statusText = card.querySelector('.agent-status span');
+                const taskEl = document.getElementById(`task-${id}`);
+                
+                if (statusDot) statusDot.className = `status-dot ${isWorking ? 'working' : 'idle'}`;
+                if (statusText) statusText.textContent = isWorking ? 'WORKING' : 'IDLE';
+                if (taskEl) taskEl.textContent = agent.task || '';
+            }
+            
+            document.getElementById('workingCount').textContent = workingCount;
+            document.getElementById('tasksToday').textContent = data.stats?.tasksCompletedToday || 0;
+            
+            // Update activity log
+            const logContainer = document.getElementById('activityLog');
+            if (data.activityLog && data.activityLog.length > 0) {
+                logContainer.innerHTML = data.activityLog.slice(0, 10).map(item => `
+                    <div class="log-item">
+                        <span class="log-time">${item.time}</span>
+                        <span class="log-agent">${AGENT_EMOJIS[item.agent] || '🤖'}</span>
+                        <span class="log-action">${item.action}</span>
+                    </div>
+                `).join('');
+            }
+        }
+        
+        async function sendTask(agent, task) {
+            const taskPrompts = {
+                'status': 'Dame un status report completo',
+                'emails': 'Revisa los emails importantes',
+                'team-status': 'Status del equipo y métricas',
+                'metrics': 'Genera informe de métricas',
+                'invoices': 'Revisa facturas pendientes',
+                'report': 'Genera informe financiero',
+                'diagnostics': 'Ejecuta diagnósticos del sistema',
+                'deploy': 'Prepara deploy a producción',
+                'sync': 'Sincroniza tareas con Google Sheets',
+                'sheets': 'Revisa Google Sheets',
+                'twitter': 'Analiza tendencias de Twitter',
+                'viral': 'Busca contenido viral',
+                'draft': 'Redacta contenido para redes',
+                'research': 'Investiga tendencias de contenido',
+                'pipeline': 'Revisa pipeline de ventas',
+                'outreach': 'Prepara mensajes de outreach',
+                'audit': 'Ejecuta auditoría de calidad',
+                'test': 'Ejecuta tests del sistema'
+            };
+            
+            const prompt = taskPrompts[task] || task;
+            await queueTask(agent, prompt);
+        }
+        
+        async function sendCommand() {
+            const agent = document.getElementById('targetAgent').value;
+            const command = document.getElementById('commandInput').value.trim();
+            
+            if (!command) return;
+            
+            if (agent === 'all') {
+                for (const a of ['nuria', 'marcus', 'sergia', 'jack', 'amy', 'pepe', 'luna', 'victor', 'max']) {
+                    await queueTask(a, command);
+                }
+            } else {
+                await queueTask(agent, command);
+            }
+            
+            document.getElementById('commandInput').value = '';
+        }
+        
+        async function queueTask(agent, prompt) {
+            const task = {
+                agent: agent,
+                taskId: `task-${Date.now()}`,
+                label: `${agent}-task`,
+                prompt: prompt
+            };
+            
+            try {
+                await fetch(`${UPSTASH_URL}/rpush/agent-task-queue`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${UPSTASH_TOKEN}` },
+                    body: JSON.stringify(task)
+                });
+                
+                // Update status to show agent is working
+                const statusRes = await fetch(`${UPSTASH_URL}/get/team-status`, {
+                    headers: { 'Authorization': `Bearer ${UPSTASH_TOKEN}` }
+                });
+                if (statusRes.ok) {
+                    const result = await statusRes.json();
+                    const status = result.result ? JSON.parse(result.result) : { agents: {}, activityLog: [] };
+                    
+                    if (status.agents[agent]) {
+                        status.agents[agent].status = 'working';
+                        status.agents[agent].task = prompt.slice(0, 50) + (prompt.length > 50 ? '...' : '');
+                    }
+                    
+                    status.activityLog = [
+                        { time: new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }), agent, action: `📤 Task queued: ${prompt.slice(0, 40)}...` },
+                        ...(status.activityLog || []).slice(0, 9)
+                    ];
+                    
+                    await fetch(`${UPSTASH_URL}/set/team-status`, {
+                        method: 'POST',
+                        headers: { 'Authorization': `Bearer ${UPSTASH_TOKEN}` },
+                        body: JSON.stringify(status)
+                    });
+                    
+                    updateUI(status);
+                }
+                
+                alert(`✅ Task sent to ${agent.toUpperCase()}`);
+            } catch (e) {
+                console.error('Failed to queue task:', e);
+                alert('❌ Failed to send task');
+            }
+        }
+        
+        // Load on start and poll every 10s
+        loadTeamStatus();
+        setInterval(loadTeamStatus, 10000);
+    </script>
+</body>
+</html>
