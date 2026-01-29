@@ -1,11 +1,11 @@
 {
-  "lastUpdate": "2026-01-28T12:34:10.815Z",
+  "lastUpdate": "2026-01-29T09:17:08.929Z",
   "sheetId": "1LIdaTvRvKEZOMJbqXcBIrA5Xq6bEnzfiiFkFp_A6pTY",
   "stats": {
-    "total": 67,
-    "pending": 35,
+    "total": 66,
+    "pending": 32,
     "todo": 8,
-    "done": 32,
+    "done": 34,
     "totalHours": 29
   },
   "mits": [
@@ -65,22 +65,6 @@
       "priority": "normal"
     },
     {
-      "id": 34,
-      "title": "https://docs.google.com/document/d/1EJJwBCa-ZONr-W4xBX8GWHyt2_x5DTVqJBZHzPk8XyU/edit?usp=drive_web&ouid=111720475375411282818",
-      "meta": "Arturo  • Superrare",
-      "xp": 15,
-      "done": false,
-      "priority": "normal"
-    },
-    {
-      "id": 35,
-      "title": "Teaser asset (example) - Artist\nAnnouncement asset (example) - Artist\nNow live asset (example) - Artist",
-      "meta": "Arturo  • Superrare",
-      "xp": 15,
-      "done": false,
-      "priority": "normal"
-    },
-    {
       "id": 36,
       "title": "Sin título",
       "meta": "Clara • Superrare",
@@ -132,6 +116,22 @@
       "id": 51,
       "title": "PROJECT TASKS  = ",
       "meta": "Sin asignar • PFP",
+      "xp": 15,
+      "done": false,
+      "priority": "normal"
+    },
+    {
+      "id": 57,
+      "title": "POL V2 Perdido",
+      "meta": "Arturo • ADMINISTRACIÓN",
+      "xp": 15,
+      "done": false,
+      "priority": "normal"
+    },
+    {
+      "id": 58,
+      "title": "Enviar Obras ICONIC",
+      "meta": "Arturo • ADMINISTRACIÓN",
       "xp": 15,
       "done": false,
       "priority": "normal"
