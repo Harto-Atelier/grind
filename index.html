@@ -1477,6 +1477,18 @@
                     <button class="action-btn" onclick="triggerTask('pepe', 'find-viral')" title="Find Viral">🔥</button>
                 </div>
             </div>
+            <div class="team-member" id="member-sergia">
+                <img src="pfps/sergia.png" alt="Sergia" class="member-pfp">
+                <div class="member-name">Sergia</div>
+                <div class="member-role">Finanzas</div>
+                <div class="member-model">Claude Sonnet</div>
+                <div class="member-status">○ IDLE</div>
+                <div class="member-task" id="task-sergia"></div>
+                <div class="member-actions">
+                    <button class="action-btn" onclick="triggerTask('sergia', 'check-invoices')" title="Check Invoices">🧾</button>
+                    <button class="action-btn" onclick="triggerTask('sergia', 'finance-report')" title="Finance Report">💰</button>
+                </div>
+            </div>
         </div>
         
         <!-- Command Input -->
@@ -1486,6 +1498,7 @@
                 <option value="jack">🔧 Jack</option>
                 <option value="pepe">🎨 Pepe</option>
                 <option value="amy">📋 Amy</option>
+                <option value="sergia">💼 Sergia</option>
             </select>
             <input type="text" id="commandInput" class="command-input" placeholder="Escribe un comando..." onkeypress="if(event.key==='Enter')sendCommand()">
             <button class="command-send" onclick="sendCommand()">▶</button>
