@@ -1,5 +1,16 @@
 # Tareas Pendientes
-*Última actualización: 2026-01-28 12:56*
+*Última actualización: 2026-01-29 17:00*
+
+## ✅ COMPLETED TODAY
+
+### Dashboard Improvements (Jan 29)
+- [x] **Quick Actions Bar** - Added 4 quick action buttons (Sync Tasks, Check Email, Twitter Scan, Market Check)
+- [x] **TIBBIR Widget** - Added crypto widget with price, mcap, 24h change + bubble map link
+- [x] **Marketplace Stats Widget** - Shows collections, floor prices, volume
+- [x] **Calendar 3-Day View** - Enhanced calendar showing next 3 days with context badges
+- [x] **Team Nuria Improvements** - Live status indicators, last completed tasks, daily stats
+- [x] **Toast Notifications** - Visual feedback for quick actions
+- [x] **Sergia Added** - 5th team member added to dashboard
 
 ## 🔴 TO DO (Urgentes)
 
@@ -10,9 +21,6 @@
 | Sergio | Enviar 1 of 1 museo | - |
 | Sergio | Caja obra museo | - |
 | Juliette | Enviar obras paul US | - |
-| ~~Arturo~~ | ~~Cortar impresiones~~ | ✅ Done |
-| ~~Arturo~~ | ~~Certificado de autenticidad~~ | ✅ Done |
-| ~~Arturo~~ | ~~About the artist~~ | ✅ Done |
 | Juliette | Sobres | Meter certificados y explicativos para envío |
 
 ## 🟡 PENDING
@@ -42,7 +50,6 @@
 ### General / Sin Proyecto
 | Tarea | Detalle |
 |-------|---------|
-| Comprar en Aldi | Via Sergio (2026-01-28) |
 | Factura final CM Chino | - |
 | Desarrollo Token | - |
 | nurIA Trading | Darle 100$ para Polymarket |
