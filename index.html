@@ -2179,12 +2179,32 @@
             }
         }
         
-        // ⚡ QUICK ACTIONS
+        // ⚡ QUICK ACTIONS - with custom prompts
         const QUICK_ACTIONS = {
-            'sync-tasks': { agent: 'amy', taskId: 'sync-tasks', label: 'Sync Tasks' },
-            'check-email': { agent: 'nuria', taskId: 'check-emails', label: 'Check Emails' },
-            'twitter-scan': { agent: 'pepe', taskId: 'twitter-trends', label: 'Twitter Scan' },
-            'market-check': { agent: 'jack', taskId: 'scan-repos', label: 'Market Check' }
+            'sync-tasks': { 
+                agent: 'amy', 
+                taskId: 'sync-tasks', 
+                label: 'Sync Tasks',
+                prompt: 'Sync all tasks from Google Sheets (Task Base spreadsheet) to dashboard/data/tasks.json. Update MIT list and priority tasks. Report what changed.'
+            },
+            'check-email': { 
+                agent: 'nuria', 
+                taskId: 'check-emails', 
+                label: 'Check Emails',
+                prompt: 'Check Gmail for unread emails. Summarize important ones. Update dashboard/data/emails.json with latest messages. Flag anything urgent.'
+            },
+            'twitter-scan': { 
+                agent: 'pepe', 
+                taskId: 'twitter-trends', 
+                label: 'Twitter Scan',
+                prompt: 'Scan Twitter for mentions of @HartoAtelier, Ordinals trends, NFT news, and AI art topics. Report interesting findings and viral content.'
+            },
+            'market-check': { 
+                agent: 'jack', 
+                taskId: 'market-check', 
+                label: 'Market Check',
+                prompt: 'Check Ordinals marketplace prices. Update floor prices for top collections. Update dashboard/data/marketplace.json. Report significant price movements.'
+            }
         };
         
         async function triggerQuickAction(actionId) {
@@ -2194,7 +2214,12 @@
             
             btn.classList.add('loading');
             try {
-                await queueTask(action.agent, action.taskId, null);
+                // Use custom prompt if available, otherwise use default taskId
+                if (action.prompt) {
+                    await queueTask(action.agent, action.taskId, action.prompt);
+                } else {
+                    await queueTask(action.agent, action.taskId, null);
+                }
                 btn.classList.add('success');
                 fetchTeamStatusRealtime();
                 setTimeout(() => { btn.classList.remove('loading', 'success'); }, 2000);
