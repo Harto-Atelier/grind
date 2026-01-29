@@ -2,22 +2,35 @@
   "agents": {
     "nuria": {
       "name": "Nuria",
-      "role": "Jefa",
+      "role": "CEO / Main",
       "emoji": "🟧",
       "model": "Claude Opus",
       "status": "working",
-      "task": "Dashboard improvements",
-      "lastActive": "2026-01-29T16:50:00.000Z",
+      "task": "Conversación con Harto",
+      "lastActive": "2026-01-29T17:23:00.000Z",
       "lastCompleted": {
-        "task": "Coordinación de equipo",
-        "time": "16:45"
+        "task": "Configuración de modelos",
+        "time": "17:20"
+      }
+    },
+    "marcus": {
+      "name": "Marcus",
+      "role": "HR / Chief of Staff",
+      "emoji": "📋",
+      "model": "Claude Opus",
+      "status": "idle",
+      "task": "",
+      "lastActive": "2026-01-29T17:02:00.000Z",
+      "lastCompleted": {
+        "task": "Setup de métricas y onboarding",
+        "time": "17:02"
       }
     },
     "amy": {
       "name": "Amy",
-      "role": "Administración",
-      "emoji": "📋",
-      "model": "Kimi 2.5",
+      "role": "Operations",
+      "emoji": "📊",
+      "model": "Kimi K2",
       "status": "idle",
       "task": "",
       "lastActive": "2026-01-29T15:30:00.000Z",
@@ -26,36 +39,10 @@
         "time": "15:30"
       }
     },
-    "jack": {
-      "name": "Jack",
-      "role": "Técnico",
-      "emoji": "🔧",
-      "model": "Claude Sonnet",
-      "status": "idle",
-      "task": "",
-      "lastActive": "2026-01-29T14:00:00.000Z",
-      "lastCompleted": {
-        "task": "Fixed dashboard bugs",
-        "time": "14:00"
-      }
-    },
-    "pepe": {
-      "name": "Pepe",
-      "role": "Ideas Locas",
-      "emoji": "🎨",
-      "model": "Kimi 2.5",
-      "status": "idle",
-      "task": "",
-      "lastActive": "2026-01-29T13:45:00.000Z",
-      "lastCompleted": {
-        "task": "Twitter trend analysis",
-        "time": "13:45"
-      }
-    },
     "sergia": {
       "name": "Sergia",
-      "role": "Finanzas",
-      "emoji": "💼",
+      "role": "Finance",
+      "emoji": "💰",
       "model": "Claude Sonnet",
       "status": "idle",
       "task": "",
@@ -65,54 +52,119 @@
         "time": "12:00"
       },
       "avatar": "pfps/sergia.png"
+    },
+    "jack": {
+      "name": "Jack",
+      "role": "Tech Lead",
+      "emoji": "🔧",
+      "model": "Claude Sonnet",
+      "status": "idle",
+      "task": "",
+      "lastActive": "2026-01-29T14:00:00.000Z",
+      "lastCompleted": {
+        "task": "Backend marketplace",
+        "time": "16:55"
+      }
+    },
+    "pepe": {
+      "name": "Pepe",
+      "role": "Research / Social",
+      "emoji": "🐸",
+      "model": "Kimi K2",
+      "status": "idle",
+      "task": "",
+      "lastActive": "2026-01-29T16:37:00.000Z",
+      "lastCompleted": {
+        "task": "Twitter trends analysis",
+        "time": "16:37"
+      }
+    },
+    "luna": {
+      "name": "Luna",
+      "role": "Content Creator",
+      "emoji": "🌙",
+      "model": "Kimi K2",
+      "status": "idle",
+      "task": "",
+      "lastActive": "2026-01-29T17:04:00.000Z",
+      "lastCompleted": {
+        "task": "Templates y tweets marketplace",
+        "time": "17:04"
+      }
+    },
+    "victor": {
+      "name": "Victor",
+      "role": "Sales / Collectors",
+      "emoji": "💼",
+      "model": "Kimi K2",
+      "status": "idle",
+      "task": "",
+      "lastActive": "2026-01-29T17:03:00.000Z",
+      "lastCompleted": {
+        "task": "Pipeline y draft Patricia DELEAU",
+        "time": "17:03"
+      }
+    },
+    "max": {
+      "name": "Max",
+      "role": "QA / Testing",
+      "emoji": "🔍",
+      "model": "Kimi K2",
+      "status": "idle",
+      "task": "",
+      "lastActive": "2026-01-29T17:04:00.000Z",
+      "lastCompleted": {
+        "task": "Auditoría marketplace",
+        "time": "17:04"
+      }
     }
   },
   "activityLog": [
     {
-      "time": "16:50",
+      "time": "17:20",
       "agent": "nuria",
-      "action": "📊 Started dashboard improvements"
+      "action": "⚙️ Configuró crons con Kimi gratis"
     },
     {
-      "time": "16:45",
-      "agent": "nuria",
-      "action": "✅ Completed team coordination"
+      "time": "17:11",
+      "agent": "luna",
+      "action": "📝 Creó Content Plan en Google Sheets"
     },
     {
-      "time": "15:30",
-      "agent": "amy",
-      "action": "📋 Synced tasks from Google Sheets"
+      "time": "17:04",
+      "agent": "max",
+      "action": "🔍 Completó auditoría del marketplace"
     },
     {
-      "time": "14:00",
+      "time": "17:03",
+      "agent": "victor",
+      "action": "💼 Creó pipeline y draft outreach"
+    },
+    {
+      "time": "17:02",
+      "agent": "marcus",
+      "action": "📋 Setup sistema de métricas y onboarding"
+    },
+    {
+      "time": "16:55",
       "agent": "jack",
-      "action": "🔧 Fixed dashboard loading bugs"
+      "action": "🔧 Backend + stress testing completado"
     },
     {
-      "time": "13:45",
+      "time": "16:37",
       "agent": "pepe",
-      "action": "🐦 Analyzed Twitter trends for Ordinals"
+      "action": "🐸 Twitter trends: Nifty Gateway cierra"
     },
     {
       "time": "12:00",
       "agent": "sergia",
-      "action": "🧾 Reviewed pending invoices"
-    },
-    {
-      "time": "11:30",
-      "agent": "nuria",
-      "action": "📅 Updated calendar events"
-    },
-    {
-      "time": "11:00",
-      "agent": "jack",
-      "action": "⛏️ Configured Sat Mining tool"
+      "action": "💰 Revisó facturas pendientes"
     }
   ],
   "stats": {
-    "tasksCompletedToday": 8,
-    "totalTasksQueued": 2,
-    "avgResponseTime": "45s"
+    "tasksCompletedToday": 15,
+    "totalTasksQueued": 0,
+    "avgResponseTime": "3m"
   },
-  "updated": "2026-01-29T16:50:00.000Z"
+  "updated": "2026-01-29T17:23:00.000Z"
 }
