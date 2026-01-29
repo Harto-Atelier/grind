@@ -1108,6 +1108,52 @@
         }
         
         /* Agent Status */
+        /* Ticker Bar */
+        .ticker-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 8px 20px;
+            background: linear-gradient(90deg, rgba(0, 217, 255, 0.05), rgba(168, 85, 247, 0.05));
+            border-bottom: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+        }
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .ticker-label {
+            color: var(--muted);
+            font-weight: 600;
+        }
+        .ticker-value {
+            color: var(--text);
+            font-weight: 500;
+        }
+        .ticker-change {
+            font-size: 0.65rem;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        .ticker-change.positive {
+            color: var(--green);
+            background: rgba(0, 255, 136, 0.1);
+        }
+        .ticker-change.negative {
+            color: var(--red);
+            background: rgba(255, 68, 68, 0.1);
+        }
+        .ticker-divider {
+            color: var(--border);
+        }
+        .ticker-extra {
+            color: var(--cyan);
+            font-size: 0.65rem;
+        }
+        
         .agent-bar {
             display: flex;
             justify-content: space-between;
@@ -1433,6 +1479,33 @@
                 <span class="user-name" id="userName"></span>
                 <button class="logout-btn" onclick="logout()">Salir</button>
             </span>
+        </div>
+    </div>
+    
+    <!-- Live Ticker Bar -->
+    <div class="ticker-bar" id="tickerBar">
+        <div class="ticker-item">
+            <span class="ticker-label">BTC</span>
+            <span class="ticker-value" id="tickerBtc">$104,200</span>
+            <span class="ticker-change positive" id="tickerBtcChange">+2.1%</span>
+        </div>
+        <div class="ticker-divider">|</div>
+        <div class="ticker-item">
+            <span class="ticker-label">ETH</span>
+            <span class="ticker-value" id="tickerEth">$3,180</span>
+            <span class="ticker-change positive" id="tickerEthChange">+1.8%</span>
+        </div>
+        <div class="ticker-divider">|</div>
+        <div class="ticker-item">
+            <span class="ticker-label">TIBBIR</span>
+            <span class="ticker-value" id="tickerTibbir">$0.188</span>
+            <span class="ticker-change positive" id="tickerTibbirChange">+19%</span>
+        </div>
+        <div class="ticker-divider">|</div>
+        <div class="ticker-item">
+            <span class="ticker-label">⏱️</span>
+            <span class="ticker-value" id="tickerBlock">Block #</span>
+            <span class="ticker-extra" id="tickerFee">~5 sat/vB</span>
         </div>
     </div>
     
@@ -2020,6 +2093,10 @@
             loadTibbirData();
             setInterval(loadTibbirData, 60000); // Update every minute
             
+            // Load Ticker data (BTC, ETH, etc)
+            loadTickerData();
+            setInterval(loadTickerData, 30000); // Update every 30 seconds
+            
             // Load Marketplace data
             loadMarketplaceData();
             setInterval(loadMarketplaceData, 300000); // Update every 5 minutes
@@ -2359,6 +2436,63 @@
                 console.error('Quick action failed:', e);
                 showToast('Error', `Failed to queue ${action.label}`, 'error');
                 btn.classList.remove('loading');
+            }
+        }
+        
+        // 📊 Ticker Data (BTC, ETH, TIBBIR)
+        async function loadTickerData() {
+            try {
+                // Fetch BTC and ETH from CoinGecko
+                const priceRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true');
+                if (priceRes.ok) {
+                    const prices = await priceRes.json();
+                    
+                    // BTC
+                    const btcPrice = prices.bitcoin?.usd || 0;
+                    const btcChange = prices.bitcoin?.usd_24h_change || 0;
+                    document.getElementById('tickerBtc').textContent = `$${btcPrice.toLocaleString()}`;
+                    const btcChangeEl = document.getElementById('tickerBtcChange');
+                    btcChangeEl.textContent = `${btcChange > 0 ? '+' : ''}${btcChange.toFixed(1)}%`;
+                    btcChangeEl.className = 'ticker-change ' + (btcChange >= 0 ? 'positive' : 'negative');
+                    
+                    // ETH
+                    const ethPrice = prices.ethereum?.usd || 0;
+                    const ethChange = prices.ethereum?.usd_24h_change || 0;
+                    document.getElementById('tickerEth').textContent = `$${ethPrice.toLocaleString()}`;
+                    const ethChangeEl = document.getElementById('tickerEthChange');
+                    ethChangeEl.textContent = `${ethChange > 0 ? '+' : ''}${ethChange.toFixed(1)}%`;
+                    ethChangeEl.className = 'ticker-change ' + (ethChange >= 0 ? 'positive' : 'negative');
+                }
+                
+                // Fetch TIBBIR from DexScreener
+                const tibbirRes = await fetch('https://api.dexscreener.com/latest/dex/pairs/base/0x0c3b466104545efa096b8f944c1e524e1d0d4888');
+                if (tibbirRes.ok) {
+                    const data = await tibbirRes.json();
+                    const pair = data.pair;
+                    if (pair) {
+                        const price = parseFloat(pair.priceUsd);
+                        const change = pair.priceChange?.h24 || 0;
+                        document.getElementById('tickerTibbir').textContent = `$${price.toFixed(3)}`;
+                        const tibChangeEl = document.getElementById('tickerTibbirChange');
+                        tibChangeEl.textContent = `${change > 0 ? '+' : ''}${parseFloat(change).toFixed(0)}%`;
+                        tibChangeEl.className = 'ticker-change ' + (change >= 0 ? 'positive' : 'negative');
+                    }
+                }
+                
+                // Fetch Bitcoin block info from mempool.space
+                const blockRes = await fetch('https://mempool.space/api/blocks/tip/height');
+                if (blockRes.ok) {
+                    const blockHeight = await blockRes.text();
+                    document.getElementById('tickerBlock').textContent = `Block #${parseInt(blockHeight).toLocaleString()}`;
+                }
+                
+                const feeRes = await fetch('https://mempool.space/api/v1/fees/recommended');
+                if (feeRes.ok) {
+                    const fees = await feeRes.json();
+                    document.getElementById('tickerFee').textContent = `~${fees.fastestFee} sat/vB`;
+                }
+            } catch (e) {
+                console.error('Failed to load ticker data:', e);
             }
         }
         
