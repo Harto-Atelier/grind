@@ -461,6 +461,81 @@
             .ticker-bar { padding: 10px 20px; gap: 20px; }
         }
         
+        /* Signal Cards */
+        .signal-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .signal-card:last-child { margin-bottom: 0; }
+        .signal-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            text-align: center;
+        }
+        .signal-info { flex: 1; }
+        .signal-ticker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .signal-action {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+        .signal-action.buy { background: rgba(0, 255, 136, 0.2); color: var(--green); }
+        .signal-action.sell { background: rgba(241, 76, 76, 0.2); color: var(--red); }
+        .signal-details {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+        .signal-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--yellow);
+        }
+        .signal-time {
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+        .signal-empty {
+            text-align: center;
+            padding: 30px;
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            background: rgba(78, 201, 176, 0.15);
+            color: var(--cyan);
+        }
+        .status-badge.active { background: rgba(0, 255, 136, 0.15); color: var(--green); }
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--cyan);
+            animation: pulse 2s infinite;
+        }
+        .status-badge.active .status-dot { background: var(--green); }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        
         /* Samsung S24 Ultra & Premium Mobile */
         @media (max-width: 480px) {
             .nav { padding: 12px 16px; position: sticky; top: 0; backdrop-filter: blur(10px); }
@@ -632,6 +707,33 @@
                 </div>
             </div>
         </div>
+        
+        <!-- TradingView Signals -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-title">// TRADINGVIEW SIGNALS</div>
+                <span class="status-badge" id="signalStatus">
+                    <span class="status-dot"></span>
+                    <span id="signalStatusText">CONNECTING...</span>
+                </span>
+            </div>
+            <div class="widget" style="background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(255, 153, 0, 0.05)); border-color: rgba(255, 107, 0, 0.4);">
+                <div class="widget-header">
+                    <div class="widget-title">📊 LIVE SIGNALS</div>
+                    <a href="tracking.html" class="widget-link">TRACKING →</a>
+                </div>
+                <div id="signalsContainer">
+                    <div class="signal-empty">
+                        <span style="font-size: 2rem;">📡</span>
+                        <p style="color: var(--muted); margin-top: 10px;">Waiting for signals...</p>
+                    </div>
+                </div>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.7rem; color: var(--muted);">Webhook: dashboard.../api/tradingview</span>
+                    <span style="font-size: 0.7rem; color: var(--muted);" id="signalLastUpdate">Last check: --</span>
+                </div>
+            </div>
+        </section>
         
         <!-- Harto Portfolio -->
         <section class="section">
@@ -896,17 +998,78 @@
             }
         }
         
+        // 📊 TradingView Signals
+        async function loadTradingViewSignals() {
+            const container = document.getElementById('signalsContainer');
+            const statusBadge = document.getElementById('signalStatus');
+            const statusText = document.getElementById('signalStatusText');
+            const lastUpdate = document.getElementById('signalLastUpdate');
+            
+            try {
+                const res = await fetch('/api/tradingview');
+                if (!res.ok) throw new Error('Failed to fetch signals');
+                
+                const data = await res.json();
+                
+                statusBadge.className = 'status-badge active';
+                statusText.textContent = 'CONNECTED';
+                lastUpdate.textContent = `Last check: ${new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}`;
+                
+                if (data.signals && data.signals.length > 0) {
+                    container.innerHTML = data.signals.slice(0, 5).map(s => {
+                        const isBuy = (s.action || '').toLowerCase().includes('buy');
+                        const emoji = isBuy ? '🟢' : '🔴';
+                        const actionClass = isBuy ? 'buy' : 'sell';
+                        const actionText = isBuy ? 'LONG' : 'SHORT';
+                        const time = new Date(s.timestamp).toLocaleString('es-ES', { 
+                            day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' 
+                        });
+                        
+                        return `
+                            <div class="signal-card">
+                                <div class="signal-icon">${emoji}</div>
+                                <div class="signal-info">
+                                    <div>
+                                        <span class="signal-ticker">${s.ticker || 'UNKNOWN'}</span>
+                                        <span class="signal-action ${actionClass}">${actionText}</span>
+                                    </div>
+                                    <div class="signal-details">${s.alert_name || 'Signal'}</div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div class="signal-price">$${s.price || '--'}</div>
+                                    <div class="signal-time">${time}</div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                } else {
+                    container.innerHTML = `
+                        <div class="signal-empty">
+                            <span style="font-size: 2rem;">📡</span>
+                            <p style="color: var(--muted); margin-top: 10px;">No signals yet. Waiting for TradingView alerts...</p>
+                        </div>
+                    `;
+                }
+            } catch (e) {
+                console.error('Signals load failed:', e);
+                statusBadge.className = 'status-badge';
+                statusText.textContent = 'OFFLINE';
+            }
+        }
+        
         // Initialize
         loadTickerData();
         loadTibbirData();
         loadMarketplaceData();
         loadPortfolioData();
+        loadTradingViewSignals();
         
         // Auto-refresh
         setInterval(loadTickerData, 60000);
         setInterval(loadTibbirData, 30000);
         setInterval(loadMarketplaceData, 300000);
         setInterval(loadPortfolioData, 300000);
+        setInterval(loadTradingViewSignals, 30000); // Check signals every 30s
     </script>
 </body>
 </html>
