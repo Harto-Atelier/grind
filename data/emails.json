@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "Load Gallery",
+      "subject": "On view until 14 February: Yatreda",
+      "time": "16:19",
+      "unread": true
+    },
+    {
       "sender": "Juliette Lavedan-Forment",
       "subject": "Fwd: FedEx - Despacho Exportación awb 058131995201 - RC3797881",
       "time": "15:25",
@@ -53,14 +59,8 @@
       "subject": "New sign-in detected on your Vercel account",
       "time": "15:43",
       "unread": true
-    },
-    {
-      "sender": "sgseaux@gmail.com",
-      "subject": "Exquisite Daily Report - 2026-01-26",
-      "time": "15:19",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-01-30T15:02:31Z"
+  "updated": "2026-01-30T15:30:32Z"
 }
