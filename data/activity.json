@@ -1,20 +1,20 @@
 {
-  "updated": "2026-01-30T09:00:26.000Z",
+  "updated": "2026-01-30T10:00:45.000Z",
   "commits": [
-    {"hash":"6ac5dbd","message":"📅 Auto-update calendar 10:00","time":"9 seconds ago"},
-{"hash":"9603471","message":"📅 Auto-update calendar 09:50","time":"10 minutes ago"},
-{"hash":"6e149ae","message":"⚡ Fix mempool fee default: 5 → 1 sat/vB","time":"14 minutes ago"},
-{"hash":"39515c7","message":"📧 Sync unread emails - now showing only unread","time":"16 minutes ago"},
-{"hash":"b1928ab","message":"👋 Remove Clara from dashboard team section","time":"19 minutes ago"},
-{"hash":"047a3fe","message":"📱 Fix tracking.html mobile - monitoring grid 2col, scrollable table","time":"20 minutes ago"},
-{"hash":"a359f93","message":"📅 Auto-update calendar 09:40","time":"20 minutes ago"},
-{"hash":"f26bff9","message":"👋 Remove Clara - reassign tasks to Arturo","time":"21 minutes ago"},
-{"hash":"5026b37","message":"📱 Fix tracking.html mobile overflow - nav stacking, responsive stats","time":"29 minutes ago"},
-{"hash":"eb2f2e4","message":"📅 Auto-update calendar 09:30","time":"30 minutes ago"},
-{"hash":"894dfd7","message":"📱 Fix mobile layout across all pages - nav stacking, overflow fixes","time":"35 minutes ago"},
-{"hash":"725fbc9","message":"📱 Fix sync bar overflow on mobile - stack vertically","time":"37 minutes ago"},
-{"hash":"c8e54ef","message":"📱 Fix nav overflow on mobile - stack nav items vertically","time":"39 minutes ago"},
-{"hash":"4de3d22","message":"📅 Auto-update calendar 09:20","time":"40 minutes ago"},
-{"hash":"eba6c3b","message":"✨ Tasks improvements: project filter, urgent counter, progress bar, better UI","time":"42 minutes ago"}
+    {"hash":"ebe51d5","message":"📅 Auto-update calendar 11:00","time":"8 seconds ago"},
+{"hash":"6b2f967","message":"📅 Auto-update calendar 10:50","time":"11 minutes ago"},
+{"hash":"b0f9d89","message":"📅 Auto-update calendar 10:40","time":"21 minutes ago"},
+{"hash":"b4ea929","message":"📧 Auto-sync emails","time":"30 minutes ago"},
+{"hash":"bae45e5","message":"📅 Auto-update calendar 10:30","time":"30 minutes ago"},
+{"hash":"90c8879","message":"Add TradingView signals widget to trading page","time":"39 minutes ago"},
+{"hash":"393796d","message":"📅 Auto-update calendar 10:20","time":"41 minutes ago"},
+{"hash":"bea2ef1","message":"Add TradingView webhook endpoint","time":"44 minutes ago"},
+{"hash":"9abc436","message":"📅 Auto-update calendar 10:10","time":"51 minutes ago"},
+{"hash":"a8d5478","message":"📧 Auto-sync emails","time":"60 minutes ago"},
+{"hash":"da2c574","message":"📊 Auto-update activity","time":"60 minutes ago"},
+{"hash":"6ac5dbd","message":"📅 Auto-update calendar 10:00","time":"60 minutes ago"},
+{"hash":"9603471","message":"📅 Auto-update calendar 09:50","time":"71 minutes ago"},
+{"hash":"6e149ae","message":"⚡ Fix mempool fee default: 5 → 1 sat/vB","time":"75 minutes ago"},
+{"hash":"39515c7","message":"📧 Sync unread emails - now showing only unread","time":"77 minutes ago"}
   ]
 }
