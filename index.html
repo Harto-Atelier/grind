@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -1748,7 +1748,7 @@
         <div class="login-box">
             <div class="login-logo">HARTO</div>
             <div class="login-subtitle">COMMAND CENTER</div>
-            <p class="login-text">Acceso restringido. Inicia sesión con tu cuenta autorizada.</p>
+            <p class="login-text">Restricted access. Sign in with your authorized account.</p>
             <div id="googleSignInBtn"></div>
             <p class="login-error" id="loginError" style="display:none;"></p>
         </div>
@@ -1781,7 +1781,7 @@
             <span class="user-info" id="userInfo" style="display:none;">
                 <img class="user-avatar" id="userAvatar" src="" alt="">
                 <span class="user-name" id="userName"></span>
-                <button class="logout-btn" onclick="logout()">Salir</button>
+                <button class="logout-btn" onclick="logout()">Logout</button>
             </span>
         </div>
     </div>
@@ -1811,7 +1811,7 @@
         <div class="hero-content">
             <h1 class="hero-title">HARTO</h1>
             <div class="hero-sub">ARTIST COMMAND CENTER</div>
-            <p class="hero-quote" id="heroQuote">"La creatividad es la inteligencia divirtiéndose." — Einstein</p>
+            <p class="hero-quote" id="heroQuote">"Creativity is intelligence having fun." — Einstein</p>
         </div>
         
         <!-- NURIA Avatar - Far Right -->
@@ -1910,23 +1910,23 @@
     <section class="widget-grid" style="border-bottom: 1px solid var(--border);">
         <div class="widget-card invoice-widget" style="grid-column: span 2;">
             <div class="widget-header">
-                <div class="widget-title">💰 FACTURAS & COBROS</div>
+                <div class="widget-title">💰 INVOICES & PAYMENTS</div>
                 <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
-                    Pendiente: <span id="invoiceTotalPending" style="color: var(--yellow); font-weight: 600;">€-</span>
+                    Pending: <span id="invoiceTotalPending" style="color: var(--yellow); font-weight: 600;">€-</span>
                 </div>
             </div>
             <div class="invoice-summary">
                 <div class="invoice-stat">
                     <div class="invoice-stat-value" id="invoicePendingCount">-</div>
-                    <div class="invoice-stat-label">Pendientes</div>
+                    <div class="invoice-stat-label">Pending</div>
                 </div>
                 <div class="invoice-stat">
                     <div class="invoice-stat-value warning" id="invoiceDraftCount">-</div>
-                    <div class="invoice-stat-label">Borradores</div>
+                    <div class="invoice-stat-label">Drafts</div>
                 </div>
                 <div class="invoice-stat">
                     <div class="invoice-stat-value danger" id="invoiceOverdueCount">-</div>
-                    <div class="invoice-stat-label">Vencidas</div>
+                    <div class="invoice-stat-label">Overdue</div>
                 </div>
             </div>
             <div class="invoice-list" id="invoiceList">
@@ -2081,10 +2081,10 @@
             <div class="team-member working" id="member-nuria">
                 <img src="pfps/nuria.png" alt="Nuria" class="member-pfp">
                 <div class="member-name">Nuria</div>
-                <div class="member-role">Jefa</div>
+                <div class="member-role">Chief</div>
                 <div class="member-model">Claude Opus</div>
                 <div class="member-status">● WORKING</div>
-                <div class="member-task" id="task-nuria">Coordinando equipo</div>
+                <div class="member-task" id="task-nuria">Coordinating team</div>
                 <div class="member-actions">
                     <button class="action-btn" onclick="triggerTask('nuria', 'check-emails')" title="Check Emails">📧</button>
                     <button class="action-btn" onclick="triggerTask('nuria', 'status-report')" title="Status Report">📊</button>
@@ -2093,7 +2093,7 @@
             <div class="team-member" id="member-amy">
                 <img src="pfps/amy.png" alt="Amy" class="member-pfp">
                 <div class="member-name">Amy</div>
-                <div class="member-role">Administración</div>
+                <div class="member-role">Administration</div>
                 <div class="member-model">Kimi 2.5</div>
                 <div class="member-status">○ IDLE</div>
                 <div class="member-task" id="task-amy"></div>
@@ -2105,7 +2105,7 @@
             <div class="team-member" id="member-jack">
                 <img src="pfps/jack.png" alt="Jack" class="member-pfp">
                 <div class="member-name">Jack</div>
-                <div class="member-role">Técnico</div>
+                <div class="member-role">Technical</div>
                 <div class="member-model">Claude Sonnet</div>
                 <div class="member-status">○ IDLE</div>
                 <div class="member-task" id="task-jack"></div>
@@ -2310,7 +2310,7 @@
                 document.getElementById('loginError').style.display = 'none';
                 showDashboard();
             } else {
-                document.getElementById('loginError').textContent = '❌ Email no autorizado: ' + payload.email;
+                document.getElementById('loginError').textContent = '❌ Unauthorized email: ' + payload.email;
                 document.getElementById('loginError').style.display = 'block';
             }
         }
@@ -2374,7 +2374,7 @@
         
         // Quotes
         const quotes = [
-            { text: "La creatividad es la inteligencia divirtiéndose.", author: "Einstein" },
+            { text: "Creativity is intelligence having fun.", author: "Einstein" },
             { text: "Every artist was first an amateur.", author: "Emerson" },
             { text: "Art is not what you see, but what you make others see.", author: "Degas" },
             { text: "The chief enemy of creativity is good sense.", author: "Picasso" },
@@ -2393,8 +2393,8 @@
             
             document.getElementById('heroDay').textContent = days[now.getDay()];
             document.getElementById('heroDate').textContent = `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
-            document.getElementById('heroClock').textContent = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-            document.getElementById('lastSync').textContent = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('heroClock').textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('lastSync').textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
         }
         
         // Random quote
@@ -2603,7 +2603,7 @@
             if (statusRes.ok) {
                 const result = await statusRes.json();
                 const status = result.result ? JSON.parse(result.result) : { agents: {}, activityLog: [] };
-                const time = new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+                const time = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
                 const actionText = customPrompt 
                     ? `💬 "${prompt.substring(0, 30)}${prompt.length > 30 ? '...' : ''}"` 
                     : `📥 ${label}`;
@@ -2799,7 +2799,7 @@
                 // Render invoice list
                 const container = document.getElementById('invoiceList');
                 const invoicesHtml = invoices.slice(0, 5).map(inv => {
-                    const dueText = inv.dueDate ? `Vence: ${new Date(inv.dueDate).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}` : 'Sin fecha';
+                    const dueText = inv.dueDate ? `Due: ${new Date(inv.dueDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}` : 'No date';
                     return `
                         <div class="invoice-item ${inv.status}">
                             <div class="invoice-info">
@@ -2815,7 +2815,7 @@
                     `;
                 }).join('');
                 
-                container.innerHTML = invoicesHtml || '<div style="text-align: center; color: var(--muted);">No hay facturas pendientes 🎉</div>';
+                container.innerHTML = invoicesHtml || '<div style="text-align: center; color: var(--muted);">No pending invoices 🎉</div>';
                 
             } catch (e) {
                 console.error('Failed to load invoice data:', e);
@@ -2983,7 +2983,7 @@
                 
                 // Update timestamp
                 const now = new Date();
-                const timeStr = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+                const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
                 document.getElementById('dataUpdated').textContent = timeStr;
                 console.log('✅ Dashboard data loaded');
             } catch (err) {
@@ -3005,7 +3005,7 @@
             
             const daysHtml = days.map(day => {
                 const dayEvents = allEvents.filter(e => e.date === day.dateStr);
-                const dayName = day.date.toLocaleDateString('es-ES', { weekday: 'short' }).toUpperCase();
+                const dayName = day.date.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
                 const dayNum = day.date.getDate();
                 
                 const eventsHtml = dayEvents.length > 0 
