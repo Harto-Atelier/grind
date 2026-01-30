@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "CoinTracker",
+      "subject": "Crypto portfolio update",
+      "time": "20:25",
+      "unread": true
+    },
+    {
       "sender": "Google",
       "subject": "Harto, review your Google Account settings",
       "time": "18:56",
@@ -53,14 +59,8 @@
       "subject": "Valoración de reserva en Maleducat",
       "time": "09:21",
       "unread": true
-    },
-    {
-      "sender": "sergio saravia (via Google Sheets)",
-      "subject": "Spreadsheet shared with you: ‘Cierre Proyecto Exquisite’",
-      "time": "14:56",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-01-30T19:01:12Z"
+  "updated": "2026-01-30T19:30:28Z"
 }
