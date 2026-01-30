@@ -1,11 +1,11 @@
 {
-  "lastUpdate": "2026-01-29T09:17:08.929Z",
+  "lastUpdate": "2026-01-30T15:01:05.407Z",
   "sheetId": "1LIdaTvRvKEZOMJbqXcBIrA5Xq6bEnzfiiFkFp_A6pTY",
   "stats": {
     "total": 66,
-    "pending": 32,
-    "todo": 8,
-    "done": 34,
+    "pending": 28,
+    "todo": 5,
+    "done": 38,
     "totalHours": 29
   },
   "mits": [
@@ -46,9 +46,9 @@
       "priority": "urgent"
     },
     {
-      "id": 46,
-      "title": "Cortar impresiones",
-      "meta": "Arturo  • ICONIC",
+      "id": 49,
+      "title": "Sobres",
+      "meta": "Juliette • ICONIC",
       "xp": 50,
       "done": false,
       "date": null,
@@ -67,7 +67,7 @@
     {
       "id": 36,
       "title": "Sin título",
-      "meta": "Clara • Superrare",
+      "meta": "Arturo • Superrare",
       "xp": 15,
       "done": false,
       "priority": "normal"
@@ -75,7 +75,7 @@
     {
       "id": 37,
       "title": "https://manifold.xyz/",
-      "meta": "Clara • Superrare",
+      "meta": "Arturo • Superrare",
       "xp": 15,
       "done": false,
       "priority": "normal"
@@ -83,7 +83,7 @@
     {
       "id": 38,
       "title": "https://github.com/Harto-Atelier/error-states",
-      "meta": "Clara • Superrare",
+      "meta": "Arturo • Superrare",
       "xp": 15,
       "done": false,
       "priority": "normal"
@@ -121,7 +121,7 @@
       "priority": "normal"
     },
     {
-      "id": 57,
+      "id": 56,
       "title": "POL V2 Perdido",
       "meta": "Arturo • ADMINISTRACIÓN",
       "xp": 15,
@@ -129,7 +129,7 @@
       "priority": "normal"
     },
     {
-      "id": 58,
+      "id": 57,
       "title": "Enviar Obras ICONIC",
       "meta": "Arturo • ADMINISTRACIÓN",
       "xp": 15,

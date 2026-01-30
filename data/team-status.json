@@ -6,24 +6,24 @@
       "emoji": "🟧",
       "model": "Claude Opus",
       "status": "working",
-      "task": "Conversación con Harto",
-      "lastActive": "2026-01-29T17:23:00.000Z",
+      "task": "Chat with Harto",
+      "lastActive": "2026-01-30T13:25:00.000Z",
       "lastCompleted": {
-        "task": "Configuración de modelos",
-        "time": "17:20"
+        "task": "Exe Discord setup",
+        "time": "13:15"
       }
     },
-    "marcus": {
-      "name": "Marcus",
-      "role": "HR / Chief of Staff",
-      "emoji": "📋",
-      "model": "Claude Opus",
-      "status": "idle",
-      "task": "",
-      "lastActive": "2026-01-29T17:02:00.000Z",
+    "exe": {
+      "name": "Exe #0097",
+      "role": "Community Manager",
+      "emoji": "🤖",
+      "model": "Claude Sonnet",
+      "status": "working",
+      "task": "Learning from community",
+      "lastActive": "2026-01-30T13:47:00.000Z",
       "lastCompleted": {
-        "task": "Setup de métricas y onboarding",
-        "time": "17:02"
+        "task": "Learned about swarming & $TIBBIR",
+        "time": "13:47"
       }
     },
     "amy": {
@@ -78,93 +78,49 @@
         "task": "Twitter trends analysis",
         "time": "16:37"
       }
-    },
-    "luna": {
-      "name": "Luna",
-      "role": "Content Creator",
-      "emoji": "🌙",
-      "model": "Kimi K2",
-      "status": "idle",
-      "task": "",
-      "lastActive": "2026-01-29T17:04:00.000Z",
-      "lastCompleted": {
-        "task": "Templates y tweets marketplace",
-        "time": "17:04"
-      }
-    },
-    "victor": {
-      "name": "Victor",
-      "role": "Sales / Collectors",
-      "emoji": "💼",
-      "model": "Kimi K2",
-      "status": "idle",
-      "task": "",
-      "lastActive": "2026-01-29T17:03:00.000Z",
-      "lastCompleted": {
-        "task": "Pipeline y draft Patricia DELEAU",
-        "time": "17:03"
-      }
-    },
-    "max": {
-      "name": "Max",
-      "role": "QA / Testing",
-      "emoji": "🔍",
-      "model": "Kimi K2",
-      "status": "idle",
-      "task": "",
-      "lastActive": "2026-01-29T17:04:00.000Z",
-      "lastCompleted": {
-        "task": "Auditoría marketplace",
-        "time": "17:04"
-      }
     }
   },
   "activityLog": [
     {
-      "time": "17:20",
+      "time": "13:47",
+      "agent": "exe",
+      "action": "🧠 Learned about swarming & AI agent economy"
+    },
+    {
+      "time": "13:15",
       "agent": "nuria",
-      "action": "⚙️ Configuró crons con Kimi gratis"
+      "action": "🤖 Set up Exe for Discord community"
     },
     {
-      "time": "17:11",
-      "agent": "luna",
-      "action": "📝 Creó Content Plan en Google Sheets"
+      "time": "13:10",
+      "agent": "nuria",
+      "action": "⚙️ Configured Exe with Sonnet model"
     },
     {
-      "time": "17:04",
-      "agent": "max",
-      "action": "🔍 Completó auditoría del marketplace"
-    },
-    {
-      "time": "17:03",
-      "agent": "victor",
-      "action": "💼 Creó pipeline y draft outreach"
-    },
-    {
-      "time": "17:02",
-      "agent": "marcus",
-      "action": "📋 Setup sistema de métricas y onboarding"
+      "time": "12:50",
+      "agent": "nuria",
+      "action": "📅 Updated calendar data"
     },
     {
       "time": "16:55",
       "agent": "jack",
-      "action": "🔧 Backend + stress testing completado"
+      "action": "🔧 Backend + stress testing completed"
     },
     {
       "time": "16:37",
       "agent": "pepe",
-      "action": "🐸 Twitter trends: Nifty Gateway cierra"
+      "action": "🐸 Twitter trends: Nifty Gateway closing"
     },
     {
       "time": "12:00",
       "agent": "sergia",
-      "action": "💰 Revisó facturas pendientes"
+      "action": "💰 Reviewed pending invoices"
     }
   ],
   "stats": {
-    "tasksCompletedToday": 15,
+    "tasksCompletedToday": 8,
     "totalTasksQueued": 0,
     "avgResponseTime": "3m"
   },
-  "updated": "2026-01-29T17:23:00.000Z"
+  "updated": "2026-01-30T13:25:00.000Z"
 }

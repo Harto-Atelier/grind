@@ -1,27 +1,27 @@
 {
   "today": [
-  {
-    "time": "14:00",
-    "title": "Reunión Arturo + Sergio",
-    "date": "2026-01-30"
-  }
-],
+    {
+      "time": "14:00",
+      "title": "Reunión Arturo + Sergio",
+      "date": "2026-01-30"
+    }
+  ],
   "upcoming": [
-  {
-    "time": "10:00",
-    "title": "Zoo avec les enfants",
-    "date": "2026-01-31"
-  },
-  {
-    "time": "13:00",
-    "title": "Meeting con Pauline",
-    "date": "2026-02-02"
-  },
-  {
-    "time": "07:30",
-    "title": "Deporte",
-    "date": "2026-02-03"
-  }
-],
-  "updated": "2026-01-30T14:50:05.000Z"
+    {
+      "time": "10:00",
+      "title": "Zoo avec les enfants",
+      "date": "2026-01-31"
+    },
+    {
+      "time": "13:00",
+      "title": "Meeting con Pauline",
+      "date": "2026-02-02"
+    },
+    {
+      "time": "07:30",
+      "title": "Deporte",
+      "date": "2026-02-03"
+    }
+  ],
+  "updated": "2026-01-30T15:01:02.832Z"
 }
