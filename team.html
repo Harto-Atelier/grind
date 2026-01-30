@@ -7,11 +7,11 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🟧</text></svg>">
     <style>
         :root {
-            --bg: #0a0a0a;
-            --card: #111;
-            --border: #222;
+            --bg: #1e1e1e;
+            --card: #252526;
+            --border: #3c3c3c;
             --text: #fff;
-            --muted: #666;
+            --muted: #808080;
             --orange: #ff6b00;
             --green: #00ff88;
             --red: #ff4444;
@@ -360,9 +360,19 @@
     </style>
 </head>
 <body>
+    <nav class="nav" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; border-bottom: 1px solid var(--border); background: var(--bg); position: sticky; top: 0; z-index: 100;">
+        <div class="nav-brand" style="font-family: monospace; font-size: 0.85rem; color: var(--cyan); letter-spacing: 2px;">HARTO // COMMAND CENTER</div>
+        <div class="nav-links" style="display: flex; gap: 25px;">
+            <a href="index.html" style="color: var(--muted); text-decoration: none; font-size: 0.85rem;">Dashboard</a>
+            <a href="tasks.html" style="color: var(--muted); text-decoration: none; font-size: 0.85rem;">Tasks</a>
+            <a href="trading.html" style="color: var(--muted); text-decoration: none; font-size: 0.85rem;">Trading</a>
+            <a href="team.html" style="color: var(--cyan); text-decoration: none; font-size: 0.85rem;">Team</a>
+            <a href="crm.html" style="color: var(--muted); text-decoration: none; font-size: 0.85rem;">CRM</a>
+        </div>
+    </nav>
+    
     <header class="header">
         <div>
-            <a href="index.html" class="back-link">← Back to Dashboard</a>
             <h1>🎭 Team Nuria — Command Center</h1>
         </div>
         <div class="header-stats">
