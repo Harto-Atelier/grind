@@ -459,6 +459,67 @@
             .tools-grid { grid-template-columns: 1fr; }
             .ticker-bar { padding: 10px 20px; gap: 20px; }
         }
+        
+        /* Samsung S24 Ultra & Premium Mobile */
+        @media (max-width: 480px) {
+            .nav { padding: 12px 16px; position: sticky; top: 0; backdrop-filter: blur(10px); }
+            .nav-brand { font-size: 0.7rem; letter-spacing: 1px; }
+            .nav-links { gap: 10px; overflow-x: auto; }
+            .nav-links a { font-size: 0.75rem; padding: 6px 2px; white-space: nowrap; }
+            
+            .ticker-bar { padding: 8px 16px; gap: 12px; }
+            .ticker-label { font-size: 0.65rem; }
+            .ticker-value { font-size: 0.75rem; }
+            .ticker-change { font-size: 0.65rem; }
+            
+            .page-header { padding: 20px 16px; }
+            .page-title { font-size: 1.5rem; letter-spacing: 2px; }
+            .page-subtitle { font-size: 0.8rem; }
+            
+            .main-content { padding: 16px; }
+            .section { margin-bottom: 24px; }
+            .section-title { font-size: 0.8rem; }
+            
+            .widget { padding: 16px; }
+            .widget-title { font-size: 0.75rem; }
+            
+            /* TIBBIR */
+            .tibbir-header { gap: 12px; margin-bottom: 16px; }
+            .tibbir-logo { font-size: 2.5rem; }
+            .tibbir-info h3 { font-size: 1.2rem; }
+            .tibbir-stats { gap: 8px; margin-bottom: 16px; }
+            .tibbir-stat { padding: 10px 8px; }
+            .tibbir-stat-value { font-size: 1rem; }
+            .tibbir-stat-label { font-size: 0.6rem; }
+            .tibbir-buttons { gap: 8px; }
+            .tibbir-btn { padding: 10px; font-size: 0.7rem; }
+            
+            /* Marketplace */
+            .marketplace-stats { gap: 8px; }
+            .marketplace-stat { padding: 12px 8px; }
+            .marketplace-stat-value { font-size: 1.1rem; }
+            .collection-item { padding: 10px 12px; }
+            .collection-name { font-size: 0.8rem; }
+            .collection-floor { font-size: 0.8rem; }
+            
+            /* Portfolio */
+            .portfolio-header { flex-direction: column; gap: 10px; align-items: flex-start; }
+            .portfolio-total { font-size: 0.85rem; }
+            .portfolio-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .portfolio-card { padding: 12px; }
+            .portfolio-collection-name { font-size: 0.75rem; }
+            .portfolio-floor { font-size: 0.9rem; }
+            .portfolio-usd { font-size: 0.7rem; }
+            
+            /* Tools */
+            .tools-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .tool-card { padding: 16px 12px; }
+            .tool-icon { font-size: 1.5rem; margin-bottom: 8px; }
+            .tool-name { font-size: 0.7rem; }
+            .tool-desc { font-size: 0.65rem; }
+            
+            body { padding-bottom: env(safe-area-inset-bottom, 20px); }
+        }
     </style>
 </head>
 <body>
