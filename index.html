@@ -2186,6 +2186,18 @@
                     <button class="action-btn" onclick="triggerTask('max', 'test')" title="Run Tests">🧪</button>
                 </div>
             </div>
+            <div class="team-member" id="member-lola">
+                <img src="pfps/lola.png" alt="Lola" class="member-pfp" onerror="this.src='pfps/default.png'">
+                <div class="member-name">Lola</div>
+                <div class="member-role">Creative Director</div>
+                <div class="member-model">Claude Sonnet</div>
+                <div class="member-status">○ IDLE</div>
+                <div class="member-task" id="task-lola"></div>
+                <div class="member-actions">
+                    <button class="action-btn" onclick="triggerTask('lola', 'design')" title="Generate Design">🎨</button>
+                    <button class="action-btn" onclick="triggerTask('lola', 'brand-check')" title="Brand Check">✅</button>
+                </div>
+            </div>
         </div>
         
         <!-- Command Input -->
@@ -2200,6 +2212,7 @@
                 <option value="luna">🌙 Luna</option>
                 <option value="victor">💼 Victor</option>
                 <option value="max">🔍 Max</option>
+                <option value="lola">🎨 Lola</option>
             </select>
             <input type="text" id="commandInput" class="command-input" placeholder="Escribe un comando..." onkeypress="if(event.key==='Enter')sendCommand()">
             <button class="command-send" onclick="sendCommand()">▶</button>
