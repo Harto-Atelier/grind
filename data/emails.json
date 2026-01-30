@@ -1,21 +1,21 @@
 {
   "emails": [
     {
-      "sender": "hartostudio@gmail.com",
-      "subject": "📋 FedEx Aduanas - Documentación requerida AWB 058131995201",
-      "time": "17:27",
+      "sender": "Juliette Lavedan-Forment",
+      "subject": "Invitation: Récupérer Côme ! @ Tue 3 Feb 2026 5:30pm - 6:30pm (CET) (hartostudio@gmail.com)",
+      "time": "17:55",
+      "unread": true
+    },
+    {
+      "sender": "Endesa Comunicaciones",
+      "subject": "Este año, llena tu casa de energía positiva",
+      "time": "17:49",
       "unread": true
     },
     {
       "sender": "Load Gallery",
       "subject": "On view until 14 February: Yatreda",
       "time": "16:19",
-      "unread": true
-    },
-    {
-      "sender": "Juliette Lavedan-Forment",
-      "subject": "Fwd: FedEx - Despacho Exportación awb 058131995201 - RC3797881",
-      "time": "15:25",
       "unread": true
     },
     {
@@ -62,5 +62,5 @@
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-01-30T16:31:22Z"
+  "updated": "2026-01-30T17:01:42Z"
 }
