@@ -1950,31 +1950,8 @@
         </div>
     </section>
     
-    <section class="projects-grid">
-        <div class="project-card" onclick="window.location='tasks.html'">
-            <div class="project-icon">🎨</div>
-            <div class="project-name">SUPERRARE</div>
-            <div class="project-tasks">9</div>
-            <div class="project-label">tasks</div>
-        </div>
-        <div class="project-card" onclick="window.location='tasks.html'">
-            <div class="project-icon">🖼️</div>
-            <div class="project-name">ICONIC</div>
-            <div class="project-tasks">8</div>
-            <div class="project-label">tasks</div>
-        </div>
-        <div class="project-card" onclick="window.location='tasks.html'">
-            <div class="project-icon">🟧</div>
-            <div class="project-name">POL</div>
-            <div class="project-tasks">1</div>
-            <div class="project-label">tasks</div>
-        </div>
-        <div class="project-card" onclick="window.location='tasks.html'">
-            <div class="project-icon">💰</div>
-            <div class="project-name">FACTURAS</div>
-            <div class="project-tasks">1</div>
-            <div class="project-label">tasks</div>
-        </div>
+    <section class="projects-grid" id="projectsGrid">
+        <!-- Populated by JS -->
     </section>
     
     <section class="main-grid">
@@ -2379,6 +2356,10 @@
             // Load Activity data
             loadActivityData();
             setInterval(loadActivityData, 120000);
+            
+            // Load Projects data
+            loadProjectsData();
+            setInterval(loadProjectsData, 300000);
         };
         
         // ===================
@@ -2833,6 +2814,62 @@
             } catch (e) {
                 console.error('Failed to load invoice data:', e);
                 document.getElementById('invoiceList').innerHTML = '<div style="color: var(--red);">❌ Error cargando facturas</div>';
+            }
+        }
+        
+        // 📂 PROJECTS DATA
+        async function loadProjectsData() {
+            try {
+                const res = await fetch('data/tasks.json?t=' + Date.now());
+                if (!res.ok) throw new Error('Failed to load tasks');
+                
+                const data = await res.json();
+                const allTasks = [...(data.mits || []), ...(data.tasks || [])];
+                
+                // Count tasks by project
+                const projects = {};
+                allTasks.forEach(task => {
+                    const meta = task.meta || '';
+                    const project = meta.split('•')[1]?.trim() || 'General';
+                    if (!projects[project]) projects[project] = { count: 0, urgent: 0 };
+                    projects[project].count++;
+                    if (task.priority === 'urgent') projects[project].urgent++;
+                });
+                
+                // Define project icons
+                const icons = {
+                    'ICONIC': '🖼️',
+                    'Superrare': '🎨',
+                    'POL': '🟧',
+                    'PFP': '👤',
+                    'Facturas y gastos': '💰',
+                    'ADMINISTRACIÓN': '📋',
+                    'General': '📁'
+                };
+                
+                // Render cards
+                const container = document.getElementById('projectsGrid');
+                const sorted = Object.entries(projects).sort((a, b) => b[1].count - a[1].count);
+                
+                container.innerHTML = sorted.slice(0, 4).map(([name, data]) => `
+                    <div class="project-card" onclick="window.location='tasks.html'">
+                        <div class="project-icon">${icons[name] || '📁'}</div>
+                        <div class="project-name">${name.toUpperCase()}</div>
+                        <div class="project-tasks">${data.count}</div>
+                        <div class="project-label">${data.urgent > 0 ? `${data.urgent} urgent` : 'tasks'}</div>
+                    </div>
+                `).join('');
+                
+            } catch (e) {
+                console.error('Failed to load projects:', e);
+                document.getElementById('projectsGrid').innerHTML = `
+                    <div class="project-card" onclick="window.location='tasks.html'">
+                        <div class="project-icon">📋</div>
+                        <div class="project-name">TASKS</div>
+                        <div class="project-tasks">-</div>
+                        <div class="project-label">view all</div>
+                    </div>
+                `;
             }
         }
         
