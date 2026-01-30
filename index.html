@@ -1509,6 +1509,99 @@
         .toast.error .toast-title {
             color: var(--red);
         }
+        
+        /* 💰 Invoice Tracker Widget */
+        .invoice-widget {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.08), rgba(0, 122, 204, 0.05));
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+        .invoice-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .invoice-stat {
+            text-align: center;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+        }
+        .invoice-stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--green);
+        }
+        .invoice-stat-value.warning { color: var(--yellow); }
+        .invoice-stat-value.danger { color: var(--red); }
+        .invoice-stat-label {
+            font-size: 0.65rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+        .invoice-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .invoice-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            border-left: 3px solid var(--muted);
+            transition: all 0.2s;
+        }
+        .invoice-item:hover {
+            background: rgba(0,0,0,0.3);
+        }
+        .invoice-item.pending { border-left-color: var(--yellow); }
+        .invoice-item.paid { border-left-color: var(--green); }
+        .invoice-item.overdue { border-left-color: var(--red); }
+        .invoice-item.draft { border-left-color: var(--muted); }
+        .invoice-info {
+            flex: 1;
+        }
+        .invoice-project {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--cyan);
+            letter-spacing: 1px;
+        }
+        .invoice-desc {
+            font-size: 0.8rem;
+            color: var(--text);
+            margin-top: 2px;
+        }
+        .invoice-meta {
+            font-size: 0.7rem;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+        .invoice-amount {
+            text-align: right;
+        }
+        .invoice-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--green);
+        }
+        .invoice-status {
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-top: 4px;
+            display: inline-block;
+        }
+        .invoice-status.pending { background: rgba(220, 220, 170, 0.2); color: var(--yellow); }
+        .invoice-status.paid { background: rgba(0, 255, 136, 0.2); color: var(--green); }
+        .invoice-status.overdue { background: rgba(241, 76, 76, 0.2); color: var(--red); }
+        .invoice-status.draft { background: rgba(128, 128, 128, 0.2); color: var(--muted); }
     </style>
 </head>
 <body>
@@ -1766,6 +1859,35 @@
             </div>
             <div style="text-align: center; margin-top: 15px; font-size: 0.75rem; color: var(--muted);">
                 <span id="portfolioLastUpdate">Updating...</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 💰 INVOICE TRACKER -->
+    <section class="widget-grid" style="border-bottom: 1px solid var(--border);">
+        <div class="widget-card invoice-widget" style="grid-column: span 2;">
+            <div class="widget-header">
+                <div class="widget-title">💰 FACTURAS & COBROS</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+                    Pendiente: <span id="invoiceTotalPending" style="color: var(--yellow); font-weight: 600;">€-</span>
+                </div>
+            </div>
+            <div class="invoice-summary">
+                <div class="invoice-stat">
+                    <div class="invoice-stat-value" id="invoicePendingCount">-</div>
+                    <div class="invoice-stat-label">Pendientes</div>
+                </div>
+                <div class="invoice-stat">
+                    <div class="invoice-stat-value warning" id="invoiceDraftCount">-</div>
+                    <div class="invoice-stat-label">Borradores</div>
+                </div>
+                <div class="invoice-stat">
+                    <div class="invoice-stat-value danger" id="invoiceOverdueCount">-</div>
+                    <div class="invoice-stat-label">Vencidas</div>
+                </div>
+            </div>
+            <div class="invoice-list" id="invoiceList">
+                <!-- Populated by JS -->
             </div>
         </div>
     </section>
@@ -2203,6 +2325,10 @@
             // Load Portfolio data
             loadPortfolioData();
             setInterval(loadPortfolioData, 300000); // Update every 5 minutes
+            
+            // Load Invoice data
+            loadInvoiceData();
+            setInterval(loadInvoiceData, 60000); // Update every minute
         };
         
         // ===================
@@ -2776,6 +2902,57 @@
             } catch (e) {
                 console.error('Failed to load portfolio data:', e);
                 container.innerHTML = '<div class="portfolio-loading" style="color: var(--red);">❌ Failed to load portfolio data</div>';
+            }
+        }
+        
+        // 💰 INVOICE TRACKER
+        async function loadInvoiceData() {
+            try {
+                const res = await fetch('data/invoices.json?t=' + Date.now());
+                if (!res.ok) throw new Error('Failed to load invoices');
+                
+                const data = await res.json();
+                const invoices = data.invoices || [];
+                
+                // Calculate stats
+                const pending = invoices.filter(i => i.status === 'pending');
+                const drafts = invoices.filter(i => i.status === 'draft');
+                const overdue = invoices.filter(i => {
+                    if (i.status !== 'pending' || !i.dueDate) return false;
+                    return new Date(i.dueDate) < new Date();
+                });
+                const totalPending = pending.reduce((sum, i) => sum + i.amount, 0);
+                
+                // Update summary
+                document.getElementById('invoiceTotalPending').textContent = `€${totalPending.toLocaleString()}`;
+                document.getElementById('invoicePendingCount').textContent = pending.length;
+                document.getElementById('invoiceDraftCount').textContent = drafts.length;
+                document.getElementById('invoiceOverdueCount').textContent = overdue.length;
+                
+                // Render invoice list
+                const container = document.getElementById('invoiceList');
+                const invoicesHtml = invoices.slice(0, 5).map(inv => {
+                    const dueText = inv.dueDate ? `Vence: ${new Date(inv.dueDate).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}` : 'Sin fecha';
+                    return `
+                        <div class="invoice-item ${inv.status}">
+                            <div class="invoice-info">
+                                <div class="invoice-project">${inv.project}</div>
+                                <div class="invoice-desc">${inv.description}</div>
+                                <div class="invoice-meta">👤 ${inv.assignee} • ${dueText}</div>
+                            </div>
+                            <div class="invoice-amount">
+                                <div class="invoice-value">€${inv.amount.toLocaleString()}</div>
+                                <div class="invoice-status ${inv.status}">${inv.status.toUpperCase()}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                container.innerHTML = invoicesHtml || '<div style="text-align: center; color: var(--muted);">No hay facturas pendientes 🎉</div>';
+                
+            } catch (e) {
+                console.error('Failed to load invoice data:', e);
+                document.getElementById('invoiceList').innerHTML = '<div style="color: var(--red);">❌ Error cargando facturas</div>';
             }
         }
         

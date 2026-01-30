@@ -1,0 +1,59 @@
+{
+  "lastUpdated": "2026-01-30T07:45:00Z",
+  "currency": "EUR",
+  "summary": {
+    "totalPending": 45000,
+    "totalPaid": 0,
+    "totalOverdue": 0
+  },
+  "invoices": [
+    {
+      "id": "ICONIC-001",
+      "project": "ICONIC",
+      "client": "ICONIC",
+      "description": "Segunda factura - obras museo",
+      "amount": 25000,
+      "currency": "EUR",
+      "status": "pending",
+      "dueDate": "2026-02-15",
+      "assignee": "Sergio",
+      "notes": "Preguntar por direcciones y añadir packaging"
+    },
+    {
+      "id": "SR-001",
+      "project": "SuperRare",
+      "client": "SuperRare",
+      "description": "NFT Drop - 0.5 ETH x 30",
+      "amount": 15000,
+      "currency": "EUR",
+      "status": "pending",
+      "dueDate": "2026-03-01",
+      "assignee": "Sergio",
+      "notes": "splits.org - 65%/35%"
+    },
+    {
+      "id": "SR-002",
+      "project": "SuperRare",
+      "client": "SuperRare",
+      "description": "Físicos - Big (6 ETH) + Small x3 (2.5 ETH)",
+      "amount": 35000,
+      "currency": "EUR",
+      "status": "draft",
+      "dueDate": null,
+      "assignee": "Arturo",
+      "notes": "Pricing pendiente de confirmar"
+    },
+    {
+      "id": "CM-001",
+      "project": "General",
+      "client": "CM Chino",
+      "description": "Factura final",
+      "amount": 5000,
+      "currency": "EUR",
+      "status": "pending",
+      "dueDate": "2026-02-01",
+      "assignee": "Sergio",
+      "notes": ""
+    }
+  ]
+}
