@@ -1,20 +1,20 @@
 {
-  "updated": "2026-01-30T08:00:24.000Z",
+  "updated": "2026-01-30T09:00:26.000Z",
   "commits": [
-    {"hash":"add1dd0","message":"📅 Auto-update calendar 09:00","time":"8 seconds ago"},
-{"hash":"fbb27c2","message":"🎨 Unify branding: same colors (#1e1e1e) and navigation across all pages","time":"5 minutes ago"},
-{"hash":"25f4527","message":"📅 Auto-update calendar 08:50","time":"10 minutes ago"},
-{"hash":"a01baea","message":"📂 Dynamic project cards from tasks.json + Activity sync cron","time":"16 minutes ago"},
-{"hash":"9447968","message":"📊 Add Recent Activity widget showing commits + activity.json data","time":"17 minutes ago"},
-{"hash":"4d91dd2","message":"Add tracking page for whale wallet monitoring","time":"37 minutes ago"},
-{"hash":"bdb57e3","message":"📱 Fix overflow & mobile styles on all pages: tasks, team, crm","time":"38 minutes ago"},
-{"hash":"6c8898c","message":"🔧 Fix horizontal overflow on mobile - prevent content from breaking viewport","time":"45 minutes ago"},
-{"hash":"b91db19","message":"📱 Optimize for Samsung S24 Ultra - better mobile touch targets, fonts, spacing","time":"48 minutes ago"},
-{"hash":"6164ae0","message":"🔧 Fix ME proxy - proper endpoint handling for stat/listings/tokens","time":"51 minutes ago"},
-{"hash":"0316704","message":"📅 Auto-update calendar 08:07","time":"53 minutes ago"},
-{"hash":"7b085de","message":"📅 Fix calendar data - remove old events, update to current","time":"55 minutes ago"},
-{"hash":"d1b9d0b","message":"🧹 Simplify homepage: move trading widgets to trading.html, clean up index","time":"65 minutes ago"},
-{"hash":"039a642","message":"💰 Invoice Tracker widget - shows pending invoices, drafts, overdue","time":"72 minutes ago"},
-{"hash":"14df523","message":"fix: Add Vercel proxy for Magic Eden API","time":"9 hours ago"}
+    {"hash":"6ac5dbd","message":"📅 Auto-update calendar 10:00","time":"9 seconds ago"},
+{"hash":"9603471","message":"📅 Auto-update calendar 09:50","time":"10 minutes ago"},
+{"hash":"6e149ae","message":"⚡ Fix mempool fee default: 5 → 1 sat/vB","time":"14 minutes ago"},
+{"hash":"39515c7","message":"📧 Sync unread emails - now showing only unread","time":"16 minutes ago"},
+{"hash":"b1928ab","message":"👋 Remove Clara from dashboard team section","time":"19 minutes ago"},
+{"hash":"047a3fe","message":"📱 Fix tracking.html mobile - monitoring grid 2col, scrollable table","time":"20 minutes ago"},
+{"hash":"a359f93","message":"📅 Auto-update calendar 09:40","time":"20 minutes ago"},
+{"hash":"f26bff9","message":"👋 Remove Clara - reassign tasks to Arturo","time":"21 minutes ago"},
+{"hash":"5026b37","message":"📱 Fix tracking.html mobile overflow - nav stacking, responsive stats","time":"29 minutes ago"},
+{"hash":"eb2f2e4","message":"📅 Auto-update calendar 09:30","time":"30 minutes ago"},
+{"hash":"894dfd7","message":"📱 Fix mobile layout across all pages - nav stacking, overflow fixes","time":"35 minutes ago"},
+{"hash":"725fbc9","message":"📱 Fix sync bar overflow on mobile - stack vertically","time":"37 minutes ago"},
+{"hash":"c8e54ef","message":"📱 Fix nav overflow on mobile - stack nav items vertically","time":"39 minutes ago"},
+{"hash":"4de3d22","message":"📅 Auto-update calendar 09:20","time":"40 minutes ago"},
+{"hash":"eba6c3b","message":"✨ Tasks improvements: project filter, urgent counter, progress bar, better UI","time":"42 minutes ago"}
   ]
 }
