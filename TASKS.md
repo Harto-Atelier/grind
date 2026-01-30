@@ -1,5 +1,5 @@
 # Tareas Pendientes
-*Última actualización: 2026-01-30 12:00*
+*Última actualización: 2026-01-30 16:00*
 
 ## 🔴 TO DO (Urgentes)
 
@@ -14,7 +14,7 @@
 
 ## 🟡 PENDING
 
-### Superrare (8h)
+### Superrare (23h)
 | Responsable | Horas | Tarea | Detalle |
 |-------------|-------|-------|---------|
 | Arturo | 2 | Leer y probar Manifold | [manifold.xyz](https://manifold.xyz/) / [efficax.diid.art](https://efficax.diid.art/) onchain extension by 0xdid |
@@ -23,12 +23,12 @@
 | Arturo | 10 | Crear obras físicas | Big piece(130x97cm): 6 ETH / Small piece(65x46cm): 2.5 ETH x 3 |
 | Sergio | 1 | Gestionar pagos | Preguntar sobre cobros 65%/35 / [splits.org](https://splits.org/) |
 
-### POL
+### POL (5h)
 | Responsable | Horas | Tarea | Detalle |
 |-------------|-------|-------|---------|
 | Sergio | 5 | Enviar POLs | [Project tasks](https://docs.google.com/spreadsheets/d/1p3ydf2ULZ042f5bbs4fJ51wADewq2SrxnV6cYZNcrvM/) |
 
-### PFP
+### PFP (60h)
 | Responsable | Horas | Tarea | Detalle |
 |-------------|-------|-------|---------|
 | - | 60 | - | [Project tasks](https://docs.google.com/spreadsheets/d/1F27ZNOzO29_ZGlVGuf0KBECT7qUcToNkuZXerAaeUp0/) |
@@ -36,8 +36,8 @@
 ### ADMINISTRACIÓN
 | Responsable | Tarea | Deadline | Detalle |
 |-------------|-------|----------|---------|
-| Juliette | Facturas y gastos | - | - |
-| Arturo | Factura final CM Chino | 30/01/2026 | - |
+| Juliette | Facturas y gastos (10h) | - | - |
+| Arturo | Factura final CM Chino | 30/01/2026 | ⚠️ HOY |
 | Arturo y Sergio | Desarrollo Token | 15/02/2026 | Definir Roadmap |
 | Arturo | nurIA Trading | 15/02/2026 | Darle 100$ para trading en Polymarket |
 | Arturo | POL V2 Perdido | - | - |
@@ -47,10 +47,10 @@
 | Arturo | Control de Saldos Wallets y Transacciones | - | - |
 | Arturo | Avanzar Stock Digital HARTO y Arturo | - | - |
 | Arturo | Pedir Cita Ayuntamiento | - | Aclarar tema basura |
-| Arturo | Movimientos Binance Enero, Factura Exquisite | 29/01/2026 | [Spreadsheet](https://docs.google.com/spreadsheets/d/1Pm_UvsJUAWIzagdbB_LbawGxsu1ir6A6rof9SH-raYg/) |
+| Arturo | Movimientos Binance Enero, Factura Exquisite | 29/01/2026 | ⚠️ VENCIDO - [Spreadsheet](https://docs.google.com/spreadsheets/d/1Pm_UvsJUAWIzagdbB_LbawGxsu1ir6A6rof9SH-raYg/) |
 | Arturo | Contabilidad de Exquisite | 15/02/2026 | Actualizar balance del Inventario |
-| Arturo | Enviar saldos de Binance al 31/12/2025 | 29/01/2026 | - |
+| Arturo | Enviar saldos de Binance al 31/12/2025 | 29/01/2026 | ⚠️ VENCIDO |
 | Sergio | Depreciar activos en mal estado | - | [Spreadsheet](https://docs.google.com/spreadsheets/d/15vAScMQIQYzZfXx-i4-5TlPS6QP_2aVzJ7mxg0DRMv0/) |
 
 ---
-*Synced from Google Sheets Task Base - Amy*
+*Synced from Google Sheets Task Base - Amy 🟦*
