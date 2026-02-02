@@ -1,6 +1,18 @@
 {
   "emails": [
     {
+      "sender": "Juliette Lavedan-Forment",
+      "subject": "Invitation: Visita Balmes 151 @ Tue 3 Feb 2026 6:45pm - 7:45pm (CET) (hartostudio@gmail.com)",
+      "time": "17:20",
+      "unread": true
+    },
+    {
+      "sender": "Juliette Lavedan-Forment",
+      "subject": "Invitation: Dejar llaves taller @ Fri 27 Feb 2026 12pm - 1pm (CET) (hartostudio@gmail.com)",
+      "time": "17:11",
+      "unread": true
+    },
+    {
       "sender": "WAIBSummit MONACO",
       "subject": "You are invited to WAIBSUMMIT MONACO OFFICIAL BEACH PARTY",
       "time": "15:05",
@@ -47,20 +59,8 @@
       "subject": "7x7 € offerts pour un moment gourmand ❄️",
       "time": "18:18",
       "unread": true
-    },
-    {
-      "sender": "Zedwell Hotels",
-      "subject": "Cosy Up this Valentine's at Zedwell",
-      "time": "17:41",
-      "unread": true
-    },
-    {
-      "sender": "Endesa Comunicaciones",
-      "subject": "Este año, llena tu casa de energía positiva",
-      "time": "17:49",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-02T16:00:41Z"
+  "updated": "2026-02-02T16:31:13Z"
 }
