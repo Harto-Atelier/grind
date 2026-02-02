@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "WAIBSummit MONACO",
+      "subject": "You are invited to WAIBSUMMIT MONACO OFFICIAL BEACH PARTY",
+      "time": "15:05",
+      "unread": true
+    },
+    {
       "sender": "Railway Corporation",
       "subject": "Your receipt from Railway Corporation #2773-6277",
       "time": "14:45",
@@ -53,14 +59,8 @@
       "subject": "Este año, llena tu casa de energía positiva",
       "time": "17:49",
       "unread": true
-    },
-    {
-      "sender": "Load Gallery",
-      "subject": "On view until 14 February: Yatreda",
-      "time": "16:19",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-02T14:01:38Z"
+  "updated": "2026-02-02T14:30:29Z"
 }
