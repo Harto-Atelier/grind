@@ -1,6 +1,18 @@
 {
   "emails": [
     {
+      "sender": "Vercel",
+      "subject": "New sign-in detected on your Vercel account",
+      "time": "21:27",
+      "unread": true
+    },
+    {
+      "sender": "HARTO ATELIER SL",
+      "subject": "CANCELACIÓN preaviso de rescisión de contrato de arrendamiento",
+      "time": "21:10",
+      "unread": true
+    },
+    {
       "sender": "Dennis Koch",
       "subject": "Call for Submissions: BMAG Art Gallery at Bitcoin 2026 Las Vegas",
       "time": "19:32",
@@ -47,20 +59,8 @@
       "subject": "7x7 € offerts pour un moment gourmand ❄️",
       "time": "18:18",
       "unread": true
-    },
-    {
-      "sender": "Zedwell Hotels",
-      "subject": "Cosy Up this Valentine's at Zedwell",
-      "time": "17:41",
-      "unread": true
-    },
-    {
-      "sender": "Endesa Comunicaciones",
-      "subject": "Este año, llena tu casa de energía positiva",
-      "time": "17:49",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-02T20:00:44Z"
+  "updated": "2026-02-02T20:30:53Z"
 }
