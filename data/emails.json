@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "Lisa Highsmith",
+      "subject": "Quick Taproot Test Before Sending Recursive Memory",
+      "time": "22:54",
+      "unread": true
+    },
+    {
       "sender": "Vercel",
       "subject": "Failed preview deployment on team 'harto11's projects'",
       "time": "21:55",
@@ -53,14 +59,8 @@
       "subject": "✨ La Peña Barcelona✨Todavía puedes apuntarte - Próximo Almuerzo en Barcelona -  Viernes 6 de febrero 2026  a las 13:30h",
       "time": "12:38",
       "unread": true
-    },
-    {
-      "sender": "ssaravia25",
-      "subject": "ssaravia25 invited you to ssaravia25/Exquisite-Analysis-Enero2026",
-      "time": "12:26",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-02T21:31:42Z"
+  "updated": "2026-02-02T22:04:15Z"
 }
