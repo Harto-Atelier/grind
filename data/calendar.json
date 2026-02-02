@@ -8,11 +8,6 @@
 ],
   "upcoming": [
   {
-    "time": "00:00",
-    "title": "🏖️ VACACIONES - No molestar",
-    "date": "2026-02-03"
-  },
-  {
     "time": "07:30",
     "title": "Deporte",
     "date": "2026-02-03"
@@ -33,10 +28,15 @@
     "date": "2026-02-06"
   },
   {
+    "time": "13:30",
+    "title": "🍽️ Almuerzo La Peña Barcelona - Hotel The One",
+    "date": "2026-02-06"
+  },
+  {
     "time": "10:00",
     "title": "📱 POST: Teaser Consensus HK (Art Basel pieces)",
     "date": "2026-02-07"
   }
 ],
-  "updated": "2026-02-02T09:40:04.000Z"
+  "updated": "2026-02-02T09:50:03.000Z"
 }
