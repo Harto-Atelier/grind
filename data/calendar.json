@@ -1,42 +1,5 @@
 {
-  "today": [
-  {
-    "time": "14:00",
-    "title": "Reunión Arturo + Sergio",
-    "date": "2026-01-30"
-  }
-],
-  "upcoming": [
-  {
-    "time": "10:00",
-    "title": "Zoo avec les enfants",
-    "date": "2026-01-31"
-  },
-  {
-    "time": "11:00",
-    "title": "📱 Enviar mensaje a Antonio (novio Carolina)",
-    "date": "2026-01-31"
-  },
-  {
-    "time": "13:00",
-    "title": "Meeting con Pauline",
-    "date": "2026-02-02"
-  },
-  {
-    "time": "07:30",
-    "title": "Deporte",
-    "date": "2026-02-03"
-  },
-  {
-    "time": "17:30",
-    "title": "Récupérer Côme !",
-    "date": "2026-02-03"
-  },
-  {
-    "time": "16:00",
-    "title": "Humus Check ",
-    "date": "2026-02-05"
-  }
-],
-  "updated": "2026-01-30T19:40:04.000Z"
+  "today": [],
+  "upcoming": [],
+  "updated": "2026-02-02T08:30:39.000Z"
 }
