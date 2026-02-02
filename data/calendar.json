@@ -1,13 +1,6 @@
 {
   "today": [
   {
-    "time": "13:00",
-    "title": "Meeting con Pauline",
-    "date": "2026-02-02"
-  }
-],
-  "upcoming": [
-  {
     "time": "07:30",
     "title": "Deporte",
     "date": "2026-02-03"
@@ -26,7 +19,9 @@
     "time": "18:45",
     "title": "Visita Balmes 151",
     "date": "2026-02-03"
-  },
+  }
+],
+  "upcoming": [
   {
     "time": "16:45",
     "title": "Visita c/ deu i mata 124",
@@ -46,7 +41,12 @@
     "time": "13:30",
     "title": "🍽️ Almuerzo La Peña Barcelona - Hotel The One",
     "date": "2026-02-06"
+  },
+  {
+    "time": "10:00",
+    "title": "📱 POST: Teaser Consensus HK (Art Basel pieces)",
+    "date": "2026-02-07"
   }
 ],
-  "updated": "2026-02-02T22:50:04.000Z"
+  "updated": "2026-02-02T23:00:23.000Z"
 }
