@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "sergio saravia",
+      "subject": "Workshop BEYOND CHATGPT",
+      "time": "13:28",
+      "unread": true
+    },
+    {
       "sender": "Patricia DELEAU",
       "subject": "✨ La Peña Barcelona✨Todavía puedes apuntarte - Próximo Almuerzo en Barcelona -  Viernes 6 de febrero 2026  a las 13:30h",
       "time": "12:50",
@@ -53,14 +59,8 @@
       "subject": "New sign-in detected on your Vercel account",
       "time": "15:43",
       "unread": true
-    },
-    {
-      "sender": "sgseaux@gmail.com",
-      "subject": "Exquisite Daily Report - 2026-01-26",
-      "time": "15:19",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-03T12:00:42Z"
+  "updated": "2026-02-03T12:30:35Z"
 }
