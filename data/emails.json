@@ -1,6 +1,24 @@
 {
   "emails": [
     {
+      "sender": "extranetcg@centregestor.es",
+      "subject": "Signar un document",
+      "time": "17:50",
+      "unread": true
+    },
+    {
+      "sender": "Centre Gestor S.A.U.",
+      "subject": "Centre Gestor Lleida S.A.U. li ha enviat un document per a signar",
+      "time": "17:50",
+      "unread": true
+    },
+    {
+      "sender": "hey@panotmobility.com",
+      "subject": "🙌 1000 km recorridos con tu bici: ¡nadie te detiene!",
+      "time": "17:36",
+      "unread": true
+    },
+    {
       "sender": "Moongate",
       "subject": "How to catfish people on tinder",
       "time": "14:45",
@@ -41,26 +59,8 @@
       "subject": "Uptime optimization at no extra cost",
       "time": "11:46",
       "unread": true
-    },
-    {
-      "sender": "Patricia DELEAU",
-      "subject": "✨ La Peña Barcelona✨Todavía puedes apuntarte - Próximo Almuerzo en Barcelona -  Viernes 6 de febrero 2026  a las 13:30h",
-      "time": "12:38",
-      "unread": true
-    },
-    {
-      "sender": "ssaravia25",
-      "subject": "ssaravia25 invited you to ssaravia25/Exquisite-Analysis-Enero2026",
-      "time": "12:26",
-      "unread": true
-    },
-    {
-      "sender": "Vercel",
-      "subject": "New sign-in detected on your Vercel account",
-      "time": "15:43",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-03T16:31:12Z"
+  "updated": "2026-02-03T17:01:14Z"
 }
