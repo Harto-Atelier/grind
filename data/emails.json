@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "factura@segurma.com",
+      "subject": "Segurma SA Factura (Ref C/2026/02/007850)",
+      "time": "06:54",
+      "unread": true
+    },
+    {
       "sender": "noreply-apps-scripts-notifications@google.com",
       "subject": "Summary of failures for Google Apps Script: Untitled project",
       "time": "06:00",
@@ -53,14 +59,8 @@
       "subject": "Call for Submissions: BMAG Art Gallery at Bitcoin 2026 Las Vegas",
       "time": "19:32",
       "unread": true
-    },
-    {
-      "sender": "CoinTracker",
-      "subject": "Crypto portfolio update",
-      "time": "19:25",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-03T05:30:28Z"
+  "updated": "2026-02-03T06:00:43Z"
 }
