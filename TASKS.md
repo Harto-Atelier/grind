@@ -1,6 +1,6 @@
 # Tasks (Synced from Google Sheets)
 
-*Last sync: 2026-02-03 08:00*
+*Last sync: 2026-02-03 16:00*
 
 ## Pending Tasks
 
@@ -28,7 +28,7 @@
 - **Juliette** (10h) - Facturas y gastos
 - **Arturo** - Factura final del CM Chino ⏰ 30/01/2026
 - **Arturo y Sergio** - Desarrollo Token (Definir Roadmap) ⏰ 15/02/2026
-- **Arturo** - nurIA Trading (100$ Polymarket) ⏰ 15/02/2026
+- **Arturo** (0.5h) - Revisar email: Re: Próximo cargo de impuestos por importe de 2.516,13 euros (De: Sergio Saravia)
 - **Arturo** - POL V2 Perdido
 - **Arturo** - Enviar Obras ICONIC
 - **Arturo** - Enviar Gastos a PAUL ICONIC
@@ -39,11 +39,12 @@
 - **Arturo** - Movimientos Binance Enero, Factura Exquisite ⏰ 29/01/2026 - [Sheet](https://docs.google.com/spreadsheets/d/1Pm_UvsJUAWIzagdbB_LbawGxsu1ir6A6rof9SH-raYg/edit?gid=0#gid=0)
 - **Arturo** - Contabilidad de Exquisite (Actualizar balance del Inventario) ⏰ 15/02/2026
 - **Arturo** - Enviar saldos de Binance al 31/12/2025 ⏰ 29/01/2026
+- **Arturo** (0.5h) - Aceptar invitación GitHub repo Exquisite-Analysis-Enero2026 ⏰ To do
 
 ### General
 - **Sergio** - Sergio Inbox: Depreciar activos en mal estado - [Sheet](https://docs.google.com/spreadsheets/d/15vAScMQIQYzZfXx-i4-5TlPS6QP_2aVzJ7mxg0DRMv0/edit?gid=985903469#gid=985903469)
 
 ---
 
-**Total Pending:** 28 tasks
-**Priority:** Facturas vencidas (30/01, 29/01), Token Roadmap (15/02), nurIA Trading (15/02)
+**Total Pending:** 30 tasks
+**Priority:** Facturas vencidas (30/01, 29/01), Token Roadmap (15/02), GitHub invite (To do)
