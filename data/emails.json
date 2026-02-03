@@ -1,9 +1,15 @@
 {
   "emails": [
     {
-      "sender": "notificaciones-bbva@bbva.com",
-      "subject": "Próximo cargo de impuestos por importe de 2.516,13 euros en su cuenta ES930182************6255 el 05/02/26.",
-      "time": "10:55",
+      "sender": "Vercel",
+      "subject": "Failed preview deployment on team 'harto11's projects'",
+      "time": "11:57",
+      "unread": true
+    },
+    {
+      "sender": "OpenRouter Team",
+      "subject": "Uptime optimization at no extra cost",
+      "time": "11:46",
       "unread": true
     },
     {
@@ -53,14 +59,8 @@
       "subject": "Spreadsheet shared with you: ‘Exquisite Analysis’",
       "time": "20:21",
       "unread": true
-    },
-    {
-      "sender": "Juliette Lavedan-Forment",
-      "subject": "Invitation: Zoo avec les enfants @ Sat 31 Jan 2026 10am - 1pm (CET) (hartostudio@gmail.com)",
-      "time": "11:53",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-03T10:30:44Z"
+  "updated": "2026-02-03T11:02:05Z"
 }
