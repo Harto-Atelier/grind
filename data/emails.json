@@ -2,6 +2,12 @@
   "emails": [
     {
       "sender": "Juliette Lavedan-Forment",
+      "subject": "Cancelled event: Visite appart 49 torrent de l'olla @ Tue 3 Feb 2026 5:20pm - 6:20pm (CET) (hartostudio@gmail.com)",
+      "time": "21:53",
+      "unread": true
+    },
+    {
+      "sender": "Juliette Lavedan-Forment",
       "subject": "Invitation: Revisió CUAP Lys @ Thu 30 Apr 2026 3:40pm - 4:40pm (CEST) (hartostudio@gmail.com)",
       "time": "21:09",
       "unread": true
@@ -53,14 +59,8 @@
       "subject": "💥 La Peña Lisbonne - Déjeuner networking du vendredi 13 février 2026 à 13h.",
       "time": "12:46",
       "unread": true
-    },
-    {
-      "sender": "Vercel",
-      "subject": "harto11's projects Has Used 76% of Included Credits",
-      "time": "12:38",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-03T20:30:33Z"
+  "updated": "2026-02-03T21:00:42Z"
 }
