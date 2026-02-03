@@ -1,14 +1,14 @@
 {
   "emails": [
     {
-      "sender": "extranetcg@centregestor.es",
-      "subject": "Signar un document",
-      "time": "17:50",
+      "sender": "CoinTracker",
+      "subject": "Crypto portfolio update",
+      "time": "18:05",
       "unread": true
     },
     {
-      "sender": "Centre Gestor S.A.U.",
-      "subject": "Centre Gestor Lleida S.A.U. li ha enviat un document per a signar",
+      "sender": "extranetcg@centregestor.es",
+      "subject": "Signar un document",
       "time": "17:50",
       "unread": true
     },
@@ -62,5 +62,5 @@
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-03T17:01:14Z"
+  "updated": "2026-02-03T17:31:14Z"
 }
