@@ -1,20 +1,20 @@
 {
-  "updated": "2026-02-03T08:02:02.000Z",
+  "updated": "2026-02-03T09:01:47.000Z",
   "commits": [
-    {"hash":"e686276","message":"📅 Auto-update calendar 09:01","time":"7 seconds ago"},
-{"hash":"075e671","message":"📅 Auto-update calendar 08:50","time":"12 minutes ago"},
-{"hash":"eab7cb6","message":"📅 Auto-update calendar 08:40","time":"22 minutes ago"},
-{"hash":"1534992","message":"📧 Auto-sync emails","time":"31 minutes ago"},
-{"hash":"101d3ae","message":"📅 Auto-update calendar 08:30","time":"32 minutes ago"},
-{"hash":"9495b2e","message":"📅 Auto-update calendar 08:20","time":"42 minutes ago"},
-{"hash":"180bcb7","message":"📅 Auto-update calendar 08:10","time":"52 minutes ago"},
-{"hash":"7199a5d","message":"📧 Auto-sync emails","time":"60 minutes ago"},
-{"hash":"3a28bf8","message":"📊 Auto-update activity","time":"61 minutes ago"},
-{"hash":"4eac1b1","message":"📅 Auto-update calendar 08:01","time":"61 minutes ago"},
-{"hash":"163940d","message":"📅 Auto-update calendar 07:50","time":"72 minutes ago"},
-{"hash":"6a6a001","message":"📅 Auto-update calendar 07:40","time":"82 minutes ago"},
-{"hash":"8a1a4f7","message":"📧 Auto-sync emails","time":"2 hours ago"},
-{"hash":"afb62c8","message":"📅 Auto-update calendar 07:31","time":"2 hours ago"},
-{"hash":"21d248b","message":"📅 Auto-update calendar 07:20","time":"2 hours ago"}
+    {"hash":"930d3ae","message":"📅 Auto-update calendar 10:01","time":"9 seconds ago"},
+{"hash":"e605b89","message":"📅 Auto-update calendar 09:50","time":"12 minutes ago"},
+{"hash":"38c8789","message":"fix: use ME proxy with API key for portfolio (CORS fix)","time":"17 minutes ago"},
+{"hash":"c18bec7","message":"fix: update Magic Eden API with auth key + correct collection slugs","time":"20 minutes ago"},
+{"hash":"6847dd1","message":"📅 Auto-update calendar 09:40","time":"22 minutes ago"},
+{"hash":"4467b78","message":"📧 Auto-sync emails","time":"31 minutes ago"},
+{"hash":"78156c0","message":"📅 Auto-update calendar 09:30","time":"31 minutes ago"},
+{"hash":"810502c","message":"📅 Auto-update calendar 09:20","time":"42 minutes ago"},
+{"hash":"811065b","message":"📅 Auto-update calendar 09:10","time":"52 minutes ago"},
+{"hash":"be9a802","message":"📧 Auto-sync emails","time":"60 minutes ago"},
+{"hash":"e1a1c55","message":"📊 Auto-update activity","time":"60 minutes ago"},
+{"hash":"e686276","message":"📅 Auto-update calendar 09:01","time":"60 minutes ago"},
+{"hash":"075e671","message":"📅 Auto-update calendar 08:50","time":"72 minutes ago"},
+{"hash":"eab7cb6","message":"📅 Auto-update calendar 08:40","time":"82 minutes ago"},
+{"hash":"1534992","message":"📧 Auto-sync emails","time":"2 hours ago"}
   ]
 }
