@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "notificaciones-bbva@bbva.com",
+      "subject": "Próximo cargo de impuestos por importe de 2.516,13 euros en su cuenta ES930182************6255 el 05/02/26.",
+      "time": "10:55",
+      "unread": true
+    },
+    {
       "sender": "Patricia DELEAU",
       "subject": "✨ La Peña Barcelona✨Todavía puedes apuntarte - Próximo Almuerzo en Barcelona -  Viernes 6 de febrero 2026  a las 13:30h",
       "time": "12:38",
@@ -53,14 +59,8 @@
       "subject": "Invitation: Zoo avec les enfants @ Sat 31 Jan 2026 10am - 1pm (CET) (hartostudio@gmail.com)",
       "time": "11:53",
       "unread": true
-    },
-    {
-      "sender": "Vercel",
-      "subject": "Failed preview deployment on team 'harto11's projects'",
-      "time": "22:25",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-03T09:31:07Z"
+  "updated": "2026-02-03T10:01:31Z"
 }
