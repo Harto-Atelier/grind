@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "Patricia DELEAU",
+      "subject": "✨La Peña Madrid - Save The Date✨ - Déjeuner de La Peña le mercredi 11 février 2026 - Almuerzo de La Peña miércoles 11 de febrero 2026 13:30h",
+      "time": "08:52",
+      "unread": true
+    },
+    {
       "sender": "notificaciones-bbva@bbva.com",
       "subject": "Próximo cargo de impuestos por importe de 2.516,13 euros en su cuenta ES930182************6255 el 05/02/26.",
       "time": "07:44",
@@ -13,21 +19,9 @@
       "unread": true
     },
     {
-      "sender": "noreply-apps-scripts-notifications@google.com",
-      "subject": "Summary of failures for Google Apps Script: Untitled project",
-      "time": "06:00",
-      "unread": true
-    },
-    {
       "sender": "arthurm nolcha.com",
       "subject": "Art Basel to Consensus Hong Kong Nolcha Featured Artist",
       "time": "03:36",
-      "unread": true
-    },
-    {
-      "sender": "Vercel",
-      "subject": "Failed preview deployments on team 'harto11's projects'",
-      "time": "00:21",
       "unread": true
     },
     {
@@ -37,21 +31,9 @@
       "unread": true
     },
     {
-      "sender": "Vercel",
-      "subject": "Failed preview deployment on team 'harto11's projects'",
-      "time": "08:03",
-      "unread": true
-    },
-    {
       "sender": "Emmanuel DELEAU",
       "subject": "🚀 Webinaire du Chapitre IA de La Peña - lundi 9 février à 18H30.",
       "time": "21:42",
-      "unread": true
-    },
-    {
-      "sender": "Vercel",
-      "subject": "New sign-in detected on your Vercel account",
-      "time": "21:27",
       "unread": true
     },
     {
@@ -59,8 +41,26 @@
       "subject": "CANCELACIÓN preaviso de rescisión de contrato de arrendamiento",
       "time": "21:10",
       "unread": true
+    },
+    {
+      "sender": "Dennis Koch",
+      "subject": "Call for Submissions: BMAG Art Gallery at Bitcoin 2026 Las Vegas",
+      "time": "19:32",
+      "unread": true
+    },
+    {
+      "sender": "Railway Corporation",
+      "subject": "Your receipt from Railway Corporation #2773-6277",
+      "time": "14:45",
+      "unread": true
+    },
+    {
+      "sender": "Patricia DELEAU",
+      "subject": "✨ La Peña Barcelona✨Todavía puedes apuntarte - Próximo Almuerzo en Barcelona -  Viernes 6 de febrero 2026  a las 13:30h",
+      "time": "12:38",
+      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-03T07:30:37Z"
+  "updated": "2026-02-03T08:02:12Z"
 }
