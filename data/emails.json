@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "notificaciones-bbva@bbva.com",
+      "subject": "Próximo cargo de impuestos por importe de 2.516,13 euros en su cuenta ES930182************6255 el 05/02/26.",
+      "time": "07:44",
+      "unread": true
+    },
+    {
       "sender": "factura@segurma.com",
       "subject": "Segurma SA Factura (Ref C/2026/02/007850)",
       "time": "06:54",
@@ -33,7 +39,7 @@
     {
       "sender": "Vercel",
       "subject": "Failed preview deployment on team 'harto11's projects'",
-      "time": "00:57",
+      "time": "07:47",
       "unread": true
     },
     {
@@ -53,14 +59,8 @@
       "subject": "CANCELACIÓN preaviso de rescisión de contrato de arrendamiento",
       "time": "21:10",
       "unread": true
-    },
-    {
-      "sender": "Dennis Koch",
-      "subject": "Call for Submissions: BMAG Art Gallery at Bitcoin 2026 Las Vegas",
-      "time": "19:32",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-03T06:32:02Z"
+  "updated": "2026-02-03T07:01:39Z"
 }
