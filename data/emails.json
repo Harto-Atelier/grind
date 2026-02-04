@@ -1,12 +1,6 @@
 {
   "emails": [
     {
-      "sender": "Asprey Studio",
-      "subject": "CHANGE OF DATE | 25 Feb 2026 | Tim Yip Solo Exhibition at Asprey Studio",
-      "time": "18:27",
-      "unread": true
-    },
-    {
       "sender": "Marco from Transient Labs",
       "subject": "Botto’s \"Genesis: #000-0051\" Special Editions now available",
       "time": "18:22",
@@ -59,8 +53,14 @@
       "subject": "Weekly Usage Summary for harto11's projects",
       "time": "17:17",
       "unread": true
+    },
+    {
+      "sender": "Juliette Lavedan-Forment",
+      "subject": "Billets Barcelona Ploërmel - BCN-Nantes 28 marzo, NTE-BCN 06 abril",
+      "time": "17:16",
+      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-04T18:30:35Z"
+  "updated": "2026-02-04T19:01:51Z"
 }
