@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "Juliette Lavedan-Forment",
+      "subject": "Billets Flixbus Rennes Ploërmel 29.03.26",
+      "time": "22:18",
+      "unread": true
+    },
+    {
       "sender": "Marco from Transient Labs",
       "subject": "Botto’s \"Genesis: #000-0051\" Special Editions now available",
       "time": "18:22",
@@ -53,14 +59,8 @@
       "subject": "Documentación sp|activa",
       "time": "15:27",
       "unread": true
-    },
-    {
-      "sender": "MutualArt.com",
-      "subject": "➽ Alerts for Werner Bronkhorst",
-      "time": "15:24",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-04T21:00:43Z"
+  "updated": "2026-02-04T21:31:39Z"
 }
