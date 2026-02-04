@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "BlenderKit",
+      "subject": "New feature: Get your add-ons 15% off directly in Blender! 🔥🔥🔥",
+      "time": "09:03",
+      "unread": true
+    },
+    {
       "sender": "Juliette Lavedan-Forment",
       "subject": "Cancelled event: Visite appart 49 torrent de l'olla @ Tue 3 Feb 2026 5:20pm - 6:20pm (CET) (hartostudio@gmail.com)",
       "time": "21:53",
@@ -53,14 +59,8 @@
       "subject": "✨ La Peña Barcelona✨Todavía puedes apuntarte - Próximo Almuerzo en Barcelona -  Viernes 6 de febrero 2026  a las 13:30h",
       "time": "12:50",
       "unread": true
-    },
-    {
-      "sender": "Patricia DELEAU",
-      "subject": "💥 La Peña Lisbonne - Déjeuner networking du vendredi 13 février 2026 à 13h.",
-      "time": "12:46",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-04T08:02:05Z"
+  "updated": "2026-02-04T08:30:54Z"
 }
