@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "OpenRouter Team",
+      "subject": "Protecting your data: logging and training policies",
+      "time": "11:46",
+      "unread": true
+    },
+    {
       "sender": "BlenderKit",
       "subject": "New feature: Get your add-ons 15% off directly in Blender! 🔥🔥🔥",
       "time": "09:03",
@@ -53,14 +59,8 @@
       "subject": "How to catfish people on tinder",
       "time": "14:45",
       "unread": true
-    },
-    {
-      "sender": "Patricia DELEAU",
-      "subject": "✨ La Peña Barcelona✨Todavía puedes apuntarte - Próximo Almuerzo en Barcelona -  Viernes 6 de febrero 2026  a las 13:30h",
-      "time": "12:50",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-04T10:30:46Z"
+  "updated": "2026-02-04T11:01:38Z"
 }
