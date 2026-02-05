@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "SuperRare",
+      "subject": "Richard Nadler: HabiTextures",
+      "time": "16:04",
+      "unread": true
+    },
+    {
       "sender": "Juliette Lavedan-Forment",
       "subject": "Rennes 28.03.26 Votre réservation à l'établissement Hotel-Restaurant Le Victoria est confirmée",
       "time": "15:46",
@@ -53,14 +59,8 @@
       "subject": "Shop Winter Sale Deals on the ArtStation Marketplace!",
       "time": "10:57",
       "unread": true
-    },
-    {
-      "sender": "Tia Grazette",
-      "subject": "Art Rotterdam billboard exhibition…",
-      "time": "15:21",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-05T15:01:46Z"
+  "updated": "2026-02-05T15:30:33Z"
 }
