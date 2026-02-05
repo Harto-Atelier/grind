@@ -1,18 +1,6 @@
 {
   "today": [
   {
-    "time": "11:00",
-    "title": "Aïoli chez Cris",
-    "date": "2026-02-05"
-  },
-  {
-    "time": "16:00",
-    "title": "Humus Check ",
-    "date": "2026-02-05"
-  }
-],
-  "upcoming": [
-  {
     "time": "13:30",
     "title": "Rdv Susana colegio",
     "date": "2026-02-06"
@@ -21,7 +9,9 @@
     "time": "13:30",
     "title": "🍽️ Almuerzo La Peña Barcelona - Hotel The One",
     "date": "2026-02-06"
-  },
+  }
+],
+  "upcoming": [
   {
     "time": "10:00",
     "title": "📱 POST: Teaser Consensus HK (Art Basel pieces)",
@@ -51,7 +41,12 @@
     "time": "17:30",
     "title": "Récupérer Côme !",
     "date": "2026-02-10"
+  },
+  {
+    "time": "12:00",
+    "title": "📱 POST: Consensus HK - Pieces on display",
+    "date": "2026-02-11"
   }
 ],
-  "updated": "2026-02-05T22:50:04.000Z"
+  "updated": "2026-02-05T23:00:20.000Z"
 }
