@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "ArtStation",
+      "subject": "Shop Winter Sale Deals on the ArtStation Marketplace!",
+      "time": "10:57",
+      "unread": true
+    },
+    {
       "sender": "Tia Grazette",
       "subject": "Art Rotterdam billboard exhibition…",
       "time": "10:20",
@@ -53,14 +59,8 @@
       "subject": "Weekly Usage Summary for harto11's projects",
       "time": "17:17",
       "unread": true
-    },
-    {
-      "sender": "Centre Gestor S.A.U.",
-      "subject": "Centre Gestor Lleida S.A.U. li ha enviat un document per a signar",
-      "time": "17:01",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-05T09:31:13Z"
+  "updated": "2026-02-05T10:00:57Z"
 }
