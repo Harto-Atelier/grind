@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "Juliette Lavedan-Forment",
+      "subject": "Rennes 28.03.26 Votre réservation à l'établissement Hotel-Restaurant Le Victoria est confirmée",
+      "time": "15:46",
+      "unread": true
+    },
+    {
       "sender": "MutualArt.com",
       "subject": "➽ Alerts for Werner Bronkhorst",
       "time": "15:21",
@@ -53,14 +59,8 @@
       "subject": "Art Rotterdam billboard exhibition…",
       "time": "15:21",
       "unread": true
-    },
-    {
-      "sender": "Lisa Highsmith",
-      "subject": "Quick Taproot Test Before Sending Recursive Memory",
-      "time": "09:38",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-05T14:30:37Z"
+  "updated": "2026-02-05T15:01:46Z"
 }
