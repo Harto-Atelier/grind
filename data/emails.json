@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "noreply-apps-scripts-notifications@google.com",
+      "subject": "Summary of failures for Google Apps Script: Untitled project",
+      "time": "06:42",
+      "unread": true
+    },
+    {
       "sender": "Stripe",
       "subject": "Se ha iniciado sesión en tu cuenta de Stripe desde un dispositivo desconocido.",
       "time": "23:18",
@@ -53,14 +59,8 @@
       "subject": "Fwd: Tu envío Correos_Express ES2026PRO0000217504: Ajuste de precio",
       "time": "16:32",
       "unread": true
-    },
-    {
-      "sender": "Juliette Lavedan-Forment",
-      "subject": "Fwd: Mensaje automático: IMPORTANTE: Documentación de Aduana Incorrecta/Incompleta - ES2026PRO0000217445",
-      "time": "16:31",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-05T05:30:37Z"
+  "updated": "2026-02-05T06:00:43Z"
 }
