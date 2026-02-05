@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "CoinTracker",
+      "subject": "Crypto portfolio update",
+      "time": "18:18",
+      "unread": true
+    },
+    {
       "sender": "Google One",
       "subject": "Explore your new Google AI Pro plan, HARTO",
       "time": "17:07",
@@ -53,14 +59,8 @@
       "subject": "Summary of failures for Google Apps Script: Untitled project",
       "time": "06:42",
       "unread": true
-    },
-    {
-      "sender": "Stripe",
-      "subject": "Se ha iniciado sesión en tu cuenta de Stripe desde un dispositivo desconocido.",
-      "time": "23:18",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-05T17:01:20Z"
+  "updated": "2026-02-05T17:30:57Z"
 }
