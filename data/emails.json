@@ -1,6 +1,18 @@
 {
   "emails": [
     {
+      "sender": "Tia Grazette",
+      "subject": "Art Rotterdam billboard exhibition…",
+      "time": "10:20",
+      "unread": true
+    },
+    {
+      "sender": "Lisa Highsmith",
+      "subject": "Quick Taproot Test Before Sending Recursive Memory",
+      "time": "09:38",
+      "unread": true
+    },
+    {
       "sender": "noreply-apps-scripts-notifications@google.com",
       "subject": "Summary of failures for Google Apps Script: Untitled project",
       "time": "06:42",
@@ -47,20 +59,8 @@
       "subject": "Centre Gestor Lleida S.A.U. li ha enviat un document per a signar",
       "time": "17:01",
       "unread": true
-    },
-    {
-      "sender": "Sergio Saravia",
-      "subject": "Follow-up on invoice & cost details for the release - ICONIC-HARTO",
-      "time": "16:55",
-      "unread": true
-    },
-    {
-      "sender": "Juliette Lavedan-Forment",
-      "subject": "Fwd: Tu envío Correos_Express ES2026PRO0000217504: Ajuste de precio",
-      "time": "16:32",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-05T07:30:28Z"
+  "updated": "2026-02-05T08:02:19Z"
 }
