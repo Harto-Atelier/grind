@@ -1,9 +1,27 @@
 {
   "emails": [
     {
-      "sender": "Sergio Saravia",
-      "subject": "Réplica a comunicación recibida — Asunto Arturo Fernández / Vivid Gallery",
-      "time": "10:57",
+      "sender": "Moongate",
+      "subject": "In town for Consensus Hong Kong?",
+      "time": "11:52",
+      "unread": true
+    },
+    {
+      "sender": "Stripe",
+      "subject": "Se ha iniciado sesión en tu cuenta de Stripe desde un dispositivo desconocido.",
+      "time": "11:49",
+      "unread": true
+    },
+    {
+      "sender": "OpenRouter Team",
+      "subject": "Comparing different models with the same prompt",
+      "time": "11:46",
+      "unread": true
+    },
+    {
+      "sender": "Juliette Lavedan-Forment",
+      "subject": "re enviar el lunes",
+      "time": "11:35",
       "unread": true
     },
     {
@@ -41,26 +59,8 @@
       "subject": "Discover more with your Upstash free account",
       "time": "16:01",
       "unread": true
-    },
-    {
-      "sender": "moments. agency",
-      "subject": "Last Call: Love is in the Art 💕",
-      "time": "15:04",
-      "unread": true
-    },
-    {
-      "sender": "BlenderKit",
-      "subject": "New feature: Get your add-ons 15% off directly in Blender! 🔥🔥🔥",
-      "time": "09:03",
-      "unread": true
-    },
-    {
-      "sender": "Marco from Transient Labs",
-      "subject": "Announcing \"Always Has Been\" by Chikai",
-      "time": "19:56",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-06T10:00:42Z"
+  "updated": "2026-02-06T11:01:50Z"
 }
