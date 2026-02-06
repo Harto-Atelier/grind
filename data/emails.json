@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "arthurm nolcha.com",
+      "subject": "Art Basel to Consensus Hong Kong Nolcha Featured Artist",
+      "time": "10:02",
+      "unread": true
+    },
+    {
       "sender": "Marta | Declarando",
       "subject": "11 errores frecuentes en tus facturas europeas",
       "time": "08:19",
@@ -53,14 +59,8 @@
       "subject": "Centre Gestor Lleida S.A.U. li ha enviat un document per a signar",
       "time": "17:01",
       "unread": true
-    },
-    {
-      "sender": "SuperRare",
-      "subject": "Richard Nadler: HabiTextures",
-      "time": "16:04",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-06T07:30:30Z"
+  "updated": "2026-02-06T08:02:50Z"
 }
