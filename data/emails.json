@@ -19,12 +19,6 @@
       "unread": true
     },
     {
-      "sender": "Stripe",
-      "subject": "Se ha iniciado sesión en tu cuenta de Stripe desde un dispositivo desconocido.",
-      "time": "11:49",
-      "unread": true
-    },
-    {
       "sender": "OpenRouter Team",
       "subject": "Comparing different models with the same prompt",
       "time": "11:46",
@@ -59,8 +53,14 @@
       "subject": "Shop Winter Sale Deals on the ArtStation Marketplace!",
       "time": "10:57",
       "unread": true
+    },
+    {
+      "sender": "Marco from Transient Labs",
+      "subject": "Botto’s \"Genesis: #000-0051\" Special Editions now available",
+      "time": "18:22",
+      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-06T14:01:32Z"
+  "updated": "2026-02-06T14:30:32Z"
 }
