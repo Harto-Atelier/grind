@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "Marta | Declarando",
+      "subject": "11 errores frecuentes en tus facturas europeas",
+      "time": "08:19",
+      "unread": true
+    },
+    {
       "sender": "Reve Team",
       "subject": "Introducing References",
       "time": "02:14",
@@ -53,14 +59,8 @@
       "subject": "Richard Nadler: HabiTextures",
       "time": "16:04",
       "unread": true
-    },
-    {
-      "sender": "sergio saravia",
-      "subject": "Factura Servicios Enero 2026",
-      "time": "19:29",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-06T07:01:54Z"
+  "updated": "2026-02-06T07:30:30Z"
 }
