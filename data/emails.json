@@ -1,6 +1,18 @@
 {
   "emails": [
     {
+      "sender": "Ollama",
+      "subject": "Qwen3-Coder-Next available in Ollama",
+      "time": "17:18",
+      "unread": true
+    },
+    {
+      "sender": "Zedwell Hotels",
+      "subject": "Free Late Check-Out for Valentine's Weekend Stays",
+      "time": "17:06",
+      "unread": true
+    },
+    {
       "sender": "noreply-apps-scripts-notifications@google.com",
       "subject": "Summary of failures for Google Apps Script: Untitled project",
       "time": "12:26",
@@ -47,20 +59,8 @@
       "subject": "How does OpenRouter pricing work?",
       "time": "11:46",
       "unread": true
-    },
-    {
-      "sender": "ArtStation",
-      "subject": "Shop Winter Sale Deals on the ArtStation Marketplace!",
-      "time": "10:57",
-      "unread": true
-    },
-    {
-      "sender": "Marco from Transient Labs",
-      "subject": "Botto’s \"Genesis: #000-0051\" Special Editions now available",
-      "time": "18:22",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-06T16:01:38Z"
+  "updated": "2026-02-06T16:30:58Z"
 }
