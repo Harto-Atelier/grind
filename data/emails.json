@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "Sergio Saravia",
+      "subject": "Réplica a comunicación recibida — Asunto Arturo Fernández / Vivid Gallery",
+      "time": "10:57",
+      "unread": true
+    },
+    {
       "sender": "Reve Team",
       "subject": "Introducing References",
       "time": "02:14",
@@ -53,14 +59,8 @@
       "subject": "Announcing \"Always Has Been\" by Chikai",
       "time": "19:56",
       "unread": true
-    },
-    {
-      "sender": "Moongate",
-      "subject": "How to catfish people on tinder",
-      "time": "14:45",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-06T09:30:59Z"
+  "updated": "2026-02-06T10:00:42Z"
 }
