@@ -654,7 +654,7 @@
                     <option value="lola">🎨 Lola (Creative)</option>
                     <option value="all">📢 ALL AGENTS</option>
                 </select>
-                <input type="text" id="commandInput" class="command-input" placeholder="Escribe una tarea o comando..." onkeypress="if(event.key==='Enter')sendCommand()">
+                <input type="text" id="commandInput" class="command-input" placeholder="Enter a task or command..." onkeypress="if(event.key==='Enter')sendCommand()">
                 <button class="command-send" onclick="sendCommand()">SEND ▶</button>
             </div>
             
@@ -735,11 +735,11 @@
             const taskPrompts = {
                 'status': 'Dame un status report completo',
                 'emails': 'Revisa los emails importantes',
-                'team-status': 'Status del equipo y métricas',
-                'metrics': 'Genera informe de métricas',
-                'invoices': 'Revisa facturas pendientes',
-                'report': 'Genera informe financiero',
-                'diagnostics': 'Ejecuta diagnósticos del sistema',
+                'team-status': 'Team status and metrics',
+                'metrics': 'Generate metrics report',
+                'invoices': 'Review pending invoices',
+                'report': 'Generate financial report',
+                'diagnostics': 'Run system diagnostics',
                 'deploy': 'Prepara deploy a producción',
                 'sync': 'Sincroniza tareas con Google Sheets',
                 'sheets': 'Revisa Google Sheets',

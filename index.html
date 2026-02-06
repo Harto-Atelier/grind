@@ -1148,6 +1148,20 @@
             max-height: 200px;
             overflow-y: auto;
         }
+        .activity-log::-webkit-scrollbar {
+            width: 8px;
+        }
+        .activity-log::-webkit-scrollbar-track {
+            background: var(--bg);
+            border-radius: 4px;
+        }
+        .activity-log::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+        .activity-log::-webkit-scrollbar-thumb:hover {
+            background: var(--cyan-border);
+        }
         .activity-log-title {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.75rem;
@@ -1773,6 +1787,20 @@
             max-height: 300px;
             overflow-y: auto;
         }
+        .activity-list::-webkit-scrollbar {
+            width: 8px;
+        }
+        .activity-list::-webkit-scrollbar-track {
+            background: var(--bg);
+            border-radius: 4px;
+        }
+        .activity-list::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+        .activity-list::-webkit-scrollbar-thumb:hover {
+            background: var(--cyan-border);
+        }
         .activity-item {
             display: flex;
             align-items: flex-start;
@@ -1861,6 +1889,12 @@
         </div>
         <div class="ticker-divider">|</div>
         <div class="ticker-item">
+            <span class="ticker-label">TIBBIR</span>
+            <span class="ticker-value" id="tickerTibbir">$0.000</span>
+            <span class="ticker-change positive" id="tickerTibbirChange">+0%</span>
+        </div>
+        <div class="ticker-divider">|</div>
+        <div class="ticker-item">
             <span class="ticker-label">⏱️</span>
             <span class="ticker-value" id="tickerBlock">Block #</span>
             <span class="ticker-extra" id="tickerFee">~1 sat/vB</span>
@@ -1944,7 +1978,7 @@
     <section class="agenda-section">
         <div class="agenda-col" style="grid-column: span 2;">
             <div class="section-header">
-                <div class="section-title">📅 PRÓXIMOS 3 DÍAS</div>
+                <div class="section-title">📅 NEXT 3 DAYS</div>
                 <div class="section-date" id="todayDate">-</div>
             </div>
             <div class="calendar-3day" id="calendar3Day">
@@ -2014,9 +2048,9 @@
     <section class="widget-grid" style="border-bottom: 1px solid var(--border);">
         <div class="widget-card activity-widget" style="grid-column: span 2;">
             <div class="widget-header">
-                <div class="widget-title">📊 ACTIVIDAD RECIENTE</div>
+                <div class="widget-title">📊 RECENT ACTIVITY</div>
                 <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted);">
-                    <span id="activityCount">-</span> commits hoy
+                    <span id="activityCount">-</span> commits today
                 </div>
             </div>
             <div class="activity-list" id="activityList">
@@ -2147,7 +2181,7 @@
         <div class="team-panel-header">
             <div class="team-panel-title">🎭 TEAM NURIA</div>
             <div style="font-size: 0.75rem; color: var(--muted);">
-                <span id="teamLiveIndicator" style="color: var(--green);">● LIVE</span> • 
+                <span class="team-live-indicator" style="color: var(--green);">● LIVE</span> • 
                 Last update: <span id="lastSync">-</span>
             </div>
         </div>
@@ -2289,12 +2323,12 @@
                 <option value="max">🔍 Max</option>
                 <option value="lola">🎨 Lola</option>
             </select>
-            <input type="text" id="commandInput" class="command-input" placeholder="Escribe un comando..." onkeypress="if(event.key==='Enter')sendCommand()">
+            <input type="text" id="commandInput" class="command-input" placeholder="Enter a command..." onkeypress="if(event.key==='Enter')sendCommand()">
             <button class="command-send" onclick="sendCommand()">▶</button>
         </div>
         
         <div class="activity-log" id="activityLog">
-            <div class="activity-log-title">📜 ACTIVITY LOG <span id="logLiveIndicator" style="font-size: 0.6rem; color: var(--green);">● LIVE</span></div>
+            <div class="activity-log-title">📜 ACTIVITY LOG <span class="live-indicator" style="font-size: 0.6rem; color: var(--green);">● LIVE</span></div>
             <div class="activity-item">
                 <span class="activity-time">12:00</span>
                 <span class="activity-agent">🔧</span>
@@ -2631,7 +2665,7 @@
                 `).join('');
                 
                 logContainer.innerHTML = `
-                    <div class="activity-log-title">📜 ACTIVITY LOG <span id="logLiveIndicator" style="font-size: 0.6rem; color: var(--green);">● LIVE</span></div>
+                    <div class="activity-log-title">📜 ACTIVITY LOG <span class="live-indicator" style="font-size: 0.6rem; color: var(--green);">● LIVE</span></div>
                     ${logHtml}
                 `;
             }
@@ -2894,7 +2928,7 @@
                 
             } catch (e) {
                 console.error('Failed to load invoice data:', e);
-                document.getElementById('invoiceList').innerHTML = '<div style="color: var(--red);">❌ Error cargando facturas</div>';
+                document.getElementById('invoiceList').innerHTML = '<div style="color: var(--red);">❌ Error loading invoices</div>';
             }
         }
         
@@ -2979,11 +3013,11 @@
                     </div>
                 `).join('');
                 
-                container.innerHTML = activityHtml || '<div style="text-align: center; color: var(--muted);">No hay actividad reciente</div>';
+                container.innerHTML = activityHtml || '<div style="text-align: center; color: var(--muted);">No recent activity</div>';
                 
             } catch (e) {
                 console.error('Failed to load activity data:', e);
-                document.getElementById('activityList').innerHTML = '<div style="color: var(--muted);">Sin datos de actividad</div>';
+                document.getElementById('activityList').innerHTML = '<div style="color: var(--muted);">No activity data</div>';
             }
         }
         
@@ -3257,7 +3291,7 @@
                 const headerInfo = document.querySelector('.team-panel-header > div:last-child');
                 if (headerInfo) {
                     headerInfo.innerHTML = `
-                        <span id="teamLiveIndicator" style="color: var(--green);">● LIVE</span> • 
+                        <span class="team-live-indicator" style="color: var(--green);">● LIVE</span> • 
                         Today: <span style="color: var(--cyan);">${data.stats.tasksCompletedToday || 0}</span> completed • 
                         Queue: <span style="color: var(--orange);">${data.stats.totalTasksQueued || 0}</span>
                     `;
@@ -3275,7 +3309,7 @@
                 `).join('');
                 
                 logContainer.innerHTML = `
-                    <div class="activity-log-title">📜 ACTIVITY LOG <span id="logLiveIndicator" style="font-size: 0.6rem; color: var(--green);">● LIVE</span></div>
+                    <div class="activity-log-title">📜 ACTIVITY LOG <span class="live-indicator" style="font-size: 0.6rem; color: var(--green);">● LIVE</span></div>
                     ${logHtml}
                 `;
             }
