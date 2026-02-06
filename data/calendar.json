@@ -1,27 +1,12 @@
 {
   "today": [
   {
-    "time": "12:45",
-    "title": "🏠 Visita piso Passeig de Gràcia 128",
-    "date": "2026-02-06"
-  },
-  {
-    "time": "13:30",
-    "title": "Rdv Susana colegio",
-    "date": "2026-02-06"
-  },
-  {
-    "time": "13:30",
-    "title": "🍽️ Almuerzo La Peña Barcelona - Hotel The One",
-    "date": "2026-02-06"
-  }
-],
-  "upcoming": [
-  {
     "time": "10:00",
     "title": "📱 POST: Teaser Consensus HK (Art Basel pieces)",
     "date": "2026-02-07"
-  },
+  }
+],
+  "upcoming": [
   {
     "time": "18:30",
     "title": "Webinar La Peña",
@@ -51,7 +36,22 @@
     "time": "17:30",
     "title": "Récupérer Côme !",
     "date": "2026-02-10"
+  },
+  {
+    "time": "12:00",
+    "title": "📱 POST: Consensus HK - Pieces on display",
+    "date": "2026-02-11"
+  },
+  {
+    "time": "10:00",
+    "title": "💡 PENSAR: Propuesta Bitcoin Vegas (BMAG)",
+    "date": "2026-02-13"
+  },
+  {
+    "time": "10:00",
+    "title": "📋 Preparar visita Humus: Reservar Casa Inés, confirmar fecha, preparar estudio",
+    "date": "2026-02-13"
   }
 ],
-  "updated": "2026-02-06T22:50:03.000Z"
+  "updated": "2026-02-06T23:00:26.000Z"
 }
