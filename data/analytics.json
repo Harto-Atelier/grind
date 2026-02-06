@@ -1,16 +1,16 @@
 {
-  "timestamp": "2026-02-04T21:58:18Z",
+  "timestamp": "2026-02-06T16:33:36Z",
   "queue": {
     "pending": 0,
-    "inProgress": 1220,
-    "completed": 1842,
-    "total": 3062
+    "inProgress": 2894,
+    "completed": 4365,
+    "total": 7259
   },
   "metrics": {
     "completionRate": 60.1,
     "activeAgents": 4,
     "hourlyCompletions": 12,
-    "avgTasksPerAgent": 305.0
+    "avgTasksPerAgent": 723.5
   },
   "trends": {
     "tasksPerHour": 12,

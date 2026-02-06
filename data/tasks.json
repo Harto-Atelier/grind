@@ -1,11 +1,11 @@
 {
-  "lastUpdate": "2026-02-04T21:01:19.015Z",
+  "lastUpdate": "2026-02-06T16:02:37.805Z",
   "sheetId": "1LIdaTvRvKEZOMJbqXcBIrA5Xq6bEnzfiiFkFp_A6pTY",
   "stats": {
-    "total": 67,
-    "pending": 29,
-    "todo": 6,
-    "done": 38,
+    "total": 69,
+    "pending": 21,
+    "todo": 5,
+    "done": 48,
     "totalHours": 30
   },
   "mits": [
@@ -64,33 +64,6 @@
       "priority": "normal"
     },
     {
-      "id": 52,
-      "title": "Factura final del CM Chino",
-      "meta": "Arturo • ADMINISTRACIÓN",
-      "xp": 50,
-      "done": false,
-      "date": "2026-01-30",
-      "priority": "normal"
-    },
-    {
-      "id": 53,
-      "title": "Desarrollo Token",
-      "meta": "Arturo y Sergio • ADMINISTRACIÓN",
-      "xp": 50,
-      "done": false,
-      "date": "2026-02-15",
-      "priority": "normal"
-    },
-    {
-      "id": 64,
-      "title": "Movimientos Binance Enero, Factura Exquisite",
-      "meta": "Arturo • ADMINISTRACIÓN",
-      "xp": 50,
-      "done": false,
-      "date": "2026-01-29",
-      "priority": "normal"
-    },
-    {
       "id": 65,
       "title": "Contabilidad de Exquisite ",
       "meta": "Arturo • ADMINISTRACIÓN",
@@ -107,15 +80,6 @@
       "done": false,
       "date": "2026-01-29",
       "priority": "normal"
-    },
-    {
-      "id": 68,
-      "title": "Revisar: GitHub invite de Sergio",
-      "meta": "Arturo • ADMINISTRACIÓN",
-      "xp": 50,
-      "done": false,
-      "date": null,
-      "priority": "urgent"
     }
   ],
   "tasks": [
@@ -131,38 +95,6 @@
       "id": 36,
       "title": "Sin título",
       "meta": "Arturo • Superrare",
-      "xp": 15,
-      "done": false,
-      "priority": "normal"
-    },
-    {
-      "id": 37,
-      "title": "https://manifold.xyz/",
-      "meta": "Arturo • Superrare",
-      "xp": 15,
-      "done": false,
-      "priority": "normal"
-    },
-    {
-      "id": 38,
-      "title": "https://github.com/Harto-Atelier/error-states",
-      "meta": "Arturo • Superrare",
-      "xp": 15,
-      "done": false,
-      "priority": "normal"
-    },
-    {
-      "id": 39,
-      "title": "NFT = 0.5 ETH x 30",
-      "meta": "Arturo  • Superrare",
-      "xp": 15,
-      "done": false,
-      "priority": "normal"
-    },
-    {
-      "id": 40,
-      "title": "Big piece(130x97cm): 6 ETH\nSmall piece(65x46cm): 2.5 ETH x 3\n",
-      "meta": "Arturo  • Superrare",
       "xp": 15,
       "done": false,
       "priority": "normal"
@@ -185,15 +117,7 @@
     },
     {
       "id": 54,
-      "title": "Revisar email: Billets Flixbus Ploërmel Rennes 05.04.26",
-      "meta": "Arturo • ADMINISTRACIÓN",
-      "xp": 15,
-      "done": false,
-      "priority": "normal"
-    },
-    {
-      "id": 56,
-      "title": "POL V2 Perdido",
+      "title": "Revisar email: re enviar el lunes",
       "meta": "Arturo • ADMINISTRACIÓN",
       "xp": 15,
       "done": false,
@@ -251,6 +175,14 @@
       "id": 67,
       "title": "Depreciar activos en mal estado",
       "meta": "Sergio • General",
+      "xp": 15,
+      "done": false,
+      "priority": "normal"
+    },
+    {
+      "id": 69,
+      "title": "Sin título",
+      "meta": "Sin asignar • ",
       "xp": 15,
       "done": false,
       "priority": "normal"
