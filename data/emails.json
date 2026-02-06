@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "Extranet Centre Gestor - CG365",
+      "subject": "Centre Gestor: Aviso disponibilidad factura",
+      "time": "22:45",
+      "unread": true
+    },
+    {
       "sender": "CoinTracker",
       "subject": "Crypto portfolio update",
       "time": "19:18",
@@ -53,14 +59,8 @@
       "subject": "Introducing References",
       "time": "02:14",
       "unread": true
-    },
-    {
-      "sender": "SuperRare",
-      "subject": "Richard Nadler: HabiTextures",
-      "time": "16:04",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-06T21:31:31Z"
+  "updated": "2026-02-06T22:00:53Z"
 }
