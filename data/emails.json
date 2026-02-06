@@ -1,12 +1,6 @@
 {
   "emails": [
     {
-      "sender": "Centre Gestor S.A.U.",
-      "subject": "VIDsigner: Document signat",
-      "time": "10:02",
-      "unread": true
-    },
-    {
       "sender": "Reve Team",
       "subject": "Introducing References",
       "time": "02:14",
@@ -31,36 +25,42 @@
       "unread": true
     },
     {
-      "sender": "Lisa Highsmith",
-      "subject": "Quick Taproot Test Before Sending Recursive Memory",
-      "time": "09:38",
+      "sender": "Marco from Transient Labs",
+      "subject": "Botto’s \"Genesis: #000-0051\" Special Editions now available",
+      "time": "18:22",
       "unread": true
     },
     {
-      "sender": "noreply-apps-scripts-notifications@google.com",
-      "subject": "Summary of failures for Google Apps Script: Untitled project",
-      "time": "06:42",
+      "sender": "Upstash",
+      "subject": "Discover more with your Upstash free account",
+      "time": "16:01",
       "unread": true
     },
     {
-      "sender": "Stripe",
-      "subject": "Se ha iniciado sesión en tu cuenta de Stripe desde un dispositivo desconocido.",
-      "time": "23:18",
+      "sender": "moments. agency",
+      "subject": "Last Call: Love is in the Art 💕",
+      "time": "15:04",
       "unread": true
     },
     {
-      "sender": "Stripe",
-      "subject": "Tu contraseña de Stripe se ha actualizado",
-      "time": "23:18",
+      "sender": "BlenderKit",
+      "subject": "New feature: Get your add-ons 15% off directly in Blender! 🔥🔥🔥",
+      "time": "09:03",
       "unread": true
     },
     {
-      "sender": "Juliette Lavedan-Forment",
-      "subject": "Billets Flixbus Rennes Ploërmel 29.03.26",
-      "time": "22:18",
+      "sender": "Marco from Transient Labs",
+      "subject": "Announcing \"Always Has Been\" by Chikai",
+      "time": "19:56",
+      "unread": true
+    },
+    {
+      "sender": "Moongate",
+      "subject": "How to catfish people on tinder",
+      "time": "14:45",
       "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-06T09:02:37Z"
+  "updated": "2026-02-06T09:30:59Z"
 }
