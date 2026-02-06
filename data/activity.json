@@ -1,20 +1,20 @@
 {
-  "updated": "2026-02-06T16:01:29.000Z",
+  "updated": "2026-02-06T17:01:02.000Z",
   "commits": [
-    {"hash":"e66f3fb","message":"📅 Auto-update calendar 17:01","time":"9 seconds ago"},
-{"hash":"fe723ac","message":"📅 Auto-update calendar 16:50","time":"11 minutes ago"},
-{"hash":"a1dddab","message":"📅 Auto-update calendar 16:40","time":"21 minutes ago"},
-{"hash":"625fc39","message":"📧 Auto-sync emails","time":"31 minutes ago"},
-{"hash":"2ae64f8","message":"📅 Auto-update calendar 16:30","time":"31 minutes ago"},
-{"hash":"01727df","message":"📅 Auto-update calendar 16:20","time":"41 minutes ago"},
-{"hash":"f8e9b12","message":"📅 Auto-update calendar 16:10","time":"51 minutes ago"},
-{"hash":"feacc40","message":"📧 Auto-sync emails","time":"60 minutes ago"},
-{"hash":"7a538bb","message":"📊 Auto-update activity","time":"60 minutes ago"},
-{"hash":"b431133","message":"📅 Auto-update calendar 16:01","time":"60 minutes ago"},
-{"hash":"4af077a","message":"📅 Auto-update calendar 15:50","time":"71 minutes ago"},
-{"hash":"67feee6","message":"📅 Auto-update calendar 15:40","time":"81 minutes ago"},
-{"hash":"fddf8f9","message":"📧 Auto-sync emails","time":"2 hours ago"},
-{"hash":"906e65b","message":"📅 Auto-update calendar 15:30","time":"2 hours ago"},
-{"hash":"c9a247e","message":"📅 Auto-update calendar 15:20","time":"2 hours ago"}
+    {"hash":"5c2e404","message":"📅 Auto-update calendar 18:00","time":"8 seconds ago"},
+{"hash":"e3c3a9d","message":"📅 Auto-update calendar 17:50","time":"10 minutes ago"},
+{"hash":"e091f45","message":"🐛 Fix UI bugs: Spanish→English, add TIBBIR ticker, fix duplicate IDs, improve scrollbars","time":"16 minutes ago"},
+{"hash":"b16f37e","message":"📅 Auto-update calendar 17:40","time":"21 minutes ago"},
+{"hash":"c9cfc88","message":"fix: restore index.html as main dashboard, move hub to hub.html","time":"26 minutes ago"},
+{"hash":"74a8bd6","message":"📧 Auto-sync emails","time":"30 minutes ago"},
+{"hash":"a912cec","message":"📅 Auto-update calendar 17:30","time":"30 minutes ago"},
+{"hash":"7644bae","message":"📅 Auto-update calendar 17:20","time":"41 minutes ago"},
+{"hash":"be15220","message":"📅 Auto-update calendar 17:10","time":"51 minutes ago"},
+{"hash":"97bc459","message":"📧 Auto-sync emails","time":"59 minutes ago"},
+{"hash":"ef26702","message":"📊 Auto-update activity","time":"60 minutes ago"},
+{"hash":"e66f3fb","message":"📅 Auto-update calendar 17:01","time":"60 minutes ago"},
+{"hash":"fe723ac","message":"📅 Auto-update calendar 16:50","time":"71 minutes ago"},
+{"hash":"a1dddab","message":"📅 Auto-update calendar 16:40","time":"81 minutes ago"},
+{"hash":"625fc39","message":"📧 Auto-sync emails","time":"2 hours ago"}
   ]
 }
