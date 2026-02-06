@@ -1,6 +1,18 @@
 {
   "emails": [
     {
+      "sender": "noreply-apps-scripts-notifications@google.com",
+      "subject": "Summary of failures for Google Apps Script: Untitled project",
+      "time": "12:26",
+      "unread": true
+    },
+    {
+      "sender": "Hostinger",
+      "subject": "Es hora de crear tu éxito online",
+      "time": "12:04",
+      "unread": true
+    },
+    {
       "sender": "Moongate",
       "subject": "In town for Consensus Hong Kong?",
       "time": "11:52",
@@ -47,20 +59,8 @@
       "subject": "Shop Winter Sale Deals on the ArtStation Marketplace!",
       "time": "10:57",
       "unread": true
-    },
-    {
-      "sender": "Marco from Transient Labs",
-      "subject": "Botto’s \"Genesis: #000-0051\" Special Editions now available",
-      "time": "18:22",
-      "unread": true
-    },
-    {
-      "sender": "Upstash",
-      "subject": "Discover more with your Upstash free account",
-      "time": "16:01",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-06T11:01:50Z"
+  "updated": "2026-02-06T11:30:27Z"
 }
