@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "noreply-apps-scripts-notifications@google.com",
+      "subject": "Summary of failures for Google Apps Script: Untitled project",
+      "time": "13:41",
+      "unread": true
+    },
+    {
       "sender": "OpenRouter Team",
       "subject": "Tool calling that just works",
       "time": "11:46",
@@ -53,14 +59,8 @@
       "subject": "Comparing different models with the same prompt",
       "time": "11:46",
       "unread": true
-    },
-    {
-      "sender": "Juliette Lavedan-Forment",
-      "subject": "re enviar el lunes",
-      "time": "11:35",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-07T12:30:31Z"
+  "updated": "2026-02-07T13:01:07Z"
 }
