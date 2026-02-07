@@ -1,6 +1,12 @@
 {
   "emails": [
     {
+      "sender": "",
+      "subject": "Aviso de notificación en Sede Electrónica - ANSEm1",
+      "time": "04:06",
+      "unread": true
+    },
+    {
       "sender": "Extranet Centre Gestor - CG365",
       "subject": "Centre Gestor: Aviso disponibilidad factura",
       "time": "22:45",
@@ -53,14 +59,8 @@
       "subject": "re enviar el lunes",
       "time": "11:35",
       "unread": true
-    },
-    {
-      "sender": "Reve Team",
-      "subject": "Introducing References",
-      "time": "02:14",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-07T03:00:42Z"
+  "updated": "2026-02-07T03:30:41Z"
 }
