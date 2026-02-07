@@ -1,6 +1,18 @@
 {
   "emails": [
     {
+      "sender": "CoinTracker",
+      "subject": "Crypto portfolio update",
+      "time": "20:59",
+      "unread": true
+    },
+    {
+      "sender": "Google",
+      "subject": "Security alert for harto@hartostudio.com",
+      "time": "20:51",
+      "unread": true
+    },
+    {
       "sender": "noreply-apps-scripts-notifications@google.com",
       "subject": "Summary of failures for Google Apps Script: Untitled project",
       "time": "13:41",
@@ -47,20 +59,8 @@
       "subject": "Es hora de crear tu éxito online",
       "time": "12:04",
       "unread": true
-    },
-    {
-      "sender": "Moongate",
-      "subject": "In town for Consensus Hong Kong?",
-      "time": "11:52",
-      "unread": true
-    },
-    {
-      "sender": "OpenRouter Team",
-      "subject": "Comparing different models with the same prompt",
-      "time": "11:46",
-      "unread": true
     }
   ],
   "unreadCount": 10,
-  "updated": "2026-02-07T19:30:31Z"
+  "updated": "2026-02-07T20:00:59Z"
 }
