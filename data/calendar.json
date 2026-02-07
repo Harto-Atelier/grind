@@ -1,16 +1,5 @@
 {
-  "today": [
-  {
-    "time": "10:00",
-    "title": "📱 POST: Teaser Consensus HK (Art Basel pieces)",
-    "date": "2026-02-07"
-  },
-  {
-    "time": "22:00",
-    "title": "Pagar SATS Maxi Tool",
-    "date": "2026-02-07"
-  }
-],
+  "today": [],
   "upcoming": [
   {
     "time": "18:30",
@@ -51,7 +40,17 @@
     "time": "10:00",
     "title": "💡 PENSAR: Propuesta Bitcoin Vegas (BMAG)",
     "date": "2026-02-13"
+  },
+  {
+    "time": "10:00",
+    "title": "📋 Preparar visita Humus: Reservar Casa Inés, confirmar fecha, preparar estudio",
+    "date": "2026-02-13"
+  },
+  {
+    "time": "15:15",
+    "title": "Carnestoltes Lys!",
+    "date": "2026-02-13"
   }
 ],
-  "updated": "2026-02-07T22:50:04.000Z"
+  "updated": "2026-02-07T23:00:19.000Z"
 }
